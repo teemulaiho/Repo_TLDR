@@ -1,0 +1,87 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class BulletBehaviour : MonoBehaviour
+{
+    public Vector3 castlePosition;
+    public GameObject target;
+    public ExplosionBehaviour explosionPrefab;
+
+    public List<ExplosionBehaviour> explosions;
+
+    float bulletSpeed = 4f;
+    int bulletDamage = 2;
+
+    private void Awake()
+    {
+        castlePosition = GameObject.FindGameObjectWithTag("Castle").transform.position;
+        transform.position = castlePosition;
+
+        SpawnExplosion();
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        Move();
+    }
+
+    private void Move()
+    {
+        if (target.activeSelf)
+            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, bulletSpeed * Time.deltaTime);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            Debug.Log("Bullet Hit Enemy");
+            Explode();
+            ResetPosition();
+        }
+    }
+
+    public int GetBulletDamage()
+    {
+        return bulletDamage;
+    }
+
+    private void SpawnExplosion()
+    {
+        if (explosions.Count < 1)
+        {
+            ExplosionBehaviour explosion = Instantiate(explosionPrefab);
+            explosion.transform.position = this.transform.position;
+
+            explosion.name = "Explosion";
+            explosions.Add(explosion);
+        }
+    }
+
+    private void Explode()
+    {
+        if (explosions.Count > 0)
+        {
+            explosions[0].Explode(transform.position);
+        }
+    }
+
+    private void ResetPosition()
+    {
+        gameObject.SetActive(!gameObject.activeSelf);
+        transform.position = castlePosition;
+    }
+
+    public void SetTarget(GameObject t)
+    {
+        target = t;
+    }
+}
