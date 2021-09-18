@@ -19,8 +19,16 @@ public class UIManager : MonoBehaviour
     GameObject spdObj;
     TMP_Text spdTxt;
 
+    GameObject rngObj;
+    TMP_Text rngTxt;
+
+    GameObject ammObj;
+    TMP_Text ammTxt;
+
     Button strengthButton;
     Button speedButton;
+    Button rangeButton;
+    Button ammoButton;
 
     public void Initialize(GameManager gm)
     {
@@ -44,15 +52,25 @@ public class UIManager : MonoBehaviour
                 xpObj = ui.transform.GetChild(i).gameObject;
                 xpTxt = xpObj.GetComponent<TMP_Text>();
             }
-            if (ui.transform.GetChild(i).name == "Strength")
+            else if (ui.transform.GetChild(i).name == "Strength")
             {
                 strObj = ui.transform.GetChild(i).gameObject;
                 strTxt = strObj.GetComponent<TMP_Text>();
             }
-            if (ui.transform.GetChild(i).name == "Seed")
+            else if (ui.transform.GetChild(i).name == "Speed")
             {
                 spdObj = ui.transform.GetChild(i).gameObject;
                 spdTxt = spdObj.GetComponent<TMP_Text>();
+            }
+            else if (ui.transform.GetChild(i).name == "Range")
+            {
+                rngObj = ui.transform.GetChild(i).gameObject;
+                rngTxt = rngObj.GetComponent<TMP_Text>();
+            }
+            else if (ui.transform.GetChild(i).name == "Ammo")
+            {
+                ammObj = ui.transform.GetChild(i).gameObject;
+                ammTxt = ammObj.GetComponent<TMP_Text>();
             }
             else if (ui.transform.GetChild(i).name == "ButtonStrength")
             {
@@ -63,6 +81,16 @@ public class UIManager : MonoBehaviour
             {
                 speedButton = ui.transform.GetChild(i).gameObject.GetComponent<Button>();
                 speedButton.onClick.AddListener(IncreaseSpeed);
+            }   
+            else if (ui.transform.GetChild(i).name == "ButtonRange")
+            {
+                rangeButton = ui.transform.GetChild(i).gameObject.GetComponent<Button>();
+                rangeButton.onClick.AddListener(IncreaseRange);
+            } 
+            else if (ui.transform.GetChild(i).name == "ButtonAmmo")
+            {
+                ammoButton = ui.transform.GetChild(i).gameObject.GetComponent<Button>();
+                ammoButton.onClick.AddListener(IncreaseAmmo);
             }
         }
     }
@@ -78,36 +106,57 @@ public class UIManager : MonoBehaviour
     {
         xpTxt.text = gameManager.GetPlayerExperience().ToString();
         strTxt.text = gameManager.GetPlayerStrength().ToString();
-        //spdTxt.text = gameManager.GetPlayerSpeed().ToString();
+        spdTxt.text = gameManager.GetPlayerSpeed().ToString();
+        rngTxt.text = gameManager.GetCastleRange().ToString();
+        ammTxt.text = gameManager.GetCastleAmmo().ToString();
     }
 
     private void IncreaseStrength()
     {
-        Debug.Log("Clicked Strength Button.");
-        gameManager.UpgradeStrength();
+        gameManager.Upgrade(UpgradeManager.UpgradeType.Strength);
     }
 
     private void IncreaseSpeed()
     {
-        Debug.Log("Clicked Speed Button.");
+        gameManager.Upgrade(UpgradeManager.UpgradeType.Speed);
+    }
+
+    private void IncreaseRange()
+    {
+        gameManager.Upgrade(UpgradeManager.UpgradeType.Range);
+    }
+
+    private void IncreaseAmmo()
+    {
+        gameManager.Upgrade(UpgradeManager.UpgradeType.Ammo);
     }
 
     private void CheckButtons()
-    {        
-        CheckStrengthUpgrade();
+    {
+        //CheckStrengthUpgrade();
+        //CheckSpeedUpgrade();
+        //CheckRangeUpgrade();
+        //CheckAmmoUpgrade();
+
+        CheckUpgradeType(UpgradeManager.UpgradeType.Strength, strengthButton);
+        CheckUpgradeType(UpgradeManager.UpgradeType.Speed, speedButton);
+        CheckUpgradeType(UpgradeManager.UpgradeType.Range, rangeButton);
+        CheckUpgradeType(UpgradeManager.UpgradeType.Ammo, ammoButton);
     }
 
-    private void CheckStrengthUpgrade()
+    private void CheckUpgradeType(UpgradeManager.UpgradeType type, Button button)
     {
         int playerXP = gameManager.GetPlayerExperience();
+        int upgradeCost = gameManager.GetUpgradeCost(type);
 
-        if (playerXP >= gameManager.GetStrengthUpgradeCost())
+        if (playerXP >= upgradeCost)
         {
-            strengthButton.interactable = true;
+            button.interactable = true;
         }
         else
         {
-            strengthButton.interactable = false;
+            button.interactable = false;
+            button.GetComponentInChildren<TMP_Text>().text = "Add " + type.ToString() + " (" + upgradeCost + ")";
         }
     }
 }

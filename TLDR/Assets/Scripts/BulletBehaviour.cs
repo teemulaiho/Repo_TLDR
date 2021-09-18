@@ -11,7 +11,7 @@ public class BulletBehaviour : MonoBehaviour
 
     public List<ExplosionBehaviour> explosions;
 
-    float bulletSpeed = 4f;
+    int bulletSpeed = 4;
     int bulletDamage = 2;
 
     public void Initialize(CastleBehaviour cb)
@@ -58,10 +58,16 @@ public class BulletBehaviour : MonoBehaviour
         return bulletDamage;
     }
 
+    public int GetBulletSpeed()
+    {
+        return bulletSpeed;
+    }
+
     private void Hit()
     {
         Explode();
         ResetPosition();
+        ResetTarget();
         AddExperience();
     }
 
@@ -91,6 +97,11 @@ public class BulletBehaviour : MonoBehaviour
         transform.position = castlePosition;
     }
 
+    private void ResetTarget()
+    {
+        target = null;
+    }
+
     private void AddExperience()
     {
         castle.AddExperience();
@@ -104,5 +115,10 @@ public class BulletBehaviour : MonoBehaviour
     public void SetDamage()
     {
         bulletDamage++;
+    }
+
+    public void SetSpeed()
+    {
+        bulletSpeed++;
     }
 }

@@ -53,17 +53,27 @@ public class GameManager : MonoBehaviour
 
     public int GetPlayerSpeed()
     {
-        return 0;
+        return playerManager.GetPlayerSpeed();
     }
 
-    public int GetStrengthUpgradeCost()
+    public int GetCastleRange()
     {
-        return upgradeManager.GetStrengthUpgradeCost();
+        return playerManager.GetCastleRange();
     }
 
-    public void UpgradeStrength()
+    public int GetCastleAmmo()
     {
-        playerManager.IncreaseStrength();
-        upgradeManager.IncreaseStrengthLevel();
+        return playerManager.GetCastleAmmo();
+    }
+
+    public int GetUpgradeCost(UpgradeManager.UpgradeType type)
+    {
+        return upgradeManager.GetUpgradeCost(type);
+    }
+
+    public void Upgrade(UpgradeManager.UpgradeType type)
+    {
+        playerManager.Upgrade(type);
+        upgradeManager.IncreaseLevel(type);
     }
 }

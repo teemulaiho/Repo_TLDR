@@ -11,7 +11,7 @@ public class CastleBehaviour : MonoBehaviour
     public BulletBehaviour bulletPrefab;
     public List<BulletBehaviour> bullets;
 
-    public float castleRange;
+    int castleRange = 20;
 
     public void Initialize(PlayerManager pm)
     {
@@ -28,7 +28,8 @@ public class CastleBehaviour : MonoBehaviour
     void Start()
     {
         GetEnemies();
-        SpawnBullets();
+        //SpawnBullets();
+        SpawnBullet();
     }
 
     // Update is called once per frame
@@ -53,7 +54,7 @@ public class CastleBehaviour : MonoBehaviour
                 bullet.gameObject.SetActive(false);
 
                 bullet.Initialize(this);
-                bullet.SetTarget(enemies[i]);
+                //bullet.SetTarget(enemies[i]);
                 
 
                 bullets.Add(bullet);
@@ -63,6 +64,21 @@ public class CastleBehaviour : MonoBehaviour
         {
             GetEnemies();
         }
+    }
+
+    private void SpawnBullet()
+    {
+        BulletBehaviour bullet = Instantiate(bulletPrefab);
+        bullet.transform.position = this.transform.position;
+
+        bullet.transform.SetParent(this.transform);
+        bullet.name = "Bullet";
+
+        bullet.gameObject.SetActive(false);
+
+        bullet.Initialize(this);
+
+        bullets.Add(bullet);
     }
 
     private void ScanEnvironment()
@@ -89,14 +105,23 @@ public class CastleBehaviour : MonoBehaviour
         {
             if (Vector3.Distance(this.transform.position, enemies[i].transform.position) <= castleRange)
             {
-                if (bullets.Count > 0)
-                {
-                    bool isActive = bullets[i].gameObject.activeSelf;
+                ShootAvailableBullet(enemies[i]);
+            }
+        }
+    }
 
-                    if (!isActive)
-                    {
-                        bullets[i].gameObject.SetActive(!isActive);
-                    }
+    private void ShootAvailableBullet(GameObject target)
+    {
+        if (bullets.Count > 0)
+        {
+            for (int i = 0; i < bullets.Count; i++)
+            {
+                bool isActive = bullets[i].gameObject.activeSelf;
+
+                if (!isActive)
+                {
+                    bullets[i].gameObject.SetActive(!isActive);
+                    bullets[i].SetTarget(target);
                 }
             }
         }
@@ -115,11 +140,63 @@ public class CastleBehaviour : MonoBehaviour
         }
     }
 
+    public void IncreaseSpeed()
+    {
+        for (int i = 0; i < bullets.Count; i++)
+        {
+            bullets[i].SetSpeed();
+        }
+    }
+
+    public void IncreaseRange()
+    {
+        castleRange++;
+    }
+
+    public void IncreaseAmmo()
+    {
+        SpawnBullet();
+    }
+
+    public void Upgrade(UpgradeManager.UpgradeType type)
+    {
+        if (type == UpgradeManager.UpgradeType.Strength)
+        {
+            IncreaseStrength();
+        }
+        else if (type == UpgradeManager.UpgradeType.Speed)
+        {
+            IncreaseSpeed();
+        }
+        else if (type == UpgradeManager.UpgradeType.Range)
+        {
+            IncreaseRange();
+        }
+    }
+
     public int GetBulletStrength()
     {
         if (bullets.Count > 0)
             return bullets[0].GetBulletDamage();
 
         return -1;
+    }
+
+    public int GetBulletSpeed()
+    {
+        if (bullets.Count > 0)
+            return bullets[0].GetBulletSpeed();
+
+        return -1;
+    }
+
+    public int GetCastleRange()
+    {
+        return castleRange;
+    }
+
+    public int GetCastleAmmo()
+    {
+        return bullets.Count;
     }
 }
