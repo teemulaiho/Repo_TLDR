@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
+    GameManager gameManager;
     public EnemyBehaviour enemyPrefab;
     public List<EnemyBehaviour> enemies;
 
@@ -12,6 +13,11 @@ public class EnemyManager : MonoBehaviour
     bool startSpawnTimer = false;
     float spawnTimer = 0f;
     float spawnLimit = 3f;
+
+    public void Initialize(GameManager gm)
+    {
+        gameManager = gm;
+    }
 
     private void Awake()
     {

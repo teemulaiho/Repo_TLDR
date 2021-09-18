@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CastleBehaviour : MonoBehaviour
 {
-    public GameObject enemy;
+    PlayerManager playerManager;
 
     public List<GameObject> enemies;
 
@@ -13,19 +13,22 @@ public class CastleBehaviour : MonoBehaviour
 
     public float castleRange;
 
+    public void Initialize(PlayerManager pm)
+    {
+        playerManager = pm;
+    }
+
     private void Awake()
     {
-        enemies.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
-        enemy = GameObject.FindGameObjectWithTag("Enemy");
 
-        SpawnBullets();
     }
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        GetEnemies();
+        SpawnBullets();
     }
 
     // Update is called once per frame
@@ -37,51 +40,54 @@ public class CastleBehaviour : MonoBehaviour
 
     void SpawnBullets()
     {
-        for (int i = 0; i < enemies.Count; i++)
+        if (enemies.Count > 0)
         {
-            BulletBehaviour bullet = Instantiate(bulletPrefab);
-            bullet.transform.position = this.transform.position;
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                BulletBehaviour bullet = Instantiate(bulletPrefab);
+                bullet.transform.position = this.transform.position;
 
-            bullet.transform.SetParent(this.transform);
-            bullet.name = "Bullet";
+                bullet.transform.SetParent(this.transform);
+                bullet.name = "Bullet";
 
-            bullet.gameObject.SetActive(false);
+                bullet.gameObject.SetActive(false);
 
-            bullet.SetTarget(enemies[i]);
+                bullet.Initialize(this);
+                bullet.SetTarget(enemies[i]);
+                
 
-            bullets.Add(bullet);
+                bullets.Add(bullet);
+            }
         }
-
-
-        //if (bullets.Count < 1)
-        //{
-        //    BulletBehaviour bullet = Instantiate(bulletPrefab);
-        //    bullet.transform.position = this.transform.position;
-
-        //    bullet.transform.SetParent(this.transform);
-        //    bullet.name = "Bullet";
-
-        //    bullet.gameObject.SetActive(false);
-
-        //    bullets.Add(bullet);
-        //}
+        else
+        {
+            GetEnemies();
+        }
     }
 
-    void ScanEnvironment()
+    private void ScanEnvironment()
     {
 
     }
 
-    void Act()
+    private void GetEnemies()
+    {
+        if (enemies.Count == 0)
+        {
+            enemies.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
+        }
+    }
+
+    private void Act()
     {
         Shoot();
     }
 
-    void Shoot()
+    private void Shoot()
     {
         for (int i = 0; i < enemies.Count; i++)
         {
-            if (Vector3.Distance(this.transform.position, enemy.transform.position) <= castleRange)
+            if (Vector3.Distance(this.transform.position, enemies[i].transform.position) <= castleRange)
             {
                 if (bullets.Count > 0)
                 {
@@ -94,5 +100,26 @@ public class CastleBehaviour : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void AddExperience()
+    {
+        playerManager.AddExperience();
+    }
+
+    public void IncreaseStrength()
+    {
+        for (int i = 0; i < bullets.Count; i++)
+        {
+            bullets[i].SetDamage();
+        }
+    }
+
+    public int GetBulletStrength()
+    {
+        if (bullets.Count > 0)
+            return bullets[0].GetBulletDamage();
+
+        return -1;
     }
 }

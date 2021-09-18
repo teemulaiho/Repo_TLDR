@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BulletBehaviour : MonoBehaviour
 {
+    CastleBehaviour castle;
     public Vector3 castlePosition;
     public GameObject target;
     public ExplosionBehaviour explosionPrefab;
@@ -12,6 +13,11 @@ public class BulletBehaviour : MonoBehaviour
 
     float bulletSpeed = 4f;
     int bulletDamage = 2;
+
+    public void Initialize(CastleBehaviour cb)
+    {
+        castle = cb;
+    }
 
     private void Awake()
     {
@@ -43,15 +49,20 @@ public class BulletBehaviour : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            Debug.Log("Bullet Hit Enemy");
-            Explode();
-            ResetPosition();
+            Hit();
         }
     }
 
     public int GetBulletDamage()
     {
         return bulletDamage;
+    }
+
+    private void Hit()
+    {
+        Explode();
+        ResetPosition();
+        AddExperience();
     }
 
     private void SpawnExplosion()
@@ -80,8 +91,18 @@ public class BulletBehaviour : MonoBehaviour
         transform.position = castlePosition;
     }
 
+    private void AddExperience()
+    {
+        castle.AddExperience();
+    }
+
     public void SetTarget(GameObject t)
     {
         target = t;
+    }
+
+    public void SetDamage()
+    {
+        bulletDamage++;
     }
 }
