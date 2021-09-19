@@ -43,6 +43,11 @@ public class BulletBehaviour : MonoBehaviour
     {
         if (target.activeSelf)
             transform.position = Vector3.MoveTowards(transform.position, target.transform.position, bulletSpeed * Time.deltaTime);
+        else
+        {
+            ResetPosition();
+            ResetTarget();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -61,6 +66,17 @@ public class BulletBehaviour : MonoBehaviour
     public int GetBulletSpeed()
     {
         return bulletSpeed;
+    }
+
+    /// <summary>
+    /// Add additional stats to the bullet base stats. Base stats are damage = 2, speed = 4.
+    /// </summary>
+    /// <param name="damage"></param>
+    /// <param name="speed"></param>
+    public void SetNewBulletStats(int damage, int speed)
+    {
+        bulletDamage += damage;
+        bulletSpeed += speed;
     }
 
     private void Hit()
@@ -120,5 +136,11 @@ public class BulletBehaviour : MonoBehaviour
     public void SetSpeed()
     {
         bulletSpeed++;
+    }
+
+    public void SetBulletStartingStats(int damage, int speed)
+    {
+        bulletDamage += damage;
+        bulletSpeed += speed;
     }
 }

@@ -31,10 +31,10 @@ public class GameManager : MonoBehaviour
         if (playerManager != null)
             playerManager.Initialize(this);
 
-        if (playerManager != null)
+        if (uiManager != null)
             uiManager.Initialize(this);
 
-        if (playerManager != null)
+        if (enemyManager != null)
             enemyManager.Initialize(this);
 
         if (upgradeManager != null)
@@ -75,5 +75,15 @@ public class GameManager : MonoBehaviour
     {
         playerManager.Upgrade(type);
         upgradeManager.IncreaseLevel(type);
+    }
+
+    public List<EnemyBehaviour> GetEnemies()
+    {
+        return enemyManager.GetEnemyList();
+    }
+
+    public Vector4 GetUpgradeLevel()
+    {
+        return upgradeManager.GetUpgradeLevel();
     }
 }

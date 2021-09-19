@@ -66,4 +66,9 @@ public class EnemyBehaviour : MonoBehaviour
             enemyHealth -= bullet.GetBulletDamage();
         }
     }
+
+    public bool InSpawnQueue()
+    {
+        return inSpawnQueue;
+    }
 }

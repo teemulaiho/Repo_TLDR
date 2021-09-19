@@ -8,11 +8,13 @@ public class EnemyManager : MonoBehaviour
     public EnemyBehaviour enemyPrefab;
     public List<EnemyBehaviour> enemies;
 
-    public int enemyAmount = 1;
+    int enemyAmount = 1;
 
+    float dt = 0f;
     bool startSpawnTimer = false;
     float spawnTimer = 0f;
     float spawnLimit = 3f;
+    int waveTimer = 60;
 
     public void Initialize(GameManager gm)
     {
@@ -25,13 +27,7 @@ public class EnemyManager : MonoBehaviour
         {
             for (int i = 0; i < enemyAmount; i++)
             {
-                EnemyBehaviour enemy = Instantiate(enemyPrefab);
-
-                enemy.Init(this);
-
-                enemy.transform.position = new Vector3(Random.Range(0f, 50f), 1f, Random.Range(0f, 50f));
-                enemy.transform.SetParent(this.transform);
-                enemies.Add(enemy);
+                SpawnEnemy();
             }
         }
     }
@@ -45,6 +41,15 @@ public class EnemyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        dt += Time.deltaTime;
+
+        if (dt > waveTimer)
+        {
+            Debug.Log("Spawn New Enemy");
+            SpawnEnemy();
+            dt = 0f;
+        }
+
         CheckSpawners();
     }
 
@@ -80,5 +85,21 @@ public class EnemyManager : MonoBehaviour
                 startSpawnTimer = false;
             }
         }
+    }
+
+    private void SpawnEnemy()
+    {
+        EnemyBehaviour enemy = Instantiate(enemyPrefab);
+
+        enemy.Init(this);
+
+        enemy.transform.position = new Vector3(Random.Range(0f, 50f), 1f, Random.Range(0f, 50f));
+        enemy.transform.SetParent(this.transform);
+        enemies.Add(enemy);
+    }
+
+    public List<EnemyBehaviour> GetEnemyList()
+    {
+        return enemies;
     }
 }

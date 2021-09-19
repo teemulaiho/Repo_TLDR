@@ -104,4 +104,14 @@ public class PlayerManager : MonoBehaviour
             IncreaseAmmo();
         }
     }
+
+    public List<EnemyBehaviour> GetEnemies()
+    {
+        return gameManager.GetEnemies();
+    }
+
+    public Vector4 GetUpgradeLevel()
+    {
+        return gameManager.GetUpgradeLevel();
+    }
 }

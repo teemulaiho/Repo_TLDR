@@ -14,10 +14,10 @@ public class UpgradeManager : MonoBehaviour
 
     GameManager gameManager;
 
-    int strengthLevel = 1;
-    int speedLevel = 1;
-    int rangeLevel = 1;
-    int ammoLevel = 1;
+    int strengthLevel = 0;
+    int speedLevel = 0;
+    int rangeLevel = 0;
+    int ammoLevel = 0;
 
     int strengthUpgradeCost = 10;
     int speedUpgradeCost = 15;
@@ -39,6 +39,11 @@ public class UpgradeManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public Vector4 GetUpgradeLevel()
+    {
+        return new Vector4(strengthLevel, speedLevel, rangeLevel, ammoLevel);
     }
 
     public int GetUpgradeCost(UpgradeType upgradeType)
