@@ -13,7 +13,7 @@ public class CastleBehaviour : MonoBehaviour
     GameObject castleRangeIndicator;
 
     float shootDT;
-    float shootCooldown = 1f;
+    float shootCooldown = 0.5f;
 
     int castleRange = 20;
 
@@ -101,7 +101,6 @@ public class CastleBehaviour : MonoBehaviour
 
     private void Act()
     {
-
         Shoot();
     }
 

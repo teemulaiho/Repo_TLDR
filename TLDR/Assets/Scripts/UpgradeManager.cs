@@ -22,7 +22,7 @@ public class UpgradeManager : MonoBehaviour
     int strengthUpgradeCost = 10;
     int speedUpgradeCost = 15;
     int rangeUpgradeCost = 20;
-    int ammoUpgradeCost = 30;
+    int ammoUpgradeCost = 5;
 
     public void Initialize(GameManager gm)
     {

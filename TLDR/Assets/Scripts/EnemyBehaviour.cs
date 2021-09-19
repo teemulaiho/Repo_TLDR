@@ -6,8 +6,11 @@ public class EnemyBehaviour : MonoBehaviour
 {
     EnemyManager enemyManager;
     public GameObject castle;
+
+    HealthbarBehaviour healthBar;
     
     float enemySpeed = 1f;
+    int enemyMaxHealth = 10;
     int enemyHealth = 10;
 
     public bool inSpawnQueue = false;
@@ -20,6 +23,13 @@ public class EnemyBehaviour : MonoBehaviour
     private void Awake()
     {
         castle = GameObject.FindGameObjectWithTag("Castle");
+
+        healthBar = GetComponentInChildren<HealthbarBehaviour>();
+
+        if (healthBar != null)
+        {
+            healthBar.SetMaxHealth(enemyMaxHealth);
+        }
     }
 
     // Start is called before the first frame update
@@ -37,12 +47,25 @@ public class EnemyBehaviour : MonoBehaviour
 
     private void CheckHealth()
     {
+        UpdateHealthBar();
+
         if (enemyHealth <= 0)
         {
-            this.gameObject.SetActive(false);
-            enemyManager.EnemyHasDied(this);
-            inSpawnQueue = true;
+            Die();
         }
+    }
+
+    private void Die()
+    {
+        this.gameObject.SetActive(false);
+        enemyManager.EnemyHasDied(this);
+        transform.position = new Vector3(999f, 999f, 999f);
+        inSpawnQueue = true;
+    }
+
+    private void UpdateHealthBar()
+    {
+        healthBar.SetHealth(enemyHealth);
     }
 
     private void Move()
@@ -54,7 +77,7 @@ public class EnemyBehaviour : MonoBehaviour
     {
         transform.position = spawnPosition;
         inSpawnQueue = false;
-        enemyHealth = 20;
+        enemyHealth = enemyMaxHealth;
     }
 
     private void OnTriggerEnter(Collider other)

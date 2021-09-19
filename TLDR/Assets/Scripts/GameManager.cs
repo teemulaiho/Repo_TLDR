@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     public UIManager uiManager;
     public UpgradeManager upgradeManager;
 
+    float elapsedTime = 0f;
+
     private void Awake()
     {
         Initialize();
@@ -23,7 +25,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        elapsedTime += Time.deltaTime;
     }
     
     private void Initialize()
@@ -39,6 +41,16 @@ public class GameManager : MonoBehaviour
 
         if (upgradeManager != null)
             upgradeManager.Initialize(this);
+    }
+
+    public float GetElapsedTime()
+    {
+        return elapsedTime;
+    }
+
+    public float GetTimeLeftUntilNextEnemySpawn()
+    {
+        return enemyManager.GetTimeLeftUntilNextEnemySpawn();
     }
 
     public int GetPlayerExperience()

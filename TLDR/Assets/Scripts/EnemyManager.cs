@@ -45,7 +45,6 @@ public class EnemyManager : MonoBehaviour
 
         if (dt > waveTimer)
         {
-            Debug.Log("Spawn New Enemy");
             SpawnEnemy();
             dt = 0f;
         }
@@ -101,5 +100,10 @@ public class EnemyManager : MonoBehaviour
     public List<EnemyBehaviour> GetEnemyList()
     {
         return enemies;
+    }
+
+    public float GetTimeLeftUntilNextEnemySpawn()
+    {
+        return waveTimer - dt;
     }
 }

@@ -25,6 +25,18 @@ public class UIManager : MonoBehaviour
     GameObject ammObj;
     TMP_Text ammTxt;
 
+    GameObject timObj;
+    TMP_Text timTxt;
+
+    GameObject eneObj;
+    TMP_Text eneTxt;
+
+    GameObject spaObj;
+    TMP_Text spaTxt;
+
+
+
+
     Button strengthButton;
     Button speedButton;
     Button rangeButton;
@@ -72,6 +84,21 @@ public class UIManager : MonoBehaviour
                 ammObj = ui.transform.GetChild(i).gameObject;
                 ammTxt = ammObj.GetComponent<TMP_Text>();
             }
+            else if (ui.transform.GetChild(i).name == "Time")
+            {
+                timObj = ui.transform.GetChild(i).gameObject;
+                timTxt = timObj.GetComponent<TMP_Text>();
+            }
+            else if (ui.transform.GetChild(i).name == "Enemies")
+            {
+                eneObj = ui.transform.GetChild(i).gameObject;
+                eneTxt = eneObj.GetComponent<TMP_Text>();
+            }
+            else if (ui.transform.GetChild(i).name == "SpawnTimer")
+            {
+                spaObj = ui.transform.GetChild(i).gameObject;
+                spaTxt = spaObj.GetComponent<TMP_Text>();
+            }
             else if (ui.transform.GetChild(i).name == "ButtonStrength")
             {
                 strengthButton = ui.transform.GetChild(i).gameObject.GetComponent<Button>();
@@ -109,6 +136,10 @@ public class UIManager : MonoBehaviour
         spdTxt.text = gameManager.GetPlayerSpeed().ToString();
         rngTxt.text = gameManager.GetCastleRange().ToString();
         ammTxt.text = gameManager.GetCastleAmmo().ToString();
+
+        timTxt.text = ((int)gameManager.GetElapsedTime()).ToString();
+        eneTxt.text = ((int)gameManager.GetEnemies().Count).ToString();
+        spaTxt.text = ((int)gameManager.GetTimeLeftUntilNextEnemySpawn()).ToString();
     }
 
     private void IncreaseStrength()
