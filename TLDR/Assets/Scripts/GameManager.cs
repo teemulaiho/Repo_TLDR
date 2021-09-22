@@ -98,4 +98,9 @@ public class GameManager : MonoBehaviour
     {
         return upgradeManager.GetUpgradeLevel();
     }
+
+    public void Spawn(PlayerManager.PlayerStructures structure)
+    {
+        playerManager.Spawn(structure);
+    }
 }

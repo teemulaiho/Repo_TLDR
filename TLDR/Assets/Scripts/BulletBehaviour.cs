@@ -17,11 +17,11 @@ public class BulletBehaviour : MonoBehaviour
     public void Initialize(CastleBehaviour cb)
     {
         castle = cb;
+        castlePosition = castle.transform.position;
     }
 
     private void Awake()
     {
-        castlePosition = GameObject.FindGameObjectWithTag("Castle").transform.position;
         transform.position = castlePosition;
 
         SpawnExplosion();
@@ -110,7 +110,7 @@ public class BulletBehaviour : MonoBehaviour
     private void ResetPosition()
     {
         gameObject.SetActive(!gameObject.activeSelf);
-        transform.position = castlePosition;
+        transform.position = castle.transform.position;
     }
 
     private void ResetTarget()

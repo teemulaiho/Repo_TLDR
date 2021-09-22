@@ -42,6 +42,8 @@ public class UIManager : MonoBehaviour
     Button rangeButton;
     Button ammoButton;
 
+    Button castleSpawnButton;
+
     public void Initialize(GameManager gm)
     {
         gameManager = gm;
@@ -119,6 +121,11 @@ public class UIManager : MonoBehaviour
                 ammoButton = ui.transform.GetChild(i).gameObject.GetComponent<Button>();
                 ammoButton.onClick.AddListener(IncreaseAmmo);
             }
+            else if (ui.transform.GetChild(i).name == "ButtonSpawnCastle")
+            {
+                castleSpawnButton = ui.transform.GetChild(i).gameObject.GetComponent<Button>();
+                castleSpawnButton.onClick.AddListener(SpawnCastle);
+            }
         }
     }
 
@@ -160,6 +167,11 @@ public class UIManager : MonoBehaviour
     private void IncreaseAmmo()
     {
         gameManager.Upgrade(UpgradeManager.UpgradeType.Ammo);
+    }
+
+    private void SpawnCastle()
+    {
+        gameManager.Spawn(PlayerManager.PlayerStructures.Castle);
     }
 
     private void CheckButtons()

@@ -7,8 +7,13 @@ public class CastleBehaviour : MonoBehaviour
     PlayerManager playerManager;
     List<EnemyBehaviour> enemies;
 
+    [SerializeField] LayerMask layerMask;
+
     public BulletBehaviour bulletPrefab;
     public List<BulletBehaviour> bullets;
+
+    bool beingPlaced = false;
+
 
     GameObject castleRangeIndicator;
 
@@ -17,9 +22,11 @@ public class CastleBehaviour : MonoBehaviour
 
     int castleRange = 20;
 
-    public void Initialize(PlayerManager pm)
+    public void Initialize(PlayerManager pm, bool placing)
     {
         playerManager = pm;
+
+        beingPlaced = placing;
 
         castleRangeIndicator = transform.Find("RangeIndicator").gameObject;
         ResizeRangeAreaIndicator();
@@ -27,7 +34,7 @@ public class CastleBehaviour : MonoBehaviour
 
     private void Awake()
     {
-
+        bulletPrefab = Resources.Load<BulletBehaviour>("Prefabs/Bullet");
     }
 
 
@@ -41,8 +48,30 @@ public class CastleBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ScanEnvironment();
-        Act();
+        if (!beingPlaced)
+        {
+            ScanEnvironment();
+            Act();
+        }
+        else
+        {
+            WaitForPlacement();
+        }
+    }
+
+    private void WaitForPlacement()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out RaycastHit raycastHit, float.MaxValue, layerMask))
+        {
+            transform.position = raycastHit.point;
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            beingPlaced = false;
+        }
     }
 
     void SpawnBullets()

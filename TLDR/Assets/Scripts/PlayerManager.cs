@@ -4,8 +4,16 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
+    public enum PlayerStructures
+    {
+        Castle
+    }
+
     GameManager gameManager;
     public CastleBehaviour castle;
+    public CastleBehaviour castlePrefab;
+    public List<CastleBehaviour> castles;
+
     int experience = 0;
 
     public void Initialize(GameManager gm)
@@ -16,7 +24,7 @@ public class PlayerManager : MonoBehaviour
     private void Awake()
     {
         if (castle != null)
-            castle.Initialize(this);
+            castle.Initialize(this, false);
     }
 
     // Start is called before the first frame update
@@ -43,22 +51,30 @@ public class PlayerManager : MonoBehaviour
 
     public int GetPlayerStrength()
     {
-        return castle.GetBulletStrength();
+        if (castle != null)
+            return castle.GetBulletStrength();
+        else return -1;
     }
 
     public int GetPlayerSpeed()
     {
-        return castle.GetBulletSpeed();
+        if (castle != null)
+            return castle.GetBulletSpeed();
+        else return -1;
     }
 
     public int GetCastleRange()
     {
-        return castle.GetCastleRange();
+        if (castle != null)
+            return castle.GetCastleRange();
+        else return -1;
     }
 
     public int GetCastleAmmo()
     {
-        return castle.GetCastleAmmo();
+        if (castle != null)
+            return castle.GetCastleAmmo();
+        else return -1;
     }
 
     public void IncreaseStrength()
@@ -113,5 +129,17 @@ public class PlayerManager : MonoBehaviour
     public Vector4 GetUpgradeLevel()
     {
         return gameManager.GetUpgradeLevel();
+    }
+
+    public void Spawn(PlayerStructures structure)
+    {
+        if (structure == PlayerStructures.Castle)
+        {
+            CastleBehaviour c = Instantiate(castlePrefab);
+            c.Initialize(this, true);
+            c.transform.position = new Vector3(Random.Range(0f, 50f), 0f, Random.Range(0f, 50f));
+            c.transform.SetParent(this.transform);
+            castles.Add(c);
+        }
     }
 }
