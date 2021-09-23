@@ -146,7 +146,7 @@ public class UIManager : MonoBehaviour
 
         timTxt.text = ((int)gameManager.GetElapsedTime()).ToString();
         eneTxt.text = ((int)gameManager.GetEnemies().Count).ToString();
-        spaTxt.text = ((int)gameManager.GetTimeLeftUntilNextEnemySpawn()).ToString();
+        spaTxt.text = ((int)gameManager.GetTimeLeftUntilNextEnemySpawnPoint()).ToString();
     }
 
     private void IncreaseStrength()

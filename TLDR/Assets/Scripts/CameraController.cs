@@ -9,6 +9,7 @@ public class CameraController : MonoBehaviour
 
     [SerializeField] float speed = 50f;
     [SerializeField] float cameraRotateSpeed = 1f;
+    [SerializeField] float scrollSpeed = 10f;
     Vector3 prevMousePos;
 
     // Start is called before the first frame update
@@ -40,6 +41,8 @@ public class CameraController : MonoBehaviour
         x = Input.GetAxisRaw("Horizontal");
         z = Input.GetAxisRaw("Vertical");
         
-        transform.position += new Vector3(x * speed * Time.deltaTime, transform.position.y, z * speed * Time.deltaTime); 
+        transform.position += new Vector3(x * speed * Time.deltaTime, transform.position.y, z * speed * Time.deltaTime);
+
+        //Camera.main.fieldOfView = Input.GetAxis("Mouse ScrollWheel") * scrollSpeed;
     }
 }

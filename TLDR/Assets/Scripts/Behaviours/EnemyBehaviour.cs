@@ -78,7 +78,7 @@ public class EnemyBehaviour : MonoBehaviour
                 float minDist = float.MaxValue;
 
                 for (int i = 0; i < targets.Count; i++)
-                {
+                {                 
                     float dist = Vector3.Distance(transform.position, targets[i].transform.position);
 
                     if (dist < minDist)

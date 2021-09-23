@@ -61,6 +61,11 @@ public class CastleBehaviour : MonoBehaviour
 
     private void WaitForPlacement()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Destroy(this.gameObject);
+        }
+
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         if (Physics.Raycast(ray, out RaycastHit raycastHit, float.MaxValue, layerMask))
@@ -70,8 +75,14 @@ public class CastleBehaviour : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            beingPlaced = false;
+            PlaceCastle();
         }
+    }
+
+    private void PlaceCastle()
+    {
+        beingPlaced = false;
+        this.tag = "Castle";
     }
 
     void SpawnBullets()
@@ -80,10 +91,7 @@ public class CastleBehaviour : MonoBehaviour
         {
             for (int i = 0; i < enemies.Count; i++)
             {
-                BulletBehaviour bullet = Instantiate(bulletPrefab);
-                bullet.transform.position = this.transform.position;
-
-                bullet.transform.SetParent(this.transform);
+                BulletBehaviour bullet = Instantiate(bulletPrefab, this.transform);
                 bullet.name = "Bullet";
 
                 bullet.gameObject.SetActive(false);
