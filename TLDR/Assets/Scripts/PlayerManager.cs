@@ -51,53 +51,86 @@ public class PlayerManager : MonoBehaviour
 
     public int GetPlayerStrength()
     {
-        if (castle != null)
-            return castle.GetBulletStrength();
+        if (castles != null && castles.Count > 0)
+            return castles[0].GetBulletStrength();
         else return -1;
+
+        //if (castle != null)
+        //    return castle.GetBulletStrength();
+
     }
 
     public int GetPlayerSpeed()
     {
-        if (castle != null)
-            return castle.GetBulletSpeed();
+        if (castles != null && castles.Count > 0)
+            return castles[0].GetBulletSpeed();
         else return -1;
+
+        //if (castle != null)
+        //    return castle.GetBulletSpeed();
     }
 
     public int GetCastleRange()
     {
-        if (castle != null)
-            return castle.GetCastleRange();
+        if (castles != null && castles.Count > 0)
+            return castles[0].GetCastleRange();
         else return -1;
+
+        //if (castle != null)
+        //    return castle.GetCastleRange();
     }
 
     public int GetCastleAmmo()
     {
-        if (castle != null)
-            return castle.GetCastleAmmo();
+        if (castles != null && castles.Count > 0)
+            return castles[0].GetCastleAmmo();
         else return -1;
+
+        //if (castle != null)
+        //    return castle.GetCastleAmmo();
     }
 
     public void IncreaseStrength()
     {
-        castle.IncreaseStrength();
+        for (int i = 0; i < castles.Count; i++)
+        {
+            castles[i].IncreaseStrength();
+        }
+
+        //castle.IncreaseStrength();
         experience -= gameManager.GetUpgradeCost(UpgradeManager.UpgradeType.Strength);
     }
 
     public void IncreaseSpeed()
     {
-        castle.IncreaseSpeed();
+        for (int i = 0; i < castles.Count; i++)
+        {
+            castles[i].IncreaseSpeed();
+        }
+
+        //castle.IncreaseSpeed();
         experience -= gameManager.GetUpgradeCost(UpgradeManager.UpgradeType.Speed);
     }
 
     public void IncreaseRange()
     {
-        castle.IncreaseRange();
+        for (int i = 0; i < castles.Count; i++)
+        {
+            castles[i].IncreaseRange();
+        }
+
+        //castle.IncreaseRange();
         experience -= gameManager.GetUpgradeCost(UpgradeManager.UpgradeType.Range);
     }
 
     public void IncreaseAmmo()
     {
-        castle.IncreaseAmmo();
+        for (int i = 0; i < castles.Count; i++)
+        {
+            castles[i].IncreaseAmmo();
+        }
+
+        //castle.IncreaseAmmo();
         experience -= gameManager.GetUpgradeCost(UpgradeManager.UpgradeType.Ammo);
     }
 
