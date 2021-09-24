@@ -183,6 +183,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 50
   cameraRotateSpeed: 1
+  scrollSpeed: 10
 --- !u!114 &107612331 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7353515400167590349, guid: 7f0a052a5d0f9db47ac270a2072463a4, type: 3}

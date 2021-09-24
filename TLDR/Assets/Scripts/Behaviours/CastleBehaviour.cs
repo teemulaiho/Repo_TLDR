@@ -5,6 +5,8 @@ using UnityEngine;
 public class CastleBehaviour : MonoBehaviour
 {
     PlayerManager playerManager;
+    BulletManager bulletManager;
+    BulletManager bulletManagerPrefab;
     List<EnemyBehaviour> enemies;
 
     [SerializeField] LayerMask layerMask;
@@ -32,14 +34,19 @@ public class CastleBehaviour : MonoBehaviour
 
         castleRangeIndicator = transform.Find("RangeIndicator").gameObject;
         ResizeRangeAreaIndicator();
+
+        bulletManager = Instantiate(bulletManagerPrefab);
+        bulletManager.transform.SetParent(this.transform);
+        bulletManager.name = "BulletManager";
+        bulletManager.Initialize(playerManager, this);
     }
 
     private void Awake()
     {
+        bulletManagerPrefab = Resources.Load<BulletManager>("Prefabs/BulletManager");
         bulletPrefab = Resources.Load<BulletBehaviour>("Prefabs/Bullet");
         explosionPrefab = Resources.Load<ExplosionBehaviour>("Prefabs/ExplosionCannon");
     }
-
 
     // Start is called before the first frame update
     void Start()
@@ -112,22 +119,24 @@ public class CastleBehaviour : MonoBehaviour
 
     private void SpawnBullet()
     {
-        BulletBehaviour bullet = Instantiate(bulletPrefab);
-        bullet.transform.position = this.transform.position;
+        bulletManager.SpawnBulletType(BulletManager.BulletType.Direct);
 
-        bullet.transform.SetParent(this.transform);
-        bullet.name = "Bullet";
+        //BulletBehaviour bullet = Instantiate(bulletPrefab);
+        //bullet.transform.position = this.transform.position;
 
-        bullet.gameObject.SetActive(false);
+        //bullet.transform.SetParent(this.transform);
+        //bullet.name = "Bullet";
 
-        bullet.Initialize(this);
+        //bullet.gameObject.SetActive(false);
 
-        Vector4 upgradeLevels = new Vector4();
-        upgradeLevels = playerManager.GetUpgradeLevel();
+        //bullet.Initialize(this);
 
-        bullet.SetNewBulletStats((int)upgradeLevels.x, (int)upgradeLevels.y);
+        //Vector4 upgradeLevels = new Vector4();
+        //upgradeLevels = playerManager.GetUpgradeLevel();
 
-        bullets.Add(bullet);
+        //bullet.SetNewBulletStats((int)upgradeLevels.x, (int)upgradeLevels.y);
+
+        //bullets.Add(bullet);
     }
 
     private void SpawnExplosion()
@@ -154,61 +163,63 @@ public class CastleBehaviour : MonoBehaviour
 
     private void Shoot()
     {
-        EnemyBehaviour nearestEnemy = null;
-        float dist = float.MaxValue;
+        bulletManager.Shoot(enemies);
 
-        if (enemies != null && enemies.Count > 0)
-        {
-            for (int i = 0; i < enemies.Count; i++)
-            {
-                if (enemies[i] != null)
-                {
-                    float newDist = Vector3.Distance(this.transform.position, enemies[i].transform.position);
+        //EnemyBehaviour nearestEnemy = null;
+        //float dist = float.MaxValue;
 
-                    if (newDist < dist)
-                    {
-                        dist = newDist;
-                        nearestEnemy = enemies[i];
-                    }
-                }
-            }
-        }
+        //if (enemies != null && enemies.Count > 0)
+        //{
+        //    for (int i = 0; i < enemies.Count; i++)
+        //    {
+        //        if (enemies[i] != null)
+        //        {
+        //            float newDist = Vector3.Distance(this.transform.position, enemies[i].transform.position);
 
-        if (dist <= castleRange)
-        {
-            if (!nearestEnemy.InSpawnQueue())
-            {
-                ShootAvailableBullet(nearestEnemy.gameObject);
-            }
-        }
+        //            if (newDist < dist)
+        //            {
+        //                dist = newDist;
+        //                nearestEnemy = enemies[i];
+        //            }
+        //        }
+        //    }
+        //}
+
+        //if (dist <= castleRange)
+        //{
+        //    if (!nearestEnemy.InSpawnQueue())
+        //    {
+        //        ShootAvailableBullet(nearestEnemy.gameObject);
+        //    }
+        //}
     }
 
     private void ShootAvailableBullet(GameObject target)
     {
-        shootDT += Time.deltaTime;
+        //shootDT += Time.deltaTime;
 
-        if (shootDT >= shootCooldown)
-        {
-            for (int i = 0; i < bullets.Count; i++)
-            {
-                bool isActive = bullets[i].gameObject.activeSelf;
+        //if (shootDT >= shootCooldown)
+        //{
+        //    for (int i = 0; i < bullets.Count; i++)
+        //    {
+        //        bool isActive = bullets[i].gameObject.activeSelf;
 
-                if (!isActive)
-                {
-                    bullets[i].gameObject.SetActive(!isActive);
-                    bullets[i].SetTarget(target);
+        //        if (!isActive)
+        //        {
+        //            bullets[i].gameObject.SetActive(!isActive);
+        //            bullets[i].SetTarget(target);
 
-                    Explode();
+        //            Explode();
 
-                    break;
-                }     
-            }
+        //            break;
+        //        }     
+        //    }
 
-            shootDT = 0f;
-        }
+        //    shootDT = 0f;
+        //}
     }
 
-    private void Explode()
+    public void Explode()
     {
         if (explosions.Count > 0)
         {
@@ -250,9 +261,10 @@ public class CastleBehaviour : MonoBehaviour
         ResizeRangeAreaIndicator();
     }
 
-    public void IncreaseAmmo()
+    public void IncreaseAmmo(BulletManager.BulletType type)
     {
-        SpawnBullet();
+        //SpawnBullet();
+        bulletManager.SpawnBullet(type);
     }
 
     public void Upgrade(UpgradeManager.UpgradeType type)
@@ -273,16 +285,16 @@ public class CastleBehaviour : MonoBehaviour
 
     public int GetBulletStrength()
     {
-        if (bullets.Count > 0)
-            return bullets[0].GetBulletDamage();
+        if (bulletManager)
+            return bulletManager.GetBulletStrength();
 
         return -1;
     }
 
     public int GetBulletSpeed()
     {
-        if (bullets.Count > 0)
-            return bullets[0].GetBulletSpeed();
+        if (bulletManager)
+            return bulletManager.GetBulletSpeed();
 
         return -1;
     }
@@ -295,5 +307,25 @@ public class CastleBehaviour : MonoBehaviour
     public int GetCastleAmmo()
     {
         return bullets.Count;
+    }
+
+    public float GetCastleShootDT()
+    {
+        return shootDT;
+    }
+
+    public void AddCastleShootDT(float dt)
+    {
+        shootDT += dt;
+    }
+
+    public void SetCastleShootDT(float value)
+    {
+        shootDT = value;
+    }
+
+    public float GetShootCooldown()
+    {
+        return shootCooldown;
     }
 }

@@ -123,11 +123,11 @@ public class PlayerManager : MonoBehaviour
         experience -= gameManager.GetUpgradeCost(UpgradeManager.UpgradeType.Range);
     }
 
-    public void IncreaseAmmo()
+    public void IncreaseAmmo(BulletManager.BulletType type)
     {
         for (int i = 0; i < castles.Count; i++)
         {
-            castles[i].IncreaseAmmo();
+            castles[i].IncreaseAmmo(type);
         }
 
         //castle.IncreaseAmmo();
@@ -150,7 +150,7 @@ public class PlayerManager : MonoBehaviour
         }
         else if (type == UpgradeManager.UpgradeType.Ammo)
         {
-            IncreaseAmmo();
+            IncreaseAmmo(BulletManager.BulletType.Direct);
         }
     }
 

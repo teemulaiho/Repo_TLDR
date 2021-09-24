@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BulletBehaviour : MonoBehaviour
 {
+    BulletManager.BulletType bulletType;
+
     CastleBehaviour castle;
     public Vector3 castlePosition;
     public GameObject target;
@@ -18,6 +20,13 @@ public class BulletBehaviour : MonoBehaviour
     {
         castle = cb;
         castlePosition = castle.transform.position;
+    }
+
+    public void Initialize(CastleBehaviour cb, BulletManager.BulletType type)
+    {
+        castle = cb;
+        castlePosition = castle.transform.position;
+        bulletType = type;
     }
 
     private void Awake()
@@ -99,7 +108,7 @@ public class BulletBehaviour : MonoBehaviour
         }
     }
 
-    private void Explode()
+    public void Explode()
     {
         if (explosions.Count > 0)
         {
