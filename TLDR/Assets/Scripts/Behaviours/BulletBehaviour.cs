@@ -27,6 +27,15 @@ public class BulletBehaviour : MonoBehaviour
         castle = cb;
         castlePosition = castle.transform.position;
         bulletType = type;
+
+        if (bulletType == BulletManager.BulletType.Direct)
+        {
+            SetBulletStartingStats(2,4);
+        }
+        else if (bulletType == BulletManager.BulletType.Cone)
+        {
+            SetBulletStartingStats(6, 2);
+        }
     }
 
     private void Awake()
@@ -151,5 +160,15 @@ public class BulletBehaviour : MonoBehaviour
     {
         bulletDamage += damage;
         bulletSpeed += speed;
+    }
+
+    private void OnDestroy()
+    {
+        foreach (ExplosionBehaviour explosion in explosions)
+        {
+            Destroy(explosion.gameObject);
+        }
+
+        explosions.Clear();
     }
 }

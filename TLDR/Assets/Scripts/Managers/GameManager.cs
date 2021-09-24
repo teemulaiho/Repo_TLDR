@@ -131,4 +131,9 @@ public class GameManager : MonoBehaviour
 
         return t;
     }
+
+    public void SetTowerBulletType(BulletManager.BulletType type, GameObject tower)
+    {
+        playerManager.SetTowerBulletType(type, tower);
+    }
 }

@@ -15,7 +15,8 @@ public class BulletManager : MonoBehaviour
     PlayerManager playerManager;
     CastleBehaviour castle;
 
-    [SerializeField] BulletBehaviour bulletPrefab;
+    [SerializeField] BulletBehaviour directBulletPrefab;
+    [SerializeField] BulletBehaviour coneBulletPrefab;
 
     public List<BulletBehaviour> bullets;
 
@@ -27,7 +28,8 @@ public class BulletManager : MonoBehaviour
 
     private void Awake()
     {
-        bulletPrefab = Resources.Load<BulletBehaviour>("Prefabs/Bullet");
+        directBulletPrefab = Resources.Load<BulletBehaviour>("Prefabs/DirectBullet");
+        coneBulletPrefab = Resources.Load<BulletBehaviour>("Prefabs/ConeBullet");
     }
 
     // Start is called before the first frame update
@@ -52,16 +54,32 @@ public class BulletManager : MonoBehaviour
 
     public void SpawnBullet(BulletType type)
     {
-        BulletBehaviour bullet = Instantiate(bulletPrefab);
-        bullet.transform.position = this.transform.position;
-        bullet.transform.SetParent(this.transform);
-        bullet.name = "Bullet";
-        bullet.gameObject.SetActive(false);
-        bullet.Initialize(castle, type);
-        Vector4 upgradeLevels = new Vector4();
-        upgradeLevels = playerManager.GetUpgradeLevel();
-        bullet.SetNewBulletStats((int)upgradeLevels.x, (int)upgradeLevels.y);
-        bullets.Add(bullet);
+        if (type == BulletType.Direct)
+        {
+            BulletBehaviour bullet = Instantiate(directBulletPrefab);
+            bullet.transform.position = this.transform.position;
+            bullet.transform.SetParent(this.transform);
+            bullet.name = "Bullet";
+            bullet.gameObject.SetActive(false);
+            bullet.Initialize(castle, type);
+            Vector4 upgradeLevels = new Vector4();
+            upgradeLevels = playerManager.GetUpgradeLevel();
+            bullet.SetNewBulletStats((int)upgradeLevels.x, (int)upgradeLevels.y);
+            bullets.Add(bullet);
+        }
+        else if (type == BulletType.Cone)
+        {
+            BulletBehaviour bullet = Instantiate(coneBulletPrefab);
+            bullet.transform.position = this.transform.position;
+            bullet.transform.SetParent(this.transform);
+            bullet.name = "Bullet";
+            bullet.gameObject.SetActive(false);
+            bullet.Initialize(castle, type);
+            Vector4 upgradeLevels = new Vector4();
+            upgradeLevels = playerManager.GetUpgradeLevel();
+            bullet.SetNewBulletStats((int)upgradeLevels.x, (int)upgradeLevels.y);
+            bullets.Add(bullet);
+        } 
     }
 
     public void Shoot(List<EnemyBehaviour> enemies)
@@ -120,6 +138,16 @@ public class BulletManager : MonoBehaviour
         }
     }
 
+    private void ClearBulletsFromList()
+    {
+        foreach (BulletBehaviour bullet in bullets)
+        {
+            Destroy(bullet.gameObject);
+        }
+
+        bullets.Clear();
+    }
+
     public int GetBulletStrength()
     {
         if (bullets.Count > 0)
@@ -134,5 +162,12 @@ public class BulletManager : MonoBehaviour
             return bullets[0].GetBulletSpeed();
 
         return -1;
+    }
+
+    public void SetBulletType(BulletType type)
+    {
+        ClearBulletsFromList();
+        bullets.Clear();
+        SpawnBullet(type);
     }
 }

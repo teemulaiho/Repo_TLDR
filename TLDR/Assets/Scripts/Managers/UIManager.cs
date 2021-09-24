@@ -10,6 +10,8 @@ public class UIManager : MonoBehaviour
     public Canvas UIprefab;
     Canvas ui;
 
+    GameObject selectedObject;
+
     GameObject xpObj;
     TMP_Text xpTxt;
 
@@ -36,13 +38,15 @@ public class UIManager : MonoBehaviour
 
     TMP_Text castlePurchaseText;
 
-
     Button strengthButton;
     Button speedButton;
     Button rangeButton;
     Button ammoButton;
 
     Button castleSpawnButton;
+
+    Button changeTowerBulletTypeToDirectButton;
+    Button changeTowerBulletTypeToConeButton;
 
     public void Initialize(GameManager gm)
     {
@@ -105,17 +109,17 @@ public class UIManager : MonoBehaviour
             {
                 strengthButton = ui.transform.GetChild(i).gameObject.GetComponent<Button>();
                 strengthButton.onClick.AddListener(IncreaseStrength);
-            }    
+            }
             else if (ui.transform.GetChild(i).name == "ButtonSpeed")
             {
                 speedButton = ui.transform.GetChild(i).gameObject.GetComponent<Button>();
                 speedButton.onClick.AddListener(IncreaseSpeed);
-            }   
+            }
             else if (ui.transform.GetChild(i).name == "ButtonRange")
             {
                 rangeButton = ui.transform.GetChild(i).gameObject.GetComponent<Button>();
                 rangeButton.onClick.AddListener(IncreaseRange);
-            } 
+            }
             else if (ui.transform.GetChild(i).name == "ButtonAmmo")
             {
                 ammoButton = ui.transform.GetChild(i).gameObject.GetComponent<Button>();
@@ -127,14 +131,35 @@ public class UIManager : MonoBehaviour
                 castlePurchaseText = castleSpawnButton.transform.Find("PurchaseCost").GetComponent<TMP_Text>();
                 castleSpawnButton.onClick.AddListener(SpawnCastle);
             }
+            else if (ui.transform.GetChild(i).name == "ButtonChangeBulletTypeDirect")
+            {
+                changeTowerBulletTypeToDirectButton = ui.transform.GetChild(i).gameObject.GetComponent<Button>();
+                changeTowerBulletTypeToDirectButton.onClick.AddListener(ChangeTowerBulletToDirect);
+            }
+            else if (ui.transform.GetChild(i).name == "ButtonChangeBulletTypeCone")
+            {
+                changeTowerBulletTypeToConeButton = ui.transform.GetChild(i).gameObject.GetComponent<Button>();
+                changeTowerBulletTypeToConeButton.onClick.AddListener(ChangeTowerBulletToCone);
+            }
         }
     }
 
     // Update is called once per frame
     void Update()
     {
+        GetPlayerInput();
+
         SetUI();
         CheckButtons();
+
+        if (selectedObject != null)
+        {
+            if (selectedObject.name == "Castle")
+            {
+                selectedObject.GetComponent<MeshRenderer>().material.color = Color.red;
+                selectedObject.GetComponent<MeshRenderer>().materials[1].color = Color.red;
+            }
+        }
     }
 
     private void SetUI()
@@ -195,6 +220,9 @@ public class UIManager : MonoBehaviour
         CheckUpgradeType(UpgradeManager.UpgradeType.Range, rangeButton);
         CheckUpgradeType(UpgradeManager.UpgradeType.Ammo, ammoButton);
         CheckUpgradeType(UpgradeManager.UpgradeType.NewTower, castleSpawnButton);
+
+        CheckBulletType(changeTowerBulletTypeToDirectButton);
+        CheckBulletType(changeTowerBulletTypeToConeButton);
     }
 
     private void CheckUpgradeType(UpgradeManager.UpgradeType type, Button button)
@@ -210,6 +238,46 @@ public class UIManager : MonoBehaviour
         {
             button.interactable = false;
             button.GetComponentInChildren<TMP_Text>().text = "Add " + type.ToString() + " (" + upgradeCost + ")";
+        }
+    }
+
+    private void CheckBulletType(Button button)
+    {
+        if (selectedObject != null)
+        {
+            if (selectedObject.name == "Castle")
+            {
+                button.interactable = true;
+            }
+            else
+            {
+                button.interactable = false;
+            }
+        }
+    }
+
+    private void ChangeTowerBulletToDirect()
+    {
+        if (selectedObject != null)
+            gameManager.SetTowerBulletType(BulletManager.BulletType.Direct, selectedObject);
+    }
+
+    private void ChangeTowerBulletToCone()
+    {
+        if (selectedObject != null)
+            gameManager.SetTowerBulletType(BulletManager.BulletType.Cone, selectedObject);
+    }
+
+    private void GetPlayerInput()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            RaycastHit hitInfo = new RaycastHit();
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo))
+            {
+                if (hitInfo.transform.gameObject.name == "Castle")
+                    selectedObject = hitInfo.transform.gameObject;
+            }          
         }
     }
 }

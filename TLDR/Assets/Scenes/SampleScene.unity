@@ -1163,5 +1163,9 @@ PrefabInstance:
       propertyPath: UI
       value: 
       objectReference: {fileID: 3479404342242961653, guid: 90a28a88c48c783439dc40a2e6065e54, type: 3}
+    - target: {fileID: 8113714026404361259, guid: 84feb8e6b08e13147972dcc945f11d3d, type: 3}
+      propertyPath: selectableLayer.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84feb8e6b08e13147972dcc945f11d3d, type: 3}

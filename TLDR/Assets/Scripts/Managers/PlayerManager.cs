@@ -170,9 +170,30 @@ public class PlayerManager : MonoBehaviour
         {
             CastleBehaviour c = Instantiate(castlePrefab);
             c.Initialize(this, true);
+            c.name = "Castle";
             c.transform.position = new Vector3(Random.Range(0f, 50f), 0f, Random.Range(0f, 50f));
             c.transform.SetParent(this.transform);
             castles.Add(c);
         }
+    }
+
+    public void SetTowerBulletType(BulletManager.BulletType type, GameObject tower)
+    {
+        CastleBehaviour c = tower.GetComponent<CastleBehaviour>();
+
+        if (c != null && 
+            castles != null && 
+            castles.Count > 0)
+        {
+            for (int i = 0; i < castles.Count; i++)
+            {
+                if (castles[i] == c)
+                {
+                    castles[i].SetTowerBulletType(type);
+                }
+            }
+        }
+        else
+            Debug.Log("No castles in list. PlayerManager.cs - SetTowerBulletType()");
     }
 }

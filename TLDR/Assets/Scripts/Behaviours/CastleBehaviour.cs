@@ -328,4 +328,9 @@ public class CastleBehaviour : MonoBehaviour
     {
         return shootCooldown;
     }
+
+    public void SetTowerBulletType(BulletManager.BulletType type)
+    {
+        bulletManager.SetBulletType(type);
+    }
 }

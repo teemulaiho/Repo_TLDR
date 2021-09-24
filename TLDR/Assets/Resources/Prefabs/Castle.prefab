@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 497102256616455611}
   - component: {fileID: 1603721460063890309}
   - component: {fileID: 3216299321779796285}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: tower 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 6487151448865496226}
   - component: {fileID: 8547846768510050484}
   - component: {fileID: 7551828120266243029}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: tree 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,7 +175,7 @@ GameObject:
   - component: {fileID: 2799975553995510008}
   - component: {fileID: 268675058616000733}
   - component: {fileID: 749511297561098125}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: tower 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -257,7 +257,7 @@ GameObject:
   - component: {fileID: 7490167225840819074}
   - component: {fileID: 7421824376933168955}
   - component: {fileID: 3441028558503826406}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: tower 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -339,7 +339,7 @@ GameObject:
   - component: {fileID: 6609746916459283425}
   - component: {fileID: 2211365959198204884}
   - component: {fileID: 4348406191420173772}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -421,7 +421,7 @@ GameObject:
   - component: {fileID: 5716325472853643985}
   - component: {fileID: 8454111419064434455}
   - component: {fileID: 681402007654448507}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: tower 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -503,7 +503,7 @@ GameObject:
   - component: {fileID: 2192859286107514712}
   - component: {fileID: 4691798043685729365}
   - component: {fileID: 975514115314839077}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RangeIndicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -584,7 +584,7 @@ GameObject:
   - component: {fileID: 857482848560282067}
   - component: {fileID: 3469248485439887235}
   - component: {fileID: 295857403855692018}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: tower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -666,7 +666,7 @@ GameObject:
   - component: {fileID: 4899729323356924140}
   - component: {fileID: 6331117961340387775}
   - component: {fileID: 221580330996120899}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: tree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -748,7 +748,7 @@ GameObject:
   - component: {fileID: 160177972011532435}
   - component: {fileID: 165616874505227250}
   - component: {fileID: 1338576935891927566}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: tower 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -831,7 +831,8 @@ GameObject:
   - component: {fileID: 5872996571469431832}
   - component: {fileID: 8531475800784187602}
   - component: {fileID: 7035873499941984034}
-  m_Layer: 0
+  - component: {fileID: -5191063014507932919}
+  m_Layer: 7
   m_Name: Castle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -930,6 +931,21 @@ MonoBehaviour:
     m_Bits: 64
   bulletPrefab: {fileID: 0}
   bullets: []
+  explosions: []
+  explosionPrefab: {fileID: 0}
+--- !u!65 &-5191063014507932919
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7882733635940028679}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.99999994, y: 0.75206673, z: 1.1547003}
+  m_Center: {x: 0, y: 0.2760334, z: 0}
 --- !u!1 &8704890255196038727
 GameObject:
   m_ObjectHideFlags: 0
@@ -941,7 +957,7 @@ GameObject:
   - component: {fileID: 3635785383103703805}
   - component: {fileID: 8277616758224741702}
   - component: {fileID: 2467196436397606392}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: tree 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
