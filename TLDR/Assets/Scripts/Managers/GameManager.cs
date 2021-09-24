@@ -91,6 +91,11 @@ public class GameManager : MonoBehaviour
         return playerManager.GetCastleAmmo();
     }
 
+    public int GetNewTowerPurchasePrice()
+    {
+        return upgradeManager.GetUpgradeCost(UpgradeManager.UpgradeType.NewTower);
+    }
+
     public int GetUpgradeCost(UpgradeManager.UpgradeType type)
     {
         return upgradeManager.GetUpgradeCost(type);

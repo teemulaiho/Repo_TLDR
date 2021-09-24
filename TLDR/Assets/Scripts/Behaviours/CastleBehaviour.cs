@@ -11,6 +11,8 @@ public class CastleBehaviour : MonoBehaviour
 
     public BulletBehaviour bulletPrefab;
     public List<BulletBehaviour> bullets;
+    public List<ExplosionBehaviour> explosions;
+    public ExplosionBehaviour explosionPrefab;
 
     bool beingPlaced = false;
 
@@ -35,6 +37,7 @@ public class CastleBehaviour : MonoBehaviour
     private void Awake()
     {
         bulletPrefab = Resources.Load<BulletBehaviour>("Prefabs/Bullet");
+        explosionPrefab = Resources.Load<ExplosionBehaviour>("Prefabs/ExplosionCannon");
     }
 
 
@@ -43,6 +46,7 @@ public class CastleBehaviour : MonoBehaviour
     {
         GetEnemies();
         SpawnBullet();
+        SpawnExplosion();
     }
 
     // Update is called once per frame
@@ -126,6 +130,13 @@ public class CastleBehaviour : MonoBehaviour
         bullets.Add(bullet);
     }
 
+    private void SpawnExplosion()
+    {
+        ExplosionBehaviour exp = Instantiate(explosionPrefab, this.transform);
+        exp.name = "Explosion";
+        explosions.Add(exp);
+    }
+
     private void ScanEnvironment()
     {
 
@@ -146,21 +157,29 @@ public class CastleBehaviour : MonoBehaviour
         EnemyBehaviour nearestEnemy = null;
         float dist = float.MaxValue;
 
-        for (int i = 0; i < enemies.Count; i++)
+        if (enemies != null && enemies.Count > 0)
         {
-            float newDist = Vector3.Distance(this.transform.position, enemies[i].transform.position);
-
-            if (newDist < dist)
+            for (int i = 0; i < enemies.Count; i++)
             {
-                dist = newDist;
-                nearestEnemy = enemies[i];
+                if (enemies[i] != null)
+                {
+                    float newDist = Vector3.Distance(this.transform.position, enemies[i].transform.position);
+
+                    if (newDist < dist)
+                    {
+                        dist = newDist;
+                        nearestEnemy = enemies[i];
+                    }
+                }
             }
         }
 
         if (dist <= castleRange)
         {
             if (!nearestEnemy.InSpawnQueue())
+            {
                 ShootAvailableBullet(nearestEnemy.gameObject);
+            }
         }
     }
 
@@ -179,11 +198,21 @@ public class CastleBehaviour : MonoBehaviour
                     bullets[i].gameObject.SetActive(!isActive);
                     bullets[i].SetTarget(target);
 
+                    Explode();
+
                     break;
                 }     
             }
 
             shootDT = 0f;
+        }
+    }
+
+    private void Explode()
+    {
+        if (explosions.Count > 0)
+        {
+            explosions[0].Explode(transform.position);
         }
     }
 

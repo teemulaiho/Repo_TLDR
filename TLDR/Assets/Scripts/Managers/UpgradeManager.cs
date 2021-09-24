@@ -9,7 +9,8 @@ public class UpgradeManager : MonoBehaviour
         Strength,
         Speed,
         Range,
-        Ammo
+        Ammo,
+        NewTower
     }
 
     GameManager gameManager;
@@ -18,11 +19,14 @@ public class UpgradeManager : MonoBehaviour
     int speedLevel = 0;
     int rangeLevel = 0;
     int ammoLevel = 0;
+    int towerCount = 0;
 
     int strengthUpgradeCost = 10;
     int speedUpgradeCost = 15;
     int rangeUpgradeCost = 20;
-    int ammoUpgradeCost = 5;
+    int ammoUpgradeCost = 30;
+
+    int newTowerCost = 45;
 
     public void Initialize(GameManager gm)
     {
@@ -64,6 +68,13 @@ public class UpgradeManager : MonoBehaviour
         {
             return ammoUpgradeCost;
         }
+        else if (upgradeType == UpgradeType.NewTower)
+        {
+            if (towerCount == 0)
+                return 0;
+            else
+                return newTowerCost;
+        }
 
         return -1;
     }
@@ -90,6 +101,11 @@ public class UpgradeManager : MonoBehaviour
             ammoLevel++;
             IncreaseUpgradeCost(type);
         }
+        else if (type == UpgradeType.NewTower)
+        {
+            towerCount++;
+            IncreaseUpgradeCost(type);
+        }
     }
 
     private void IncreaseUpgradeCost(UpgradeType type)
@@ -109,6 +125,13 @@ public class UpgradeManager : MonoBehaviour
         else if (type == UpgradeType.Ammo)
         {
             ammoUpgradeCost++;
+        }
+        else if (type == UpgradeType.NewTower)
+        {
+            if (towerCount == 1)
+                newTowerCost = 45;
+            else
+                newTowerCost = (int)((float)newTowerCost * 1.25f);
         }
     }
 }

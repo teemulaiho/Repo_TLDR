@@ -38,7 +38,7 @@ public class CameraController : MonoBehaviour
 
             prevMousePos = Input.mousePosition;
         }
-
+        
         x = Input.GetAxisRaw("Horizontal");
         z = Input.GetAxisRaw("Vertical");
 

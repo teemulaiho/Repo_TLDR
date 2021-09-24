@@ -34,7 +34,7 @@ public class UIManager : MonoBehaviour
     GameObject spaObj;
     TMP_Text spaTxt;
 
-
+    TMP_Text castlePurchaseText;
 
 
     Button strengthButton;
@@ -124,6 +124,7 @@ public class UIManager : MonoBehaviour
             else if (ui.transform.GetChild(i).name == "ButtonSpawnCastle")
             {
                 castleSpawnButton = ui.transform.GetChild(i).gameObject.GetComponent<Button>();
+                castlePurchaseText = castleSpawnButton.transform.Find("PurchaseCost").GetComponent<TMP_Text>();
                 castleSpawnButton.onClick.AddListener(SpawnCastle);
             }
         }
@@ -147,6 +148,8 @@ public class UIManager : MonoBehaviour
         timTxt.text = ((int)gameManager.GetElapsedTime()).ToString();
         eneTxt.text = ((int)gameManager.GetEnemies().Count).ToString();
         spaTxt.text = ((int)gameManager.GetTimeLeftUntilNextEnemySpawnPoint()).ToString();
+
+        castlePurchaseText.text = gameManager.GetNewTowerPurchasePrice().ToString();
     }
 
     private void IncreaseStrength()
@@ -169,9 +172,15 @@ public class UIManager : MonoBehaviour
         gameManager.Upgrade(UpgradeManager.UpgradeType.Ammo);
     }
 
+    private void IncreaseTowerCount()
+    {
+        gameManager.Upgrade(UpgradeManager.UpgradeType.NewTower);
+    }
+
     private void SpawnCastle()
     {
         gameManager.Spawn(PlayerManager.PlayerStructures.Castle);
+        IncreaseTowerCount();
     }
 
     private void CheckButtons()
@@ -185,6 +194,7 @@ public class UIManager : MonoBehaviour
         CheckUpgradeType(UpgradeManager.UpgradeType.Speed, speedButton);
         CheckUpgradeType(UpgradeManager.UpgradeType.Range, rangeButton);
         CheckUpgradeType(UpgradeManager.UpgradeType.Ammo, ammoButton);
+        CheckUpgradeType(UpgradeManager.UpgradeType.NewTower, castleSpawnButton);
     }
 
     private void CheckUpgradeType(UpgradeManager.UpgradeType type, Button button)

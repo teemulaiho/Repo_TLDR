@@ -10,6 +10,9 @@ public class EnemySpawnPointBehaviour : MonoBehaviour
     [SerializeField] float spawnPointDT = 0f;
     [SerializeField] float spawnPointTimer = 8f;
 
+    [SerializeField] float deactivationDT;
+    [SerializeField] float deactivationTimer = 30f;
+
     public void Initialize(SpawnManager sm, EnemyManager em)
     {
         spawnManager = sm;
@@ -25,12 +28,19 @@ public class EnemySpawnPointBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        deactivationDT += Time.deltaTime;
         spawnPointDT += Time.deltaTime;
 
         if (spawnPointDT >= spawnPointTimer)
         {
             enemyManager.SpawnEnemy(this);
             spawnPointDT = 0f;
+        }
+
+
+        if (deactivationDT >= deactivationTimer)
+        {
+            //this.gameObject.SetActive(false);
         }
     }
 

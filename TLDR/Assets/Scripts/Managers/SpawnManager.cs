@@ -13,6 +13,7 @@ public class SpawnManager : MonoBehaviour
     float dt = 0f;
     float spawnActivationTimer = 10f;
 
+
     public void Initialize(GameManager gm, EnemyManager em)
     {
         gameManager = gm;
