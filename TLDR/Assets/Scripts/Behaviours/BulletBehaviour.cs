@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BulletBehaviour : MonoBehaviour
 {
+    BulletManager.BulletType bulletType;
+
     CastleBehaviour castle;
     public Vector3 castlePosition;
     public GameObject target;
@@ -17,11 +19,27 @@ public class BulletBehaviour : MonoBehaviour
     public void Initialize(CastleBehaviour cb)
     {
         castle = cb;
+        castlePosition = castle.transform.position;
+    }
+
+    public void Initialize(CastleBehaviour cb, BulletManager.BulletType type)
+    {
+        castle = cb;
+        castlePosition = castle.transform.position;
+        bulletType = type;
+
+        if (bulletType == BulletManager.BulletType.Direct)
+        {
+            SetBulletStartingStats(2,4);
+        }
+        else if (bulletType == BulletManager.BulletType.Cone)
+        {
+            SetBulletStartingStats(6, 2);
+        }
     }
 
     private void Awake()
     {
-        castlePosition = GameObject.FindGameObjectWithTag("Castle").transform.position;
         transform.position = castlePosition;
 
         SpawnExplosion();
@@ -99,7 +117,7 @@ public class BulletBehaviour : MonoBehaviour
         }
     }
 
-    private void Explode()
+    public void Explode()
     {
         if (explosions.Count > 0)
         {
@@ -110,7 +128,7 @@ public class BulletBehaviour : MonoBehaviour
     private void ResetPosition()
     {
         gameObject.SetActive(!gameObject.activeSelf);
-        transform.position = castlePosition;
+        transform.position = castle.transform.position;
     }
 
     private void ResetTarget()
@@ -142,5 +160,15 @@ public class BulletBehaviour : MonoBehaviour
     {
         bulletDamage += damage;
         bulletSpeed += speed;
+    }
+
+    private void OnDestroy()
+    {
+        foreach (ExplosionBehaviour explosion in explosions)
+        {
+            Destroy(explosion.gameObject);
+        }
+
+        explosions.Clear();
     }
 }

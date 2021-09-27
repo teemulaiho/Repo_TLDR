@@ -23,13 +23,15 @@ public class EnemyManager : MonoBehaviour
 
     private void Awake()
     {
-        if (enemyPrefab != null)
-        {
-            for (int i = 0; i < enemyAmount; i++)
-            {
-                SpawnEnemy();
-            }
-        }
+
+        // Spawn logic currently in EnemySpawnPointBehaviour.cs
+        //if (enemyPrefab != null)
+        //{
+        //    for (int i = 0; i < enemyAmount; i++)
+        //    {
+        //        SpawnEnemy();
+        //    }
+        //}
     }
 
     // Start is called before the first frame update
@@ -41,13 +43,15 @@ public class EnemyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        dt += Time.deltaTime;
 
-        if (dt > waveTimer)
-        {
-            SpawnEnemy();
-            dt = 0f;
-        }
+        // Spawn logic currently in EnemySpawnPointBehaviour.cs
+        //dt += Time.deltaTime;
+
+        //if (dt > waveTimer)
+        //{
+        //    SpawnEnemy();
+        //    dt = 0f;
+        //}
 
         CheckSpawners();
     }
@@ -94,6 +98,14 @@ public class EnemyManager : MonoBehaviour
 
         enemy.transform.position = new Vector3(Random.Range(0f, 50f), 1f, Random.Range(0f, 50f));
         enemy.transform.SetParent(this.transform);
+        enemies.Add(enemy);
+    }
+
+    public void SpawnEnemy(EnemySpawnPointBehaviour sp)
+    {
+        EnemyBehaviour enemy = Instantiate(enemyPrefab, sp.transform);
+        enemy.transform.position = sp.transform.position;
+        enemy.Init(this);
         enemies.Add(enemy);
     }
 

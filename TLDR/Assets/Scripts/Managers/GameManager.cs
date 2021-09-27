@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     public EnemyManager enemyManager;
     public UIManager uiManager;
     public UpgradeManager upgradeManager;
+    public SpawnManager spawnManager;
+    public TimerManager timerManager;
 
     float elapsedTime = 0f;
 
@@ -41,6 +43,12 @@ public class GameManager : MonoBehaviour
 
         if (upgradeManager != null)
             upgradeManager.Initialize(this);
+
+        if (spawnManager != null)
+            spawnManager.Initialize(this, enemyManager);
+
+        if (timerManager != null)
+            timerManager.Initialize(this);
     }
 
     public float GetElapsedTime()
@@ -51,6 +59,11 @@ public class GameManager : MonoBehaviour
     public float GetTimeLeftUntilNextEnemySpawn()
     {
         return enemyManager.GetTimeLeftUntilNextEnemySpawn();
+    }
+
+    public float GetTimeLeftUntilNextEnemySpawnPoint()
+    {
+        return spawnManager.GetTimeLeftUntilNextEnemySpawnPoint();
     }
 
     public int GetPlayerExperience()
@@ -78,6 +91,11 @@ public class GameManager : MonoBehaviour
         return playerManager.GetCastleAmmo();
     }
 
+    public int GetNewTowerPurchasePrice()
+    {
+        return upgradeManager.GetUpgradeCost(UpgradeManager.UpgradeType.NewTower);
+    }
+
     public int GetUpgradeCost(UpgradeManager.UpgradeType type)
     {
         return upgradeManager.GetUpgradeCost(type);
@@ -97,5 +115,25 @@ public class GameManager : MonoBehaviour
     public Vector4 GetUpgradeLevel()
     {
         return upgradeManager.GetUpgradeLevel();
+    }
+
+    public void Spawn(PlayerManager.PlayerStructures structure)
+    {
+        playerManager.Spawn(structure);
+    }
+
+    public List<float> GetTimers()
+    {
+        List<float> t = new List<float>();
+
+        t.Add(spawnManager.GetSpawnManagerTimer());
+        t.AddRange(spawnManager.GetSpawnPointTimers());
+
+        return t;
+    }
+
+    public void SetTowerBulletType(BulletManager.BulletType type, GameObject tower)
+    {
+        playerManager.SetTowerBulletType(type, tower);
     }
 }
