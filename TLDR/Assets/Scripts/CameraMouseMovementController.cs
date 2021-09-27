@@ -32,12 +32,14 @@ public class CameraMouseMovementController : MonoBehaviour
 
         if (x >= xDeadZone || x <= -xDeadZone)
         {
-            transform.position += new Vector3(x * speed * Time.deltaTime, transform.position.y, 0);
+            if (Mathf.Abs(x) <= 1)
+                transform.position += new Vector3(x * speed * Time.deltaTime, transform.position.y, 0);
         }
 
         if (y >= yDeadZone || y <= -yDeadZone)
         {
-            transform.position += new Vector3(0, transform.position.y, z * speed * Time.deltaTime);
+            if (Mathf.Abs(y) <= 1)
+                transform.position += new Vector3(0, transform.position.y, z * speed * Time.deltaTime);
         }
 
         cameraForwardDir = Camera.main.transform.forward;

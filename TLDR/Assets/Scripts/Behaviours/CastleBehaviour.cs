@@ -372,6 +372,4 @@ public class CastleBehaviour : MonoBehaviour
     {
         selected = false;
     }
-
-
 }

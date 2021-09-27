@@ -163,5 +163,9 @@ public class GameManager : MonoBehaviour
         {
             playerManager.DeselectObject(obj);
         }
+        else if (obj.tag == "EnemySpawnPoint")
+        {
+            spawnManager.DeselectObject(obj);
+        }
     }
 }

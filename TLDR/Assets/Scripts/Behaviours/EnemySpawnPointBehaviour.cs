@@ -107,10 +107,7 @@ public class EnemySpawnPointBehaviour : MonoBehaviour
         return spawnPointDT;
     }
 
-    public void SelectObject(int mouseButton)
-    {
-        selected = true;
-    }
+
 
     private void PlaceObject()
     {
@@ -123,5 +120,15 @@ public class EnemySpawnPointBehaviour : MonoBehaviour
         {
             beingPlaced = true;
         }
+    }
+
+    public void SelectObject(int mouseButton)
+    {
+        selected = true;
+    }
+
+    public void DeselectObject()
+    {
+        selected = false;
     }
 }

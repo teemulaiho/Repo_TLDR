@@ -89,4 +89,18 @@ public class SpawnManager : MonoBehaviour
             }
         }
     }
+
+    public void DeselectObject(GameObject obj)
+    {
+        if (spawnPoints != null && spawnPoints.Count > 0)
+        {
+            foreach (EnemySpawnPointBehaviour s in spawnPoints)
+            {
+                if (obj == s.gameObject)
+                {
+                    s.DeselectObject();
+                }
+            }
+        }
+    }
 }
