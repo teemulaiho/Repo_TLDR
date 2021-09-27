@@ -8,6 +8,9 @@ public class CameraMouseMovementController : MonoBehaviour
     float y = 0f;
     float z = 0f;
 
+    float xDeadZone = 0.85f;
+    float yDeadZone = 0.85f;
+
     [SerializeField] float speed = 50f;
     [SerializeField] float cameraRotateSpeed = 1f;
     [SerializeField] float scrollSpeed = 10f;
@@ -27,9 +30,17 @@ public class CameraMouseMovementController : MonoBehaviour
         y = ((Input.mousePosition.y / Screen.height) - 0.5f) * 2;
         z = ((Input.mousePosition.y / Screen.height) - 0.5f) * 2;
 
-        transform.position += new Vector3(x * speed * Time.deltaTime, transform.position.y, z * speed * Time.deltaTime);
-        cameraForwardDir = Camera.main.transform.forward;
+        if (x >= xDeadZone || x <= -xDeadZone)
+        {
+            transform.position += new Vector3(x * speed * Time.deltaTime, transform.position.y, 0);
+        }
 
+        if (y >= yDeadZone || y <= -yDeadZone)
+        {
+            transform.position += new Vector3(0, transform.position.y, z * speed * Time.deltaTime);
+        }
+
+        cameraForwardDir = Camera.main.transform.forward;
         Camera.main.transform.position +=
             new Vector3(
             cameraForwardDir.x * Input.GetAxis("Mouse ScrollWheel") * scrollSpeed,
