@@ -17,9 +17,10 @@ public class CastleBehaviour : MonoBehaviour
     public ExplosionBehaviour explosionPrefab;
 
     bool beingPlaced = false;
-
+    bool selected = false;
 
     GameObject castleRangeIndicator;
+    GameObject selectedIndicator;
 
     float shootDT;
     float shootCooldown = 0.5f;
@@ -34,6 +35,8 @@ public class CastleBehaviour : MonoBehaviour
 
         castleRangeIndicator = transform.Find("RangeIndicator").gameObject;
         ResizeRangeAreaIndicator();
+
+        selectedIndicator = transform.Find("SelectionIndicator").gameObject;
 
         bulletManager = Instantiate(bulletManagerPrefab);
         bulletManager.transform.SetParent(this.transform);
@@ -59,6 +62,15 @@ public class CastleBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        GetPlayerInput();
+
+        if (selected)
+        {
+            selectedIndicator.SetActive(selected);
+        }
+        else
+            selectedIndicator.SetActive(false);
+
         if (!beingPlaced)
         {
             ScanEnvironment();
@@ -67,6 +79,15 @@ public class CastleBehaviour : MonoBehaviour
         else
         {
             WaitForPlacement();
+        }
+    }
+
+    private void GetPlayerInput()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            if (selected)
+                MoveCastle(true);
         }
     }
 
@@ -84,7 +105,7 @@ public class CastleBehaviour : MonoBehaviour
             transform.position = raycastHit.point;
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(1))
         {
             PlaceCastle();
         }
@@ -332,5 +353,23 @@ public class CastleBehaviour : MonoBehaviour
     public void SetTowerBulletType(BulletManager.BulletType type)
     {
         bulletManager.SetBulletType(type);
+    }
+
+    public void SelectCastle(int mouseButton)
+    {
+        selected = true;      
+    }
+
+    public void DeselectCastle()
+    {
+        selected = false;
+    }
+
+    public void MoveCastle(bool isMovable)
+    {
+        if (isMovable)
+        {
+            beingPlaced = true;
+        }
     }
 }

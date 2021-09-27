@@ -136,4 +136,28 @@ public class GameManager : MonoBehaviour
     {
         playerManager.SetTowerBulletType(type, tower);
     }
+
+    public void SelectObject(GameObject obj, int mouseButton)
+    {
+        if (obj.tag == "Enemy")
+        {
+
+        }
+        else if (obj.tag == "Castle")
+        {
+            playerManager.SelectObject(obj, mouseButton);
+        }        
+    }
+
+    public void DeselectObject(GameObject obj)
+    {
+        if (obj.tag == "Enemy")
+        {
+
+        }
+        else if (obj.tag == "Castle")
+        {
+            playerManager.DeselectObject(obj);
+        }
+    }
 }

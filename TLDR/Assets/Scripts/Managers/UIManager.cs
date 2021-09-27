@@ -48,6 +48,7 @@ public class UIManager : MonoBehaviour
     Button changeTowerBulletTypeToDirectButton;
     Button changeTowerBulletTypeToConeButton;
 
+
     public void Initialize(GameManager gm)
     {
         gameManager = gm;
@@ -151,15 +152,6 @@ public class UIManager : MonoBehaviour
 
         SetUI();
         CheckButtons();
-
-        if (selectedObject != null)
-        {
-            if (selectedObject.name == "Castle")
-            {
-                selectedObject.GetComponent<MeshRenderer>().material.color = Color.red;
-                selectedObject.GetComponent<MeshRenderer>().materials[1].color = Color.red;
-            }
-        }
     }
 
     private void SetUI()
@@ -272,12 +264,31 @@ public class UIManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            // First deselect current object.
+            if (selectedObject != null)
+            {
+                DeselectObject(selectedObject);
+            }
+
             RaycastHit hitInfo = new RaycastHit();
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo))
             {
-                if (hitInfo.transform.gameObject.name == "Castle")
-                    selectedObject = hitInfo.transform.gameObject;
+                if (hitInfo.transform != null)
+                {
+                    SelectObject(hitInfo.transform.gameObject, 0);
+                }
             }          
         }
+    }
+
+    private void SelectObject(GameObject obj, int mouseButton)
+    {
+        selectedObject = obj.transform.gameObject;
+        gameManager.SelectObject(selectedObject, mouseButton);
+    }
+
+    private void DeselectObject(GameObject obj)
+    {
+        gameManager.DeselectObject(obj);
     }
 }

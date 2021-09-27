@@ -196,4 +196,32 @@ public class PlayerManager : MonoBehaviour
         else
             Debug.Log("No castles in list. PlayerManager.cs - SetTowerBulletType()");
     }
+
+    public void SelectObject(GameObject obj, int mouseButton)
+    {
+        if (castles != null && castles.Count > 0)
+        {
+            foreach (CastleBehaviour c in castles)
+            {
+                if (obj == c.gameObject)
+                {
+                    c.SelectCastle(mouseButton);
+                }
+            }
+        }
+    }
+
+    public void DeselectObject(GameObject obj)
+    {
+        if (castles != null && castles.Count > 0)
+        {
+            foreach (CastleBehaviour c in castles)
+            {
+                if (obj == c.gameObject)
+                {
+                    c.DeselectCastle();
+                }
+            }
+        }
+    }
 }
