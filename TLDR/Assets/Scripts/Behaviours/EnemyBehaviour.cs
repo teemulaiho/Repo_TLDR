@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyBehaviour : MonoBehaviour
 {
     EnemyManager enemyManager;
+    EnemySpawnPointBehaviour spawnPoint;
 
     List<GameObject> targets = new List<GameObject>();
     GameObject target;
@@ -20,9 +21,10 @@ public class EnemyBehaviour : MonoBehaviour
 
     public bool inSpawnQueue = false;
 
-    public void Init(EnemyManager p_enemyManager)
+    public void Init(EnemyManager p_enemyManager, EnemySpawnPointBehaviour p_spawnPoint)
     {
         enemyManager = p_enemyManager;
+        spawnPoint = p_spawnPoint;
     }
 
     private void Awake()
@@ -130,5 +132,10 @@ public class EnemyBehaviour : MonoBehaviour
     public bool InSpawnQueue()
     {
         return inSpawnQueue;
+    }
+
+    public Vector3 GetSpawnPointPosition()
+    {
+        return spawnPoint.transform.position;
     }
 }

@@ -75,4 +75,18 @@ public class SpawnManager : MonoBehaviour
     {
         return spawnActivationTimer - dt;
     }
+
+    public void SelectObject(GameObject obj, int mouseButton)
+    {
+        if (spawnPoints != null && spawnPoints.Count > 0)
+        {
+            foreach (EnemySpawnPointBehaviour s in spawnPoints)
+            {
+                if (obj == s.gameObject)
+                {
+                    s.SelectObject(mouseButton);
+                }
+            }
+        }
+    }
 }

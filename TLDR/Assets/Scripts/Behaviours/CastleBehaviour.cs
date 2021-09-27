@@ -255,6 +255,14 @@ public class CastleBehaviour : MonoBehaviour
         castleRangeIndicator.transform.localScale = curSize;
     }
 
+    private void MoveCastle(bool isMovable)
+    {
+        if (isMovable)
+        {
+            beingPlaced = true;
+        }
+    }
+
     public void AddExperience()
     {
         playerManager.AddExperience();
@@ -365,11 +373,5 @@ public class CastleBehaviour : MonoBehaviour
         selected = false;
     }
 
-    public void MoveCastle(bool isMovable)
-    {
-        if (isMovable)
-        {
-            beingPlaced = true;
-        }
-    }
+
 }

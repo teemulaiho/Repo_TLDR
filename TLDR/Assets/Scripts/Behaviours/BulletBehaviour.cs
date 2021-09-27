@@ -166,7 +166,8 @@ public class BulletBehaviour : MonoBehaviour
     {
         foreach (ExplosionBehaviour explosion in explosions)
         {
-            Destroy(explosion.gameObject);
+            if (explosion != null)
+                Destroy(explosion.gameObject);
         }
 
         explosions.Clear();

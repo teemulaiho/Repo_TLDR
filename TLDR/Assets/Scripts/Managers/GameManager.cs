@@ -143,6 +143,10 @@ public class GameManager : MonoBehaviour
         {
 
         }
+        else if (obj.tag == "EnemySpawnPoint")
+        {
+            spawnManager.SelectObject(obj, mouseButton);
+        }
         else if (obj.tag == "Castle")
         {
             playerManager.SelectObject(obj, mouseButton);

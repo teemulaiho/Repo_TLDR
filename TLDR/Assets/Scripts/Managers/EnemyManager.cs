@@ -67,6 +67,11 @@ public class EnemyManager : MonoBehaviour
         return new Vector3(Random.Range(0f, 50f), 1f, Random.Range(0f, 50f));
     }
 
+    private Vector3 SetSpawnPosition(EnemyBehaviour e)
+    {
+        return e.GetSpawnPointPosition();
+    }
+
     private void CheckSpawners()
     {
         if (startSpawnTimer)
@@ -79,7 +84,8 @@ public class EnemyManager : MonoBehaviour
                 {
                     if (enemies[i].inSpawnQueue)
                     {
-                        enemies[i].Spawn(SetSpawnPosition());
+                        //enemies[i].Spawn(SetSpawnPosition());
+                        enemies[i].Spawn(enemies[i].GetSpawnPointPosition());
                         enemies[i].gameObject.SetActive(true);
                     }
                 }
@@ -94,7 +100,7 @@ public class EnemyManager : MonoBehaviour
     {
         EnemyBehaviour enemy = Instantiate(enemyPrefab);
 
-        enemy.Init(this);
+        enemy.Init(this, null);
 
         enemy.transform.position = new Vector3(Random.Range(0f, 50f), 1f, Random.Range(0f, 50f));
         enemy.transform.SetParent(this.transform);
@@ -103,9 +109,10 @@ public class EnemyManager : MonoBehaviour
 
     public void SpawnEnemy(EnemySpawnPointBehaviour sp)
     {
-        EnemyBehaviour enemy = Instantiate(enemyPrefab, sp.transform);
+        //EnemyBehaviour enemy = Instantiate(enemyPrefab, sp.transform);
+        EnemyBehaviour enemy = Instantiate(enemyPrefab);
         enemy.transform.position = sp.transform.position;
-        enemy.Init(this);
+        enemy.Init(this, sp);
         enemies.Add(enemy);
     }
 
