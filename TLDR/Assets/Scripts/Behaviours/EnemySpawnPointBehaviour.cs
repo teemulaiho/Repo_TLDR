@@ -7,6 +7,8 @@ public class EnemySpawnPointBehaviour : MonoBehaviour
     SpawnManager spawnManager;
     EnemyManager enemyManager;
 
+    Color defaultColor;
+
     [SerializeField] LayerMask layerMask; // Use "Ground", when moving object raycast is from main camera to ground.
 
     [SerializeField] float spawnPointDT = 0f;
@@ -19,12 +21,19 @@ public class EnemySpawnPointBehaviour : MonoBehaviour
     bool selected = false;
     GameObject selectedIndicator;
 
+
+
     public void Initialize(SpawnManager sm, EnemyManager em)
     {
         spawnManager = sm;
         enemyManager = em;
 
         selectedIndicator = transform.Find("SelectionIndicator").gameObject;
+    }
+
+    private void Awake()
+    {
+        defaultColor = this.GetComponent<MeshRenderer>().material.color;
     }
 
     // Start is called before the first frame update
@@ -41,18 +50,34 @@ public class EnemySpawnPointBehaviour : MonoBehaviour
 
         GetPlayerInput();
 
+        if (spawnPointDT >= spawnPointTimer * 0.5f)
+        {
+            var pingpong = Mathf.PingPong(Time.time, 1);
+            var color = Color.Lerp(defaultColor, Color.red, pingpong);
+            this.GetComponent<MeshRenderer>().material.color = color;
+
+            float scaleMultiplier = 1.5f;
+            float lerpScale = Mathf.Lerp(1, scaleMultiplier, pingpong);
+
+            Vector3 newScale = new Vector3(lerpScale, lerpScale, lerpScale);
+            transform.localScale = newScale;            
+        }
+        else
+        {
+            var color = Color.Lerp(this.GetComponent<MeshRenderer>().material.color, defaultColor, 1);
+            this.GetComponent<MeshRenderer>().material.color = color;
+        }
+
         if (spawnPointDT >= spawnPointTimer)
         {
             enemyManager.SpawnEnemy(this);
             spawnPointDT = 0f;
         }
-
-
+        
         if (deactivationDT >= deactivationTimer)
         {
             //this.gameObject.SetActive(false);
         }
-
 
         if (selected)
         {

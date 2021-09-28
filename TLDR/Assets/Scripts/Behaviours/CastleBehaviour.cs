@@ -250,8 +250,12 @@ public class CastleBehaviour : MonoBehaviour
 
     private void ResizeRangeAreaIndicator()
     {
-        Vector3 curSize = castleRangeIndicator.transform.localScale;
-        curSize = new Vector3(castleRange * 2, curSize.y, castleRange * 2);
+        //Vector3 curSize = castleRangeIndicator.transform.localScale;
+        //curSize = new Vector3(castleRange * 2, curSize.y, castleRange * 2);
+        //castleRangeIndicator.transform.localScale = curSize;
+
+        //Vector3 curSize = castleRangeIndicator.transform.lossyScale;
+        Vector3 curSize = new Vector3(castleRange * (1 - 1 / transform.localScale.x), castleRangeIndicator.transform.localScale.y, castleRange * (1 - 1 / transform.localScale.x));
         castleRangeIndicator.transform.localScale = curSize;
     }
 
