@@ -11,6 +11,7 @@ public class EnemyBehaviour : MonoBehaviour
     GameObject target;
 
     HealthbarBehaviour healthBar;
+    ReactionBehaviour reactionBar;
     
     float enemySpeed = 1f;
     int enemyMaxHealth = 10;
@@ -34,6 +35,13 @@ public class EnemyBehaviour : MonoBehaviour
         if (healthBar != null)
         {
             healthBar.SetMaxHealth(enemyMaxHealth);
+        }
+
+        reactionBar = GetComponentInChildren<ReactionBehaviour>();
+
+        if (reactionBar)
+        {
+            reactionBar.Initialize(this);
         }
     }
 
