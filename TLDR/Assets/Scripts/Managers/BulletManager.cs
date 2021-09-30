@@ -17,6 +17,7 @@ public class BulletManager : MonoBehaviour
 
     [SerializeField] BulletBehaviour directBulletPrefab;
     [SerializeField] BulletBehaviour coneBulletPrefab;
+    [SerializeField] BulletBehaviour aoeBulletPrefab;
 
     public List<BulletBehaviour> bullets;
 
@@ -28,8 +29,9 @@ public class BulletManager : MonoBehaviour
 
     private void Awake()
     {
-        directBulletPrefab = Resources.Load<BulletBehaviour>("Prefabs/DirectBullet");
-        coneBulletPrefab = Resources.Load<BulletBehaviour>("Prefabs/ConeBullet");
+        directBulletPrefab = Resources.Load<BulletBehaviour>("Prefabs/Bullets/DirectBullet");
+        coneBulletPrefab = Resources.Load<BulletBehaviour>("Prefabs/Bullets/ConeBullet");
+        aoeBulletPrefab = Resources.Load<BulletBehaviour>("Prefabs/Bullets/AOEBullet");
     }
 
     // Start is called before the first frame update
@@ -44,6 +46,19 @@ public class BulletManager : MonoBehaviour
         
     }
 
+    private void SetBulletTypeAttributes(BulletBehaviour bullet, BulletType type)
+    {
+        bullet.transform.position = this.transform.position;
+        bullet.transform.SetParent(this.transform);
+        bullet.name = "Bullet";
+        bullet.gameObject.SetActive(false);
+        bullet.Initialize(castle, type);
+        Vector4 upgradeLevels = new Vector4();
+        upgradeLevels = playerManager.GetUpgradeLevel();
+        bullet.SetNewBulletStats((int)upgradeLevels.x, (int)upgradeLevels.y);
+        bullets.Add(bullet);
+    }
+
     public void SpawnBulletType(BulletType type)
     {
         if (type == BulletType.Direct)
@@ -54,32 +69,69 @@ public class BulletManager : MonoBehaviour
 
     public void SpawnBullet(BulletType type)
     {
+        //bool foundBulletType = false;
+        //BulletBehaviour bullet = new BulletBehaviour();
+
         if (type == BulletType.Direct)
         {
-            BulletBehaviour bullet = Instantiate(directBulletPrefab);
-            bullet.transform.position = this.transform.position;
-            bullet.transform.SetParent(this.transform);
-            bullet.name = "Bullet";
-            bullet.gameObject.SetActive(false);
-            bullet.Initialize(castle, type);
-            Vector4 upgradeLevels = new Vector4();
-            upgradeLevels = playerManager.GetUpgradeLevel();
-            bullet.SetNewBulletStats((int)upgradeLevels.x, (int)upgradeLevels.y);
-            bullets.Add(bullet);
+            BulletBehaviour bullet = new BulletBehaviour();
+            bullet = Instantiate(directBulletPrefab);
+            SetBulletTypeAttributes(bullet, type);
+            //foundBulletType = true;
+            //bullet.transform.position = this.transform.position;
+            //bullet.transform.SetParent(this.transform);
+            //bullet.name = "Bullet";
+            //bullet.gameObject.SetActive(false);
+            //bullet.Initialize(castle, type);
+            //Vector4 upgradeLevels = new Vector4();
+            //upgradeLevels = playerManager.GetUpgradeLevel();
+            //bullet.SetNewBulletStats((int)upgradeLevels.x, (int)upgradeLevels.y);
+            //bullets.Add(bullet);
         }
         else if (type == BulletType.Cone)
         {
-            BulletBehaviour bullet = Instantiate(coneBulletPrefab);
-            bullet.transform.position = this.transform.position;
-            bullet.transform.SetParent(this.transform);
-            bullet.name = "Bullet";
-            bullet.gameObject.SetActive(false);
-            bullet.Initialize(castle, type);
-            Vector4 upgradeLevels = new Vector4();
-            upgradeLevels = playerManager.GetUpgradeLevel();
-            bullet.SetNewBulletStats((int)upgradeLevels.x, (int)upgradeLevels.y);
-            bullets.Add(bullet);
+            BulletBehaviour bullet = new BulletBehaviour();
+            bullet = Instantiate(coneBulletPrefab);
+            SetBulletTypeAttributes(bullet, type);
+            //foundBulletType = true;
+            //bullet.transform.position = this.transform.position;
+            //bullet.transform.SetParent(this.transform);
+            //bullet.name = "Bullet";
+            //bullet.gameObject.SetActive(false);
+            //bullet.Initialize(castle, type);
+            //Vector4 upgradeLevels = new Vector4();
+            //upgradeLevels = playerManager.GetUpgradeLevel();
+            //bullet.SetNewBulletStats((int)upgradeLevels.x, (int)upgradeLevels.y);
+            //bullets.Add(bullet);
         } 
+        else if (type == BulletType.AOE)
+        {
+            BulletBehaviour bullet = new BulletBehaviour();
+            bullet = Instantiate(aoeBulletPrefab);
+            SetBulletTypeAttributes(bullet, type);
+            //foundBulletType = true;
+            //bullet.transform.position = this.transform.position;
+            //bullet.name = "Bullet";
+            //bullet.gameObject.SetActive(false);
+            //bullet.Initialize(castle, type);
+            //Vector4 upgradeLevels = new Vector4();
+            //upgradeLevels = playerManager.GetUpgradeLevel();
+            //bullet.SetNewBulletStats((int)upgradeLevels.x, (int)upgradeLevels.y);
+            //bullets.Add(bullet);
+        }
+
+        //if (foundBulletType)
+        //{
+        //    bullet.transform.position = this.transform.position;
+        //    bullet.transform.SetParent(this.transform);
+        //    bullet.name = "Bullet";
+        //    bullet.gameObject.SetActive(false);
+        //    bullet.Initialize(castle, type);
+        //    Vector4 upgradeLevels = new Vector4();
+        //    upgradeLevels = playerManager.GetUpgradeLevel();
+        //    bullet.SetNewBulletStats((int)upgradeLevels.x, (int)upgradeLevels.y);
+        //    bullets.Add(bullet);
+        //}
     }
 
     public void Shoot(List<EnemyBehaviour> enemies)

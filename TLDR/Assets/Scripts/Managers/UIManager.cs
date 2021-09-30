@@ -148,10 +148,10 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetPlayerInput();
-
-        SetUI();
         CheckButtons();
+
+        GetPlayerInput();
+        SetUI();
     }
 
     private void SetUI()
@@ -264,13 +264,16 @@ public class UIManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+
+            RaycastHit hitInfo = new RaycastHit();
+            Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo);
+
             // First deselect current object.
             if (selectedObject != null)
             {
                 DeselectObject(selectedObject);
             }
 
-            RaycastHit hitInfo = new RaycastHit();
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo))
             {
                 if (hitInfo.transform != null)
