@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 
@@ -48,6 +49,9 @@ public class UIManager : MonoBehaviour
     Button changeTowerBulletTypeToDirectButton;
     Button changeTowerBulletTypeToConeButton;
 
+    TMP_Text mouseCameraControlButtonTxt;
+    Button mouseCameraControlButton;
+    GameObject cameraController;
 
     public void Initialize(GameManager gm)
     {
@@ -57,6 +61,8 @@ public class UIManager : MonoBehaviour
     private void Awake()
     {
         ui = Instantiate(UIprefab);
+
+        cameraController = GameObject.Find("CameraMovement"); 
     }
 
     // Start is called before the first frame update
@@ -141,6 +147,13 @@ public class UIManager : MonoBehaviour
             {
                 changeTowerBulletTypeToConeButton = ui.transform.GetChild(i).gameObject.GetComponent<Button>();
                 changeTowerBulletTypeToConeButton.onClick.AddListener(ChangeTowerBulletToCone);
+            }
+            else if (ui.transform.GetChild(i).name == "CameraControl")
+            {
+                mouseCameraControlButton = ui.transform.GetChild(i).gameObject.GetComponent<Button>();
+                mouseCameraControlButton.onClick.AddListener(ChangeCameraControl);
+
+                mouseCameraControlButtonTxt = mouseCameraControlButton.GetComponentInChildren<TMP_Text>();
             }
         }
     }
@@ -246,6 +259,8 @@ public class UIManager : MonoBehaviour
                 button.interactable = false;
             }
         }
+        else
+            button.interactable = false;
     }
 
     private void ChangeTowerBulletToDirect()
@@ -264,6 +279,8 @@ public class UIManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            if (EventSystem.current.IsPointerOverGameObject())
+                return;
 
             RaycastHit hitInfo = new RaycastHit();
             Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo);
@@ -272,6 +289,7 @@ public class UIManager : MonoBehaviour
             if (selectedObject != null)
             {
                 DeselectObject(selectedObject);
+                selectedObject = null;
             }
 
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo))
@@ -286,12 +304,34 @@ public class UIManager : MonoBehaviour
 
     private void SelectObject(GameObject obj, int mouseButton)
     {
-        selectedObject = obj.transform.gameObject;
-        gameManager.SelectObject(selectedObject, mouseButton);
+        if (obj.tag == "Castle")
+        {
+            selectedObject = obj.transform.gameObject;
+            gameManager.SelectObject(selectedObject, mouseButton);
+        }
+        else if (obj.tag == "EnemySpawnPoint")
+        {
+            selectedObject = obj.transform.gameObject;
+            gameManager.SelectObject(selectedObject, mouseButton);
+        }
+
     }
 
     private void DeselectObject(GameObject obj)
     {
         gameManager.DeselectObject(obj);
+    }
+
+    private void ChangeCameraControl()
+    {
+        cameraController.GetComponent<CameraMouseMovementController>().enabled = 
+            !cameraController.GetComponent<CameraMouseMovementController>().enabled;
+
+        bool isEnabled = cameraController.GetComponent<CameraMouseMovementController>().enabled;
+     
+        if (isEnabled)
+            mouseCameraControlButtonTxt.text = "Mouse + Keyboard\nCamera Control";
+        else
+            mouseCameraControlButtonTxt.text = "Keyboard Camera Control";
     }
 }
