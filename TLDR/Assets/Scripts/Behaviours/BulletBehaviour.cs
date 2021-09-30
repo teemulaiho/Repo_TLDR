@@ -13,8 +13,8 @@ public class BulletBehaviour : MonoBehaviour
 
     public List<ExplosionBehaviour> explosions;
 
-    int bulletSpeed = 4;
-    int bulletDamage = 2;
+    int bulletSpeed = 0;
+    int bulletDamage = 0;
 
     public void Initialize(CastleBehaviour cb)
     {
@@ -35,6 +35,11 @@ public class BulletBehaviour : MonoBehaviour
         else if (bulletType == BulletManager.BulletType.Cone)
         {
             SetBulletStartingStats(6, 2);
+        }
+        else if (bulletType == BulletManager.BulletType.AOE)
+        {
+            GetComponent<MeshRenderer>().material.color = Color.black;
+            SetBulletStartingStats(10, 1);
         }
     }
 
@@ -60,7 +65,20 @@ public class BulletBehaviour : MonoBehaviour
     private void Move()
     {
         if (target.activeSelf)
-            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, bulletSpeed * Time.deltaTime);
+        {
+            if (bulletType == BulletManager.BulletType.Direct)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, target.transform.position, bulletSpeed * Time.deltaTime);
+            }
+            else if (bulletType == BulletManager.BulletType.Cone)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, target.transform.position, bulletSpeed * Time.deltaTime);
+            }
+            else if (bulletType == BulletManager.BulletType.AOE)
+            {
+                transform.position = GetArcPosition(transform.position); 
+            }
+        }
         else
         {
             ResetPosition();
@@ -171,5 +189,24 @@ public class BulletBehaviour : MonoBehaviour
         }
 
         explosions.Clear();
+    }
+
+    private Vector3 GetArcPosition(Vector3 pos)
+    {
+        Vector3 arcPos;
+
+        float trajectoryHeight = 5f;
+        float cTime = Time.time * 0.2f;
+
+        //arcPos = Vector3.Lerp(transform.position, target.transform.position, bulletSpeed * Time.deltaTime);
+
+        arcPos = Vector3.MoveTowards(pos, target.transform.position, bulletSpeed * Time.deltaTime);
+
+        float yOffSet = trajectoryHeight * Mathf.Sin(Time.time * 0.2f);
+        Debug.Log(yOffSet);
+
+        arcPos.y += yOffSet;
+
+        return arcPos;
     }
 }

@@ -8,8 +8,7 @@ public class BulletManager : MonoBehaviour
     {
         Direct,
         Cone,
-        AOE,
-        Cannon
+        AOE
     }
 
     PlayerManager playerManager;
@@ -53,9 +52,23 @@ public class BulletManager : MonoBehaviour
         bullet.name = "Bullet";
         bullet.gameObject.SetActive(false);
         bullet.Initialize(castle, type);
-        Vector4 upgradeLevels = new Vector4();
-        upgradeLevels = playerManager.GetUpgradeLevel();
-        bullet.SetNewBulletStats((int)upgradeLevels.x, (int)upgradeLevels.y);
+        //Vector4 upgradeLevels = new Vector4();
+        //upgradeLevels = playerManager.GetUpgradeLevel();
+        //bullet.SetNewBulletStats((int)upgradeLevels.x, (int)upgradeLevels.y);
+
+        if (type == BulletType.Direct)
+        {
+            bullet.SetNewBulletStats(2, 4);
+        }
+        else if (type == BulletType.Cone)
+        {
+            bullet.SetNewBulletStats(6, 2);
+        }
+        else if (type == BulletType.AOE)
+        {
+            bullet.SetNewBulletStats(10, 1);
+        }
+
         bullets.Add(bullet);
     }
 

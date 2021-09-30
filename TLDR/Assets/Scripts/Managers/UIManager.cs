@@ -48,6 +48,7 @@ public class UIManager : MonoBehaviour
 
     Button changeTowerBulletTypeToDirectButton;
     Button changeTowerBulletTypeToConeButton;
+    Button changeTowerBulletTypeToAOEButton;
 
     TMP_Text mouseCameraControlButtonTxt;
     Button mouseCameraControlButton;
@@ -148,6 +149,12 @@ public class UIManager : MonoBehaviour
                 changeTowerBulletTypeToConeButton = ui.transform.GetChild(i).gameObject.GetComponent<Button>();
                 changeTowerBulletTypeToConeButton.onClick.AddListener(ChangeTowerBulletToCone);
             }
+            else if (ui.transform.GetChild(i).name == "ButtonChangeBulletTypeAOE")
+            {
+                changeTowerBulletTypeToAOEButton = ui.transform.GetChild(i).gameObject.GetComponent<Button>();
+                changeTowerBulletTypeToAOEButton.onClick.AddListener(ChangeTowerBulletToAOE);
+            }
+
             else if (ui.transform.GetChild(i).name == "CameraControl")
             {
                 mouseCameraControlButton = ui.transform.GetChild(i).gameObject.GetComponent<Button>();
@@ -228,6 +235,7 @@ public class UIManager : MonoBehaviour
 
         CheckBulletType(changeTowerBulletTypeToDirectButton);
         CheckBulletType(changeTowerBulletTypeToConeButton);
+        CheckBulletType(changeTowerBulletTypeToAOEButton);
     }
 
     private void CheckUpgradeType(UpgradeManager.UpgradeType type, Button button)
@@ -273,6 +281,12 @@ public class UIManager : MonoBehaviour
     {
         if (selectedObject != null)
             gameManager.SetTowerBulletType(BulletManager.BulletType.Cone, selectedObject);
+    }
+
+    private void ChangeTowerBulletToAOE()
+    {
+        if (selectedObject != null)
+            gameManager.SetTowerBulletType(BulletManager.BulletType.AOE, selectedObject);
     }
 
     private void GetPlayerInput()
