@@ -9,6 +9,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     List<GameObject> targets = new List<GameObject>();
     GameObject target;
+    Vector3 noTargetPos;    //If no target, walk around.
 
     HealthbarBehaviour healthBar;
     ReactionBehaviour reactionBar;
@@ -56,7 +57,9 @@ public class EnemyBehaviour : MonoBehaviour
     {
         CheckHealth();
         Sense();
+        CheckReaction();
         Move();
+
    }
 
     private void CheckHealth()
@@ -88,7 +91,7 @@ public class EnemyBehaviour : MonoBehaviour
                 float minDist = float.MaxValue;
 
                 for (int i = 0; i < targets.Count; i++)
-                {                 
+                {
                     float dist = Vector3.Distance(transform.position, targets[i].transform.position);
 
                     if (dist < minDist)
@@ -97,6 +100,11 @@ public class EnemyBehaviour : MonoBehaviour
                         target = targets[i];
                     }
                 }
+            }
+            else if (Vector3.Distance(transform.position, noTargetPos) > 5f ||
+                Vector3.Distance(transform.position, noTargetPos) < 0.25f)
+            {
+                noTargetPos = new Vector3(Random.Range(transform.position.x, transform.position.x + 5f), transform.position.y, Random.Range(transform.position.z, transform.position.z + 5f));
             }
         }
     }
@@ -115,9 +123,11 @@ public class EnemyBehaviour : MonoBehaviour
     }
 
     private void Move()
-    {  
+    {
         if (target != null)
             transform.position = Vector3.MoveTowards(transform.position, target.transform.position, enemySpeed * Time.deltaTime);
+        else
+            transform.position = Vector3.MoveTowards(transform.position, noTargetPos, enemySpeed * Time.deltaTime);
     }
 
     public void Spawn(Vector3 spawnPosition)
@@ -135,6 +145,16 @@ public class EnemyBehaviour : MonoBehaviour
 
             enemyHealth -= bullet.GetBulletDamage();
         }
+    }
+
+    private void CheckReaction()
+    {
+        if (target != null)
+        {
+            reactionBar.SetReactionSprite(1);
+        }
+        else
+            reactionBar.SetReactionSprite(0);
     }
 
     public bool InSpawnQueue()

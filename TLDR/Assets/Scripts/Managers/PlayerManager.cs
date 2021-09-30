@@ -213,15 +213,33 @@ public class PlayerManager : MonoBehaviour
 
     public void DeselectObject(GameObject obj)
     {
-        if (castles != null && castles.Count > 0)
+        if (obj != null)
         {
-            foreach (CastleBehaviour c in castles)
+            if (castles != null && castles.Count > 0)
             {
-                if (obj == c.gameObject)
+                foreach (CastleBehaviour c in castles)
                 {
-                    c.DeselectCastle();
+                    if (c != null)
+                    {
+                        if (obj == c.gameObject)
+                        {
+                            c.DeselectCastle();
+                        }
+                    }
                 }
             }
+        }
+    }
+
+    public void RemoveObject(GameObject obj)
+    {
+        if (obj.GetComponent<CastleBehaviour>())
+        {
+            if (castles.Count > 0)
+            {
+                gameManager.RemoveObject(obj);
+                castles.Remove(obj.GetComponent<CastleBehaviour>());
+            }           
         }
     }
 }

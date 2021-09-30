@@ -8,6 +8,8 @@ public class ReactionBehaviour : MonoBehaviour
     EnemyBehaviour enemy;
     [SerializeField] List<Sprite> reactions;
 
+    Image reactionImage;
+
     public void Initialize(EnemyBehaviour e)
     {
         enemy = e;
@@ -17,6 +19,8 @@ public class ReactionBehaviour : MonoBehaviour
     {
         reactions.Add(Resources.Load<Sprite>("Sprites/QuestionMark"));
         reactions.Add(Resources.Load<Sprite>("Sprites/ExclamationMark"));
+
+        reactionImage = transform.Find("ReactionImage").GetComponent<Image>();
     }
 
     // Start is called before the first frame update
@@ -29,5 +33,11 @@ public class ReactionBehaviour : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void SetReactionSprite(int i)
+    {
+        if (reactions.Count >= i)
+            reactionImage.sprite = reactions[i];
     }
 }

@@ -95,6 +95,7 @@ public class CastleBehaviour : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            playerManager.RemoveObject(this.gameObject);
             Destroy(this.gameObject);
         }
 

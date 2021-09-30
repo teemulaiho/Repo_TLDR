@@ -168,4 +168,14 @@ public class GameManager : MonoBehaviour
             spawnManager.DeselectObject(obj);
         }
     }
+
+    public void RemoveObject(GameObject obj)
+    {
+        if (obj.GetComponent<CastleBehaviour>())
+            upgradeManager.DecreaseLevel(UpgradeManager.UpgradeType.NewTower);
+    }
+
+    public void CheckUpgrade()
+    {
+    }
 }
