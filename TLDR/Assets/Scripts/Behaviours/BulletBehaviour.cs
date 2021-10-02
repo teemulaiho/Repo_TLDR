@@ -6,6 +6,7 @@ public class BulletBehaviour : MonoBehaviour
 {
     BulletManager.BulletType bulletType;
 
+    UpgradeManager upgradeManager;
     CastleBehaviour castle;
     public Vector3 castlePosition;
     public GameObject target;
@@ -18,17 +19,20 @@ public class BulletBehaviour : MonoBehaviour
     int bulletSpeed = 0;
     int bulletDamage = 0;
 
-    public void Initialize(CastleBehaviour cb)
-    {
-        castle = cb;
-        castlePosition = castle.transform.position;
-    }
+    //public void Initialize(CastleBehaviour cb)
+    //{
+    //    castle = cb;
+    //    castlePosition = castle.transform.position;
+    //}
 
     public void Initialize(CastleBehaviour cb, BulletManager.BulletType type)
     {
         castle = cb;
         castlePosition = castle.transform.position;
         bulletType = type;
+
+        if (upgradeManager == null)
+            upgradeManager = castle.GetUpgradeManager();
 
         if (blastRadius)
             blastRadius.SetActive(false);
@@ -58,7 +62,6 @@ public class BulletBehaviour : MonoBehaviour
         {
             blastRadius = transform.Find("BlastRadius").gameObject;
             blastRadius.gameObject.SetActive(false);
-
         }
 
         SpawnExplosion();
@@ -67,13 +70,28 @@ public class BulletBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        upgradeManager = castle.GetUpgradeManager();
+        upgradeManager.OnVariableChange += VariableChangeHandler;
     }
 
     // Update is called once per frame
     void Update()
     {
         Move();
+    }
+
+    private void VariableChangeHandler(int newVal, UpgradeManager.UpgradeType type)
+    {
+        if (type == UpgradeManager.UpgradeType.Strength)
+        {
+            Debug.Log("Bullet received message: StrengthLevel increased.\n Bullet damage increased by 1.");
+            bulletDamage++;
+        }
+        else if (type == UpgradeManager.UpgradeType.Speed)
+        {
+            Debug.Log("Bullet received message: SpeedLevel increased.\n Bullet speed increased by 1.");
+            bulletDamage++;
+        }
     }
 
     private void Move()
@@ -129,8 +147,10 @@ public class BulletBehaviour : MonoBehaviour
     /// <param name="speed"></param>
     public void SetNewBulletStats(int damage, int speed)
     {
-        bulletDamage += damage;
-        bulletSpeed += speed;
+        bulletDamage = damage;
+        bulletSpeed = speed;
+
+        AddUpgradeStats();
     }
 
     private void Hit()
@@ -194,8 +214,16 @@ public class BulletBehaviour : MonoBehaviour
 
     public void SetBulletStartingStats(int damage, int speed)
     {
-        bulletDamage += damage;
-        bulletSpeed += speed;
+        bulletDamage = damage;
+        bulletSpeed = speed;
+
+        AddUpgradeStats();
+    }
+
+    public void AddUpgradeStats()
+    {
+        bulletDamage += upgradeManager.StrengthLevel;
+        bulletSpeed += upgradeManager.SpeedLevel;
     }
 
     private void OnDestroy()

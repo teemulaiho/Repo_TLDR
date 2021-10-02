@@ -60,8 +60,15 @@ public class EnemySpawnPointBehaviour : MonoBehaviour
         
         if (deactivationDT >= /*deactivationTimer*/ timerManager.GetSpawnPointDeactivationTimer())
         {
-            this.gameObject.SetActive(false);
-            enemyManager.DeactivateEnemies(spawnedEnemies);
+            spawnPointDT = 0;
+
+            float scaleTarget = 0f;
+            float lerpVal = Mathf.Lerp(transform.localScale.x, scaleTarget, Time.deltaTime);
+            transform.localScale = new Vector3(lerpVal, lerpVal, lerpVal);
+
+            if (transform.localScale.x <= 0.01f)
+                this.gameObject.SetActive(false);
+            //enemyManager.DeactivateEnemies(spawnedEnemies);
         }
 
         if (timerManager.GetEnemySpawnRateTimer() == 0)

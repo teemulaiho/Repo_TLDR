@@ -21,6 +21,30 @@ public class UpgradeManager : MonoBehaviour
     int ammoLevel = 0;
     int towerCount = 0;
 
+    public int StrengthLevel
+    {
+        get { return strengthLevel; }
+        set
+        {
+            if (strengthLevel == value) return;
+            strengthLevel = value;
+            if (OnVariableChange != null)
+                OnVariableChange(strengthLevel, UpgradeType.Strength);
+        }
+    }
+
+    public int SpeedLevel
+    {
+        get { return speedLevel; }
+        set
+        {
+            if (speedLevel == value) return;
+            speedLevel = value;
+            if (OnVariableChange != null)
+                OnVariableChange(speedLevel, UpgradeType.Speed);
+        }
+    }
+
     int strengthUpgradeCost = 10;
     int speedUpgradeCost = 15;
     int rangeUpgradeCost = 20;
@@ -44,6 +68,11 @@ public class UpgradeManager : MonoBehaviour
     {
         
     }
+
+    public delegate void OnVariableChangeDelegate(int newVal, UpgradeManager.UpgradeType type);
+
+    public event OnVariableChangeDelegate OnVariableChange;
+
 
     private void IncreaseUpgradeCost(UpgradeType type)
     {
@@ -101,6 +130,10 @@ public class UpgradeManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Returns Vector4(strengthLevel, speedLevel, rangeLevel, ammoLevel);
+    /// </summary>
+    /// <returns></returns>
     public Vector4 GetUpgradeLevel()
     {
         return new Vector4(strengthLevel, speedLevel, rangeLevel, ammoLevel);
@@ -140,10 +173,12 @@ public class UpgradeManager : MonoBehaviour
         if (type == UpgradeType.Strength)
         {
             strengthLevel++;
+            StrengthLevel = strengthLevel;
         }
         else if (type == UpgradeType.Speed)
         {
             speedLevel++;
+            SpeedLevel = speedLevel;
         }
         else if (type == UpgradeType.Range)
         {

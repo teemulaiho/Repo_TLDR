@@ -242,4 +242,9 @@ public class PlayerManager : MonoBehaviour
             }           
         }
     }
+
+    public UpgradeManager GetUpgradeManager()
+    {
+        return gameManager.GetUpgradeManager();
+    }
 }

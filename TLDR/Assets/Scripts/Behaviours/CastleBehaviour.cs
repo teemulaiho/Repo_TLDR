@@ -118,26 +118,26 @@ public class CastleBehaviour : MonoBehaviour
         this.tag = "Castle";
     }
 
-    void SpawnBullets()
-    {
-        if (enemies.Count > 0)
-        {
-            for (int i = 0; i < enemies.Count; i++)
-            {
-                BulletBehaviour bullet = Instantiate(bulletPrefab, this.transform);
-                bullet.name = "Bullet";
+    //void SpawnBullets()
+    //{
+    //    if (enemies.Count > 0)
+    //    {
+    //        for (int i = 0; i < enemies.Count; i++)
+    //        {
+    //            BulletBehaviour bullet = Instantiate(bulletPrefab, this.transform);
+    //            bullet.name = "Bullet";
 
-                bullet.gameObject.SetActive(false);
+    //            bullet.gameObject.SetActive(false);
 
-                bullet.Initialize(this);
-                bullets.Add(bullet);
-            }
-        }
-        else
-        {
-            GetEnemies();
-        }
-    }
+    //            bullet.Initialize(this);
+    //            bullets.Add(bullet);
+    //        }
+    //    }
+    //    else
+    //    {
+    //        GetEnemies();
+    //    }
+    //}
 
     private void SpawnBullet()
     {
@@ -186,34 +186,6 @@ public class CastleBehaviour : MonoBehaviour
     private void Shoot()
     {
         bulletManager.Shoot(enemies);
-
-        //EnemyBehaviour nearestEnemy = null;
-        //float dist = float.MaxValue;
-
-        //if (enemies != null && enemies.Count > 0)
-        //{
-        //    for (int i = 0; i < enemies.Count; i++)
-        //    {
-        //        if (enemies[i] != null)
-        //        {
-        //            float newDist = Vector3.Distance(this.transform.position, enemies[i].transform.position);
-
-        //            if (newDist < dist)
-        //            {
-        //                dist = newDist;
-        //                nearestEnemy = enemies[i];
-        //            }
-        //        }
-        //    }
-        //}
-
-        //if (dist <= castleRange)
-        //{
-        //    if (!nearestEnemy.InSpawnQueue())
-        //    {
-        //        ShootAvailableBullet(nearestEnemy.gameObject);
-        //    }
-        //}
     }
 
     private void ShootAvailableBullet(GameObject target)
@@ -376,5 +348,10 @@ public class CastleBehaviour : MonoBehaviour
     public void DeselectCastle()
     {
         selected = false;
+    }
+
+    public UpgradeManager GetUpgradeManager()
+    {
+        return playerManager.GetUpgradeManager();
     }
 }

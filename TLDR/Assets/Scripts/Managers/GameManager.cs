@@ -199,4 +199,9 @@ public class GameManager : MonoBehaviour
 
         }
     }
+
+    public UpgradeManager GetUpgradeManager()
+    {
+        return upgradeManager;
+    }
 }
