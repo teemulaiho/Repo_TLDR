@@ -6,12 +6,13 @@ public class SpawnManager : MonoBehaviour
 {
     GameManager gameManager;
     EnemyManager enemyManager;
+    TimerManager timerManager;
 
     EnemySpawnPointBehaviour spawnPointPrefab;
     public List<EnemySpawnPointBehaviour> spawnPoints;
 
     float dt = 0f;
-    float spawnActivationTimer = 10f;
+    //float spawnActivationTimer = 30f;
 
 
     public void Initialize(GameManager gm, EnemyManager em)
@@ -30,7 +31,7 @@ public class SpawnManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        timerManager = gameManager.GetTimerManager();
     }
 
     // Update is called once per frame
@@ -38,7 +39,11 @@ public class SpawnManager : MonoBehaviour
     {
         dt += Time.deltaTime;
 
-        if (dt >= spawnActivationTimer)
+        if (timerManager.GetSpawnPointActivationTimer() == 0)
+        {
+
+        }
+        else if (dt >= /*spawnActivationTimer*/ timerManager.GetSpawnPointActivationTimer())
         {
             dt = 0f;
             CreateSpawnPoint();
@@ -73,7 +78,7 @@ public class SpawnManager : MonoBehaviour
 
     public float GetTimeLeftUntilNextEnemySpawnPoint()
     {
-        return spawnActivationTimer - dt;
+        return /*spawnActivationTimer*/ timerManager.GetSpawnPointActivationTimer() - dt;
     }
 
     public void SelectObject(GameObject obj, int mouseButton)
@@ -102,5 +107,10 @@ public class SpawnManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public TimerManager GetTimerManager()
+    {
+        return timerManager;
     }
 }

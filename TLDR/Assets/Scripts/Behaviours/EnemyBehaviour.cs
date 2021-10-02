@@ -19,7 +19,7 @@ public class EnemyBehaviour : MonoBehaviour
     int enemyHealth = 10;
 
     float senseDT = 0;
-    float senseTime = 4f;
+    float senseTime = 6f;
 
     public bool inSpawnQueue = false;
 

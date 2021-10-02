@@ -54,6 +54,16 @@ public class UIManager : MonoBehaviour
     Button mouseCameraControlButton;
     GameObject cameraController;
 
+    Slider sliderSpawnPoint;
+    TMP_Text txtSpawnPoint;
+
+    Slider sliderEnemySpawnRate;
+    TMP_Text txtEnemySpawnRate;
+
+    Slider sliderEnemyHealth;
+
+
+
     public void Initialize(GameManager gm)
     {
         gameManager = gm;
@@ -162,6 +172,20 @@ public class UIManager : MonoBehaviour
 
                 mouseCameraControlButtonTxt = mouseCameraControlButton.GetComponentInChildren<TMP_Text>();
             }
+            else if (ui.transform.GetChild(i).name == "SliderSpawnPoint")
+            {
+                sliderSpawnPoint = ui.transform.GetChild(i).gameObject.GetComponent<Slider>();
+                txtSpawnPoint = sliderSpawnPoint.transform.Find("TxtValue").GetComponent<TMP_Text>();
+            }
+            else if (ui.transform.GetChild(i).name == "SliderEnemySpawnRate")
+            {
+                sliderEnemySpawnRate = ui.transform.GetChild(i).gameObject.GetComponent<Slider>();
+                txtEnemySpawnRate = sliderEnemySpawnRate.transform.Find("TxtValue").GetComponent<TMP_Text>();
+            }
+            else if (ui.transform.GetChild(i).name == "SliderEnemyHealth")
+            {
+                sliderEnemyHealth = ui.transform.GetChild(i).gameObject.GetComponent<Slider>();
+            }
         }
     }
 
@@ -169,9 +193,21 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         CheckButtons();
+        CheckSliders();
 
         GetPlayerInput();
         SetUI();
+    }
+
+    private void CheckSliders()
+    {
+        gameManager.SetTimer(sliderSpawnPoint.name, sliderSpawnPoint.value);
+        txtSpawnPoint.text = sliderSpawnPoint.value.ToString();
+
+        gameManager.SetTimer(sliderEnemySpawnRate.name, sliderEnemySpawnRate.value);
+        txtEnemySpawnRate.text = sliderEnemySpawnRate.value.ToString();
+
+        gameManager.SetTimer(sliderEnemyHealth.name, sliderEnemyHealth.value);
     }
 
     private void SetUI()

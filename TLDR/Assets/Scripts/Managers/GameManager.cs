@@ -178,4 +178,25 @@ public class GameManager : MonoBehaviour
     public void CheckUpgrade()
     {
     }
+
+    public TimerManager GetTimerManager()
+    {
+        return timerManager;
+    }
+
+    public void SetTimer(string name, float value)
+    {
+        if (name == "SliderSpawnPoint")
+        {
+            timerManager.SetSpawnPointActivationTimer(value);
+        }
+        else if (name == "SliderEnemySpawnRate")
+        {
+            timerManager.SetEnemySpawnRateTimer(value);
+        }
+        else if (name == "SliderEnemyHealth")
+        {
+
+        }
+    }
 }

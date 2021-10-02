@@ -8,6 +8,8 @@ public class EnemyManager : MonoBehaviour
     public EnemyBehaviour enemyPrefab;
     public List<EnemyBehaviour> enemies;
 
+    GameObject enemyParent;
+
     int enemyAmount = 1;
 
     float dt = 0f;
@@ -23,6 +25,7 @@ public class EnemyManager : MonoBehaviour
 
     private void Awake()
     {
+        enemyParent = new GameObject("ENEMIES");
 
         // Spawn logic currently in EnemySpawnPointBehaviour.cs
         //if (enemyPrefab != null)
@@ -53,7 +56,7 @@ public class EnemyManager : MonoBehaviour
         //    dt = 0f;
         //}
 
-        CheckSpawners();
+        //CheckSpawners();
     }
 
     public void EnemyHasDied(EnemyBehaviour enemy)
@@ -107,13 +110,21 @@ public class EnemyManager : MonoBehaviour
         enemies.Add(enemy);
     }
 
-    public void SpawnEnemy(EnemySpawnPointBehaviour sp)
+    public EnemyBehaviour SpawnEnemy(EnemySpawnPointBehaviour sp)
     {
         //EnemyBehaviour enemy = Instantiate(enemyPrefab, sp.transform);
         EnemyBehaviour enemy = Instantiate(enemyPrefab);
+        enemy.transform.SetParent(enemyParent.transform);
         enemy.transform.position = sp.transform.position;
         enemy.Init(this, sp);
         enemies.Add(enemy);
+
+        return enemy;
+    }
+
+    public void GetEnemy(EnemySpawnPointBehaviour sp)
+    {
+
     }
 
     public List<EnemyBehaviour> GetEnemyList()
@@ -124,5 +135,22 @@ public class EnemyManager : MonoBehaviour
     public float GetTimeLeftUntilNextEnemySpawn()
     {
         return waveTimer - dt;
+    }
+
+    public void DeactivateEnemies(List<EnemyBehaviour> e)
+    {
+        if (enemies != null)
+        {
+            for (int i = 0; i < e.Count; i++)
+            {
+                for (int j = 0; j < enemies.Count; j++)
+                {
+                    if (e[i] == enemies[j])
+                    {
+                        enemies[j].gameObject.SetActive(false);
+                    }
+                }
+            }
+        }        
     }
 }

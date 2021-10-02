@@ -6,20 +6,25 @@ public class EnemySpawnPointBehaviour : MonoBehaviour
 {
     SpawnManager spawnManager;
     EnemyManager enemyManager;
+    TimerManager timerManager;
+
+    public List<EnemyBehaviour> spawnedEnemies;
 
     Color defaultColor;
 
     [SerializeField] LayerMask layerMask; // Use "Ground", when moving object raycast is from main camera to ground.
 
     [SerializeField] float spawnPointDT = 0f;
-    [SerializeField] float spawnPointTimer = 8f;
+    //[SerializeField] float spawnPointTimer = 8f;
 
-    [SerializeField] float deactivationDT;
-    [SerializeField] float deactivationTimer = 30f;
+    [SerializeField] float deactivationDT = 0f;
+    //[SerializeField] float deactivationTimer = 30f;
 
     bool beingPlaced = false;
     bool selected = false;
     GameObject selectedIndicator;
+
+    float originalScaleX = 0f;
 
 
 
@@ -34,49 +39,60 @@ public class EnemySpawnPointBehaviour : MonoBehaviour
     private void Awake()
     {
         defaultColor = this.GetComponent<MeshRenderer>().material.color;
+        originalScaleX = transform.localScale.x;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-
+        timerManager = spawnManager.GetTimerManager();
     }
 
     // Update is called once per frame
     void Update()
     {
-        deactivationDT += Time.deltaTime;
+        if (spawnedEnemies != null && spawnedEnemies.Count > 0)
+            deactivationDT += Time.deltaTime;
         spawnPointDT += Time.deltaTime;
 
         GetPlayerInput();
 
-        if (spawnPointDT >= spawnPointTimer * 0.5f)
+        
+        if (deactivationDT >= /*deactivationTimer*/ timerManager.GetSpawnPointDeactivationTimer())
         {
-            var pingpong = Mathf.PingPong(Time.time, 1);
-            var color = Color.Lerp(defaultColor, Color.red, pingpong);
-            this.GetComponent<MeshRenderer>().material.color = color;
+            this.gameObject.SetActive(false);
+            enemyManager.DeactivateEnemies(spawnedEnemies);
+        }
 
-            float scaleMultiplier = 1.5f;
-            float lerpScale = Mathf.Lerp(1, scaleMultiplier, pingpong);
+        if (timerManager.GetEnemySpawnRateTimer() == 0)
+        {
 
-            Vector3 newScale = new Vector3(lerpScale, lerpScale, lerpScale);
-            transform.localScale = newScale;            
         }
         else
         {
-            var color = Color.Lerp(this.GetComponent<MeshRenderer>().material.color, defaultColor, 1);
-            this.GetComponent<MeshRenderer>().material.color = color;
-        }
+            if (spawnPointDT >= /*spawnPointTimer*/ timerManager.GetEnemySpawnRateTimer() * 0.5f)
+            {
+                var pingpong = Mathf.PingPong(Time.time, 1);
+                var color = Color.Lerp(defaultColor, Color.red, pingpong);
+                this.GetComponent<MeshRenderer>().material.color = color;
 
-        if (spawnPointDT >= spawnPointTimer)
-        {
-            enemyManager.SpawnEnemy(this);
-            spawnPointDT = 0f;
-        }
-        
-        if (deactivationDT >= deactivationTimer)
-        {
-            //this.gameObject.SetActive(false);
+                float scaleMultiplier = 1.5f;
+                float lerpScale = Mathf.Lerp(originalScaleX, scaleMultiplier, pingpong);
+
+                Vector3 newScale = new Vector3(lerpScale, lerpScale, lerpScale);
+                transform.localScale = newScale;
+            }
+            else
+            {
+                var color = Color.Lerp(this.GetComponent<MeshRenderer>().material.color, defaultColor, 1);
+                this.GetComponent<MeshRenderer>().material.color = color;
+            }
+
+            if (spawnPointDT >= /*spawnPointTimer*/ timerManager.GetEnemySpawnRateTimer())
+            {
+                spawnPointDT = 0f;
+                spawnedEnemies.Add(enemyManager.SpawnEnemy(this));
+            }
         }
 
         if (selected)
