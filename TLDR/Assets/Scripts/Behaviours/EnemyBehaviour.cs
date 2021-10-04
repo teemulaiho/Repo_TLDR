@@ -80,10 +80,10 @@ public class EnemyBehaviour : MonoBehaviour
         {
             senseDT = 0f;
 
-            if (GameObject.FindGameObjectWithTag("Castle") != null)
+            if (GameObject.FindGameObjectWithTag("Base") != null)
             {
                 targets.Clear();
-                targets.AddRange(GameObject.FindGameObjectsWithTag("Castle"));
+                targets.AddRange(GameObject.FindGameObjectsWithTag("Base"));
             }
 
             if (targets != null && targets.Count > 0)

@@ -14,15 +14,30 @@ public class PlayerManager : MonoBehaviour
     public CastleBehaviour castlePrefab;
     public List<CastleBehaviour> castles;
 
+    BaseBehaviour basePrefab;
+    BaseBehaviour baseObj;
+
     int experience = 0;
 
     public void Initialize(GameManager gm)
     {
         gameManager = gm;
+
+        if (basePrefab == null)
+            basePrefab = Resources.Load<BaseBehaviour>("Prefabs/Base");
+
+        baseObj = Instantiate(basePrefab);
+        baseObj.name = "Base";
+        baseObj.transform.position = new Vector3(0f, 1f, 0f); 
     }
 
     private void Awake()
     {
+        //castle = Resources.Load<CastleBehaviour>("Prefabs/Castle");
+
+        if (basePrefab)
+            basePrefab = Resources.Load<BaseBehaviour>("Prefabs/Base");
+
         if (castle != null)
             castle.Initialize(this, false);
     }
