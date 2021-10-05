@@ -6,18 +6,26 @@ public class PlayerManager : MonoBehaviour
 {
     public enum PlayerStructures
     {
-        Castle
+        Base,
+        Castle,
+        TowerDirect,
+        TowerCone,
+        TowerAOE
     }
 
     GameManager gameManager;
-    public CastleBehaviour castle;
-    public CastleBehaviour castlePrefab;
-    public List<CastleBehaviour> castles;
+    public TurretBehaviour castle;
+    public TurretBehaviour castlePrefab;
+    public List<TurretBehaviour> structures;
 
     BaseBehaviour basePrefab;
     BaseBehaviour baseObj;
 
-    int experience = 0;
+    TurretBehaviour turretDirectPrefab;
+    TurretBehaviour turretConePrefab;
+    TurretBehaviour turretAOEPrefab;
+
+    int experience =- 0;
 
     public void Initialize(GameManager gm)
     {
@@ -25,6 +33,15 @@ public class PlayerManager : MonoBehaviour
 
         if (basePrefab == null)
             basePrefab = Resources.Load<BaseBehaviour>("Prefabs/Base");
+
+        if (turretDirectPrefab == null)
+            turretDirectPrefab = Resources.Load<TurretBehaviour>("Prefabs/Turrets/TurretDirect");
+
+        if (turretConePrefab == null)
+            turretConePrefab = Resources.Load<TurretBehaviour>("Prefabs/Turrets/TurretCone");
+
+        if (turretAOEPrefab == null)
+            turretAOEPrefab = Resources.Load<TurretBehaviour>("Prefabs/Turrets/TurretAOE");
 
         baseObj = Instantiate(basePrefab);
         baseObj.name = "Base";
@@ -37,6 +54,15 @@ public class PlayerManager : MonoBehaviour
 
         if (basePrefab)
             basePrefab = Resources.Load<BaseBehaviour>("Prefabs/Base");
+
+        if (turretDirectPrefab == null)
+            turretDirectPrefab = Resources.Load<TurretBehaviour>("Prefabs/Turrets/TurretDirect");
+
+        if (turretConePrefab == null)
+            turretConePrefab = Resources.Load<TurretBehaviour>("Prefabs/Turrets/TurretCone");
+
+        if (turretAOEPrefab == null)
+            turretAOEPrefab = Resources.Load<TurretBehaviour>("Prefabs/Turrets/TurretAOE");
 
         if (castle != null)
             castle.Initialize(this, false);
@@ -66,8 +92,8 @@ public class PlayerManager : MonoBehaviour
 
     public int GetPlayerStrength()
     {
-        if (castles != null && castles.Count > 0)
-            return castles[0].GetBulletStrength();
+        if (structures != null && structures.Count > 0)
+            return structures[0].GetBulletStrength();
         else return -1;
 
         //if (castle != null)
@@ -77,8 +103,8 @@ public class PlayerManager : MonoBehaviour
 
     public int GetPlayerSpeed()
     {
-        if (castles != null && castles.Count > 0)
-            return castles[0].GetBulletSpeed();
+        if (structures != null && structures.Count > 0)
+            return structures[0].GetBulletSpeed();
         else return -1;
 
         //if (castle != null)
@@ -87,8 +113,8 @@ public class PlayerManager : MonoBehaviour
 
     public int GetCastleRange()
     {
-        if (castles != null && castles.Count > 0)
-            return castles[0].GetCastleRange();
+        if (structures != null && structures.Count > 0)
+            return structures[0].GetCastleRange();
         else return -1;
 
         //if (castle != null)
@@ -97,8 +123,8 @@ public class PlayerManager : MonoBehaviour
 
     public int GetCastleAmmo()
     {
-        if (castles != null && castles.Count > 0)
-            return castles[0].GetCastleAmmo();
+        if (structures != null && structures.Count > 0)
+            return structures[0].GetCastleAmmo();
         else return -1;
 
         //if (castle != null)
@@ -107,9 +133,9 @@ public class PlayerManager : MonoBehaviour
 
     public void IncreaseStrength()
     {
-        for (int i = 0; i < castles.Count; i++)
+        for (int i = 0; i < structures.Count; i++)
         {
-            castles[i].IncreaseStrength();
+            structures[i].IncreaseStrength();
         }
 
         //castle.IncreaseStrength();
@@ -118,9 +144,9 @@ public class PlayerManager : MonoBehaviour
 
     public void IncreaseSpeed()
     {
-        for (int i = 0; i < castles.Count; i++)
+        for (int i = 0; i < structures.Count; i++)
         {
-            castles[i].IncreaseSpeed();
+            structures[i].IncreaseSpeed();
         }
 
         //castle.IncreaseSpeed();
@@ -129,9 +155,9 @@ public class PlayerManager : MonoBehaviour
 
     public void IncreaseRange()
     {
-        for (int i = 0; i < castles.Count; i++)
+        for (int i = 0; i < structures.Count; i++)
         {
-            castles[i].IncreaseRange();
+            structures[i].IncreaseRange();
         }
 
         //castle.IncreaseRange();
@@ -140,9 +166,9 @@ public class PlayerManager : MonoBehaviour
 
     public void IncreaseAmmo(BulletManager.BulletType type)
     {
-        for (int i = 0; i < castles.Count; i++)
+        for (int i = 0; i < structures.Count; i++)
         {
-            castles[i].IncreaseAmmo(type);
+            structures[i].IncreaseAmmo(type);
         }
 
         //castle.IncreaseAmmo();
@@ -183,28 +209,58 @@ public class PlayerManager : MonoBehaviour
     {
         if (structure == PlayerStructures.Castle)
         {
-            CastleBehaviour c = Instantiate(castlePrefab);
+            TurretBehaviour c = Instantiate(castlePrefab);
             c.Initialize(this, true);
             c.name = "Castle";
             c.transform.position = new Vector3(Random.Range(0f, 50f), 0f, Random.Range(0f, 50f));
             c.transform.SetParent(this.transform);
-            castles.Add(c);
+            structures.Add(c);
+        }
+        else if (structure == PlayerStructures.TowerDirect)
+        {
+            TurretBehaviour t = Instantiate(turretDirectPrefab);
+            t.Initialize(this, true);
+            t.name = "Castle";
+            t.transform.position = new Vector3(Random.Range(0f, 50f), 0f, Random.Range(0f, 50f));
+            t.transform.SetParent(this.transform);
+            t.SetTowerType(structure);
+            structures.Add(t);
+        }
+        else if (structure == PlayerStructures.TowerCone)
+        {
+            TurretBehaviour t = Instantiate(turretConePrefab);
+            t.Initialize(this, true);
+            t.name = "Castle";
+            t.transform.position = new Vector3(Random.Range(0f, 50f), 0f, Random.Range(0f, 50f));
+            t.transform.SetParent(this.transform);
+            t.SetTowerType(structure);
+            structures.Add(t);
+        }
+        else if (structure == PlayerStructures.TowerAOE)
+        {
+            TurretBehaviour t = Instantiate(turretAOEPrefab);
+            t.Initialize(this, true);
+            t.name = "Castle";
+            t.transform.position = new Vector3(Random.Range(0f, 50f), 0f, Random.Range(0f, 50f));
+            t.transform.SetParent(this.transform);
+            t.SetTowerType(structure);
+            structures.Add(t);
         }
     }
 
     public void SetTowerBulletType(BulletManager.BulletType type, GameObject tower)
     {
-        CastleBehaviour c = tower.GetComponent<CastleBehaviour>();
+        TurretBehaviour c = tower.GetComponent<TurretBehaviour>();
 
         if (c != null && 
-            castles != null && 
-            castles.Count > 0)
+            structures != null && 
+            structures.Count > 0)
         {
-            for (int i = 0; i < castles.Count; i++)
+            for (int i = 0; i < structures.Count; i++)
             {
-                if (castles[i] == c)
+                if (structures[i] == c)
                 {
-                    castles[i].SetTowerBulletType(type);
+                    structures[i].SetTowerBulletType(type);
                 }
             }
         }
@@ -214,9 +270,9 @@ public class PlayerManager : MonoBehaviour
 
     public void SelectObject(GameObject obj, int mouseButton)
     {
-        if (castles != null && castles.Count > 0)
+        if (structures != null && structures.Count > 0)
         {
-            foreach (CastleBehaviour c in castles)
+            foreach (TurretBehaviour c in structures)
             {
                 if (obj == c.gameObject)
                 {
@@ -230,9 +286,9 @@ public class PlayerManager : MonoBehaviour
     {
         if (obj != null)
         {
-            if (castles != null && castles.Count > 0)
+            if (structures != null && structures.Count > 0)
             {
-                foreach (CastleBehaviour c in castles)
+                foreach (TurretBehaviour c in structures)
                 {
                     if (c != null)
                     {
@@ -248,12 +304,12 @@ public class PlayerManager : MonoBehaviour
 
     public void RemoveObject(GameObject obj)
     {
-        if (obj.GetComponent<CastleBehaviour>())
+        if (obj.GetComponent<TurretBehaviour>())
         {
-            if (castles.Count > 0)
+            if (structures.Count > 0)
             {
                 gameManager.RemoveObject(obj);
-                castles.Remove(obj.GetComponent<CastleBehaviour>());
+                structures.Remove(obj.GetComponent<TurretBehaviour>());
             }           
         }
     }

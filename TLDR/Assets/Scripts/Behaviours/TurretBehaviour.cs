@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CastleBehaviour : MonoBehaviour
+public class TurretBehaviour : MonoBehaviour
 {
+    PlayerManager.PlayerStructures turretType;
+
     PlayerManager playerManager;
     BulletManager bulletManager;
     BulletManager bulletManagerPrefab;
@@ -141,7 +143,19 @@ public class CastleBehaviour : MonoBehaviour
 
     private void SpawnBullet()
     {
-        bulletManager.SpawnBulletType(BulletManager.BulletType.Direct);
+        if (turretType == PlayerManager.PlayerStructures.TowerDirect)
+        {
+            bulletManager.SpawnBulletType(BulletManager.BulletType.Direct);
+        }
+        else if (turretType == PlayerManager.PlayerStructures.TowerCone)
+        {
+            bulletManager.SpawnBulletType(BulletManager.BulletType.Cone);
+        }        
+        else if (turretType == PlayerManager.PlayerStructures.TowerAOE)
+        {
+            bulletManager.SpawnBulletType(BulletManager.BulletType.AOE);
+        }
+
 
         //BulletBehaviour bullet = Instantiate(bulletPrefab);
         //bullet.transform.position = this.transform.position;
@@ -353,5 +367,10 @@ public class CastleBehaviour : MonoBehaviour
     public UpgradeManager GetUpgradeManager()
     {
         return playerManager.GetUpgradeManager();
+    }
+
+    public void SetTowerType(PlayerManager.PlayerStructures type)
+    {
+        turretType = type;
     }
 }

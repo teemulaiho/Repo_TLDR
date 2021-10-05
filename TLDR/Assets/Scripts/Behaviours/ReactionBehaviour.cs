@@ -9,6 +9,7 @@ public class ReactionBehaviour : MonoBehaviour
     [SerializeField] List<Sprite> reactions;
 
     Image reactionImage;
+    int defaultReaction = 0;
 
     public void Initialize(EnemyBehaviour e)
     {
@@ -21,6 +22,8 @@ public class ReactionBehaviour : MonoBehaviour
         reactions.Add(Resources.Load<Sprite>("Sprites/ExclamationMark"));
 
         reactionImage = transform.Find("ReactionImage").GetComponent<Image>();
+
+        SetReactionSprite(defaultReaction);
     }
 
     // Start is called before the first frame update

@@ -39,6 +39,8 @@ public class UIManager : MonoBehaviour
 
     TMP_Text castlePurchaseText;
 
+    [SerializeField] List<Button> uiButtons;
+
     Button strengthButton;
     Button speedButton;
     Button rangeButton;
@@ -73,7 +75,8 @@ public class UIManager : MonoBehaviour
     {
         ui = Instantiate(UIprefab);
 
-        cameraController = GameObject.Find("CameraMovement"); 
+        cameraController = GameObject.Find("CameraMovement");
+        uiButtons = new List<Button>();
     }
 
     // Start is called before the first frame update
@@ -164,7 +167,6 @@ public class UIManager : MonoBehaviour
                 changeTowerBulletTypeToAOEButton = ui.transform.GetChild(i).gameObject.GetComponent<Button>();
                 changeTowerBulletTypeToAOEButton.onClick.AddListener(ChangeTowerBulletToAOE);
             }
-
             else if (ui.transform.GetChild(i).name == "CameraControl")
             {
                 mouseCameraControlButton = ui.transform.GetChild(i).gameObject.GetComponent<Button>();
@@ -185,6 +187,33 @@ public class UIManager : MonoBehaviour
             else if (ui.transform.GetChild(i).name == "SliderEnemyHealth")
             {
                 sliderEnemyHealth = ui.transform.GetChild(i).gameObject.GetComponent<Slider>();
+            }
+        }
+
+        uiButtons.AddRange(ui.GetComponentsInChildren<Button>());
+
+        if (uiButtons != null &&
+            uiButtons.Count > 0)
+        {
+            foreach (Button b in uiButtons)
+            {
+                // For reference, delete comment once done.
+                //castleSpawnButton = ui.transform.GetChild(i).gameObject.GetComponent<Button>();
+                //castlePurchaseText = castleSpawnButton.transform.Find("PurchaseCost").GetComponent<TMP_Text>();
+                //castleSpawnButton.onClick.AddListener(SpawnCastle);
+
+                if (b.name == "ButtonSpawnTurretDirect")
+                {
+                    b.onClick.AddListener(SpawnDirectTurret);
+                }
+                else if (b.name == "ButtonSpawnTurretCone")
+                {
+                    b.onClick.AddListener(SpawnConeTurret);
+                }
+                else if (b.name == "ButtonSpawnTurretAOE")
+                {
+                    b.onClick.AddListener(SpawnAOETurret);
+                }
             }
         }
     }
@@ -254,6 +283,21 @@ public class UIManager : MonoBehaviour
     {
         gameManager.Spawn(PlayerManager.PlayerStructures.Castle);
         IncreaseTowerCount();
+    }
+
+    private void SpawnDirectTurret()
+    {
+        gameManager.Spawn(PlayerManager.PlayerStructures.TowerDirect);
+    }
+
+    private void SpawnConeTurret()
+    {
+        gameManager.Spawn(PlayerManager.PlayerStructures.TowerCone);
+    }
+
+    private void SpawnAOETurret()
+    {
+        gameManager.Spawn(PlayerManager.PlayerStructures.TowerAOE);
     }
 
     private void CheckButtons()

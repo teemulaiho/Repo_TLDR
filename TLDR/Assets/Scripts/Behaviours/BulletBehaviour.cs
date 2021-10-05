@@ -7,7 +7,7 @@ public class BulletBehaviour : MonoBehaviour
     BulletManager.BulletType bulletType;
 
     UpgradeManager upgradeManager;
-    CastleBehaviour castle;
+    TurretBehaviour castle;
     public Vector3 castlePosition;
     public GameObject target;
     public ExplosionBehaviour explosionPrefab;
@@ -25,7 +25,7 @@ public class BulletBehaviour : MonoBehaviour
     //    castlePosition = castle.transform.position;
     //}
 
-    public void Initialize(CastleBehaviour cb, BulletManager.BulletType type)
+    public void Initialize(TurretBehaviour cb, BulletManager.BulletType type)
     {
         castle = cb;
         castlePosition = castle.transform.position;
@@ -240,11 +240,11 @@ public class BulletBehaviour : MonoBehaviour
     private Vector3 GetArcPosition(Vector3 pos)
     {
         Vector3 newPos = Vector3.MoveTowards(pos, target.transform.position, bulletSpeed * Time.deltaTime);
-        float dist = Vector3.Distance(pos, target.transform.position);
-        float timeToDist = dist / bulletSpeed;
+        //float dist = Vector3.Distance(pos, target.transform.position);
+        //float timeToDist = dist / bulletSpeed;
 
-        float yPos = 1f * timeToDist + -0.1f * (timeToDist * timeToDist);
-        newPos.y = yPos;
+        //float yPos = 1f * timeToDist + -0.1f * (timeToDist * timeToDist);
+        //newPos.y = yPos;
 
         return newPos;
     }

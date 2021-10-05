@@ -12,7 +12,7 @@ public class BulletManager : MonoBehaviour
     }
 
     PlayerManager playerManager;
-    CastleBehaviour castle;
+    TurretBehaviour castle;
 
     [SerializeField] BulletBehaviour directBulletPrefab;
     [SerializeField] BulletBehaviour coneBulletPrefab;
@@ -20,7 +20,7 @@ public class BulletManager : MonoBehaviour
 
     public List<BulletBehaviour> bullets;
 
-    public void Initialize(PlayerManager pm, CastleBehaviour cs)
+    public void Initialize(PlayerManager pm, TurretBehaviour cs)
     {
         playerManager = pm;
         castle = cs;
@@ -74,10 +74,7 @@ public class BulletManager : MonoBehaviour
 
     public void SpawnBulletType(BulletType type)
     {
-        if (type == BulletType.Direct)
-        {
-            SpawnBullet(type);
-        }
+        SpawnBullet(type);
     }
 
     public void SpawnBullet(BulletType type)

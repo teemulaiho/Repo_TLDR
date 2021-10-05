@@ -171,7 +171,7 @@ public class GameManager : MonoBehaviour
 
     public void RemoveObject(GameObject obj)
     {
-        if (obj.GetComponent<CastleBehaviour>())
+        if (obj.GetComponent<TurretBehaviour>())
             upgradeManager.DecreaseLevel(UpgradeManager.UpgradeType.NewTower);
     }
 

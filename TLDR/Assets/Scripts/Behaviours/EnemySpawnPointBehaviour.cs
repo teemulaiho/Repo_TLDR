@@ -56,7 +56,6 @@ public class EnemySpawnPointBehaviour : MonoBehaviour
         spawnPointDT += Time.deltaTime;
 
         GetPlayerInput();
-
         
         if (deactivationDT >= /*deactivationTimer*/ timerManager.GetSpawnPointDeactivationTimer())
         {
@@ -154,8 +153,6 @@ public class EnemySpawnPointBehaviour : MonoBehaviour
     {
         return spawnPointDT;
     }
-
-
 
     private void PlaceObject()
     {

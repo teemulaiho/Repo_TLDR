@@ -17,6 +17,7 @@ public class EnemyBehaviour : MonoBehaviour
     float enemySpeed = 1f;
     int enemyMaxHealth = 10;
     int enemyHealth = 10;
+    int enemyDamage = 1;
 
     float senseDT = 0;
     float senseTime = 4f;
@@ -59,8 +60,7 @@ public class EnemyBehaviour : MonoBehaviour
         Sense();
         CheckReaction();
         Move();
-
-   }
+    }
 
     private void CheckHealth()
     {
@@ -80,17 +80,32 @@ public class EnemyBehaviour : MonoBehaviour
         {
             senseDT = 0f;
 
-            if (GameObject.FindGameObjectWithTag("Base") != null)
-            {
-                targets.Clear();
-                targets.AddRange(GameObject.FindGameObjectsWithTag("Base"));
-            }
+            //CheckMultipleTargets();
+            CheckSingleTarget();
+        }
+        else if (Vector3.Distance(transform.position, noTargetPos) > 5f ||
+                    Vector3.Distance(transform.position, noTargetPos) < 0.25f)
+        {
+            noTargetPos = new Vector3(Random.Range(transform.position.x - 5f, transform.position.x + 5f), transform.position.y, Random.Range(transform.position.z - 5f, transform.position.z + 5f));
+        }
+    }
 
-            if (targets != null && targets.Count > 0)
-            {
-                float minDist = float.MaxValue;
+    private void CheckMultipleTargets()
+    {
+        if (GameObject.FindGameObjectWithTag("Base") != null)
+        {
+            targets.Clear();
+            targets.AddRange(GameObject.FindGameObjectsWithTag("Base"));
+        }
 
-                for (int i = 0; i < targets.Count; i++)
+        if (targets != null && targets.Count > 0)
+        {
+            float minDist = float.MaxValue;
+
+            for (int i = 0; i < targets.Count; i++)
+            {
+                // Don't check disabled gameobjects.
+                if (targets[i].gameObject.activeSelf)
                 {
                     float dist = Vector3.Distance(transform.position, targets[i].transform.position);
 
@@ -101,11 +116,23 @@ public class EnemyBehaviour : MonoBehaviour
                     }
                 }
             }
-            else if (Vector3.Distance(transform.position, noTargetPos) > 5f ||
-                Vector3.Distance(transform.position, noTargetPos) < 0.25f)
+        }
+    }
+
+    private void CheckSingleTarget()
+    {
+        if (target == null)
+        {
+            if (GameObject.FindGameObjectWithTag("Base") != null)
             {
-                noTargetPos = new Vector3(Random.Range(transform.position.x, transform.position.x + 5f), transform.position.y, Random.Range(transform.position.z, transform.position.z + 5f));
+                target = GameObject.FindGameObjectWithTag("Base");
             }
+        }
+        
+        if (target != null && 
+            !target.activeSelf)
+        {
+            target = null;
         }
     }
 
@@ -124,7 +151,8 @@ public class EnemyBehaviour : MonoBehaviour
 
     private void Move()
     {
-        if (target != null)
+        if (target != null &&
+            target.gameObject.activeSelf)
             transform.position = Vector3.MoveTowards(transform.position, target.transform.position, enemySpeed * Time.deltaTime);
         else
             transform.position = Vector3.MoveTowards(transform.position, noTargetPos, enemySpeed * Time.deltaTime);
@@ -145,11 +173,16 @@ public class EnemyBehaviour : MonoBehaviour
 
             enemyHealth -= bullet.GetBulletDamage();
         }
+        else if (other.CompareTag("Base"))
+        {
+            enemyHealth = 0;
+        }
     }
 
     private void CheckReaction()
     {
-        if (target != null)
+        if (target != null && 
+            target.gameObject.activeSelf)
         {
             reactionBar.SetReactionSprite(1);
         }
@@ -165,5 +198,10 @@ public class EnemyBehaviour : MonoBehaviour
     public Vector3 GetSpawnPointPosition()
     {
         return spawnPoint.transform.position;
+    }
+
+    public int GetEnemyDamage()
+    {
+        return enemyDamage;
     }
 }
