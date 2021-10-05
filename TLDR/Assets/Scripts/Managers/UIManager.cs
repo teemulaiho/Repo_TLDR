@@ -259,7 +259,7 @@ public class UIManager : MonoBehaviour
                 {
                     debugManager.SetValue((int)s.value, false, BulletManager.BulletType.Direct);
                 }
-                else if (s.name == "SliderConeBulletDmage")
+                else if (s.name == "SliderConeBulletDamage")
                 {
                     debugManager.SetValue((int)s.value, true, BulletManager.BulletType.Cone);
                 }

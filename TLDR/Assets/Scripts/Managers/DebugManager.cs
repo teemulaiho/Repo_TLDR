@@ -19,8 +19,6 @@ public class DebugManager : MonoBehaviour
             if (dmgDir == value) return;
             dmgDir = value;
 
-            Debug.Log("DmgDir value changed to " + dmgDir);
-
             if (OnVariableChange != null)
                 OnVariableChange(dmgDir, true, PlayerManager.PlayerStructures.TowerDirect);
             //OnVariableChange(dmgDir, true, BulletManager.BulletType.Direct);
@@ -77,7 +75,6 @@ public class DebugManager : MonoBehaviour
             if (spdCon == value) return;
             spdCon = value;
 
-
             if (OnVariableChange != null)
                 OnVariableChange(spdCon, false, PlayerManager.PlayerStructures.TowerCone);
                 //OnVariableChange(spdCon, false, BulletManager.BulletType.Cone);
@@ -91,7 +88,6 @@ public class DebugManager : MonoBehaviour
         {
             if (spdAOE == value) return;
             spdAOE = value;
-
 
             if (OnVariableChange != null)
                 OnVariableChange(spdAOE, false, PlayerManager.PlayerStructures.TowerAOE);
@@ -135,32 +131,71 @@ public class DebugManager : MonoBehaviour
             }
             else if (type == BulletManager.BulletType.Cone)
             {
-                //dmgCon = value;
-                DmgCon = value;
+                if (dmgCon != value)
+                {
+                    //dmgCon = value;
+                    DmgCon = value;
+                }
             }
             else if (type == BulletManager.BulletType.AOE)
             {
-                //dmgAOE = value;
-                DmgAOE = value;
+                if (dmgAOE != value)
+                {
+                    //dmgAOE = value;
+                    DmgAOE = value;
+                }
             }
         }
         else
         {
             if (type == BulletManager.BulletType.Direct)
             {
-                //spdDir = value;
-                SpdDir = value;
+                if (spdDir != value)
+                {
+                    //spdDir = value;
+                    SpdDir = value;
+                }
             }
             else if (type == BulletManager.BulletType.Cone)
             {
-                //spdCon = value;
-                SpdCon = value;
+                if (spdDir != value)
+                {
+                    //spdCon = value;
+                    SpdCon = value;
+                }
             }
             else if (type == BulletManager.BulletType.AOE)
             {
-                //spdAOE = value;
-                SpdAOE = value;
+                if (spdAOE != value)
+                {
+                    //spdAOE = value;
+                    SpdAOE = value;
+                }
             }
         }
+    }
+
+    public Vector2 GetSpeedAndDamage(BulletManager.BulletType type)
+    {
+        float dmg = 0f;
+        float spd = 0f;
+
+        if (type == BulletManager.BulletType.Direct)
+        {
+            dmg = DmgDir;
+            spd = SpdDir;
+        }
+        else if (type == BulletManager.BulletType.Cone)
+        {
+            dmg = DmgCon;
+            spd = SpdCon;
+        }
+        else if (type == BulletManager.BulletType.AOE)
+        {
+            dmg = DmgAOE;
+            spd = SpdAOE;
+        }
+
+        return new Vector2(dmg, spd);
     }
 }

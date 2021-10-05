@@ -8,6 +8,7 @@ public class BulletBehaviour : MonoBehaviour
 
     DebugManager debugManager;
     UpgradeManager upgradeManager;
+
     TurretBehaviour castle;
     public Vector3 castlePosition;
     public GameObject target;
@@ -77,6 +78,13 @@ public class BulletBehaviour : MonoBehaviour
         upgradeManager = castle.GetUpgradeManager();
         upgradeManager.OnVariableChange += VariableChangeHandler;
         debugManager.OnVariableChange += VariableChangeHandlerSlider;
+
+        if (debugManager != null)
+        {
+            Vector2 stats = debugManager.GetSpeedAndDamage(bulletType);
+            bulletDamage = (int)stats.x;
+            bulletSpeed = (int)stats.y;
+        }
     }
 
     // Update is called once per frame
@@ -105,12 +113,10 @@ public class BulletBehaviour : MonoBehaviour
         {
             if (isDmg)
             {
-                Debug.Log("type: " + type.ToString() + " damage is now: " + newVal);
                 bulletDamage = newVal;
             }
             else
             {
-                Debug.Log("type: " + type.ToString() + " speed is now: " + newVal);
                 bulletSpeed = newVal;
             }
         }
