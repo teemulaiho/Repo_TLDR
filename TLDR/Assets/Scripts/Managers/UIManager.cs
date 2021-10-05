@@ -8,6 +8,7 @@ using TMPro;
 public class UIManager : MonoBehaviour
 {
     GameManager gameManager;
+    DebugManager debugManager;
     public Canvas UIprefab;
     Canvas ui;
 
@@ -40,6 +41,7 @@ public class UIManager : MonoBehaviour
     TMP_Text castlePurchaseText;
 
     [SerializeField] List<Button> uiButtons;
+    [SerializeField] List<Slider> uiSliders;
 
     Button strengthButton;
     Button speedButton;
@@ -64,11 +66,10 @@ public class UIManager : MonoBehaviour
 
     Slider sliderEnemyHealth;
 
-
-
     public void Initialize(GameManager gm)
     {
         gameManager = gm;
+        debugManager = gameManager.GetDebugManager();
     }
 
     private void Awake()
@@ -77,6 +78,7 @@ public class UIManager : MonoBehaviour
 
         cameraController = GameObject.Find("CameraMovement");
         uiButtons = new List<Button>();
+        uiSliders = new List<Slider>();
     }
 
     // Start is called before the first frame update
@@ -216,6 +218,8 @@ public class UIManager : MonoBehaviour
                 }
             }
         }
+
+        uiSliders.AddRange(ui.GetComponentsInChildren<Slider>());
     }
 
     // Update is called once per frame
@@ -237,6 +241,44 @@ public class UIManager : MonoBehaviour
         txtEnemySpawnRate.text = sliderEnemySpawnRate.value.ToString();
 
         gameManager.SetTimer(sliderEnemyHealth.name, sliderEnemyHealth.value);
+
+
+
+
+
+        if (uiSliders != null &&
+            uiSliders.Count > 0)
+        {
+            foreach (Slider s in uiSliders)
+            {
+                if (s.name == "SliderDirectBulletDamage")
+                {
+                    debugManager.SetValue(s.value, true, BulletManager.BulletType.Direct);
+                }
+                else if (s.name == "SliderDirectBulletSpeed")
+                {
+                    debugManager.SetValue(s.value, false, BulletManager.BulletType.Direct);
+                }
+                else if (s.name == "SliderConeBulletDmage")
+                {
+                    debugManager.SetValue(s.value, true, BulletManager.BulletType.Cone);
+                }
+                else if (s.name == "SliderConeBulletSpeed")
+                {
+                    debugManager.SetValue(s.value, false, BulletManager.BulletType.Cone);
+                }
+                else if (s.name == "SliderAOEBulletDamage")
+                {
+                    debugManager.SetValue(s.value, true, BulletManager.BulletType.AOE);
+                }
+                else if (s.name == "SliderAOEBulletSpeed")
+                {
+                    debugManager.SetValue(s.value, false, BulletManager.BulletType.AOE);
+                }
+            }
+        }
+
+
     }
 
     private void SetUI()

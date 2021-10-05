@@ -6,6 +6,7 @@ public class BulletBehaviour : MonoBehaviour
 {
     BulletManager.BulletType bulletType;
 
+    DebugManager debugManager;
     UpgradeManager upgradeManager;
     TurretBehaviour castle;
     public Vector3 castlePosition;
@@ -52,6 +53,9 @@ public class BulletBehaviour : MonoBehaviour
 
             blastRadius.SetActive(true);
         }
+
+        if (debugManager == null)
+            debugManager = upgradeManager.GetDebugManager();
     }
 
     private void Awake()
@@ -72,6 +76,7 @@ public class BulletBehaviour : MonoBehaviour
     {
         upgradeManager = castle.GetUpgradeManager();
         upgradeManager.OnVariableChange += VariableChangeHandler;
+        debugManager.OnVariableChange += VariableChangeHandlerSlider;
     }
 
     // Update is called once per frame
@@ -91,6 +96,18 @@ public class BulletBehaviour : MonoBehaviour
         {
             Debug.Log("Bullet received message: SpeedLevel increased.\n Bullet speed increased by 1.");
             bulletDamage++;
+        }
+    }
+
+    private void VariableChangeHandlerSlider(int newVal, bool isDmg, BulletManager.BulletType type)
+    {
+        if (isDmg)
+        {
+            bulletDamage = newVal;
+        }
+        else
+        {
+            bulletSpeed = newVal;
         }
     }
 

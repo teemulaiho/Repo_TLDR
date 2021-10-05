@@ -14,6 +14,7 @@ public class UpgradeManager : MonoBehaviour
     }
 
     GameManager gameManager;
+    DebugManager debugManager;
 
     int strengthLevel = 0;
     int speedLevel = 0;
@@ -55,6 +56,9 @@ public class UpgradeManager : MonoBehaviour
     public void Initialize(GameManager gm)
     {
         gameManager = gm;
+
+        if (gameManager != null)
+            debugManager = gameManager.GetDebugManager();
     }
 
     // Start is called before the first frame update
@@ -220,5 +224,10 @@ public class UpgradeManager : MonoBehaviour
         }
 
         DecreaseUpgradeCost(type);
+    }
+
+    public DebugManager GetDebugManager()
+    {
+        return debugManager;
     }
 }

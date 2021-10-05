@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public UpgradeManager upgradeManager;
     public SpawnManager spawnManager;
     public TimerManager timerManager;
+    public DebugManager debugManager;
 
     float elapsedTime = 0f;
 
@@ -203,5 +204,10 @@ public class GameManager : MonoBehaviour
     public UpgradeManager GetUpgradeManager()
     {
         return upgradeManager;
+    }
+
+    public DebugManager GetDebugManager()
+    {
+        return debugManager;
     }
 }

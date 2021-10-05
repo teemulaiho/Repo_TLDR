@@ -48,7 +48,7 @@ public class TurretBehaviour : MonoBehaviour
 
     private void Awake()
     {
-        bulletManagerPrefab = Resources.Load<BulletManager>("Prefabs/BulletManager");
+        bulletManagerPrefab = Resources.Load<BulletManager>("Prefabs/Managers/BulletManager");
         bulletPrefab = Resources.Load<BulletBehaviour>("Prefabs/Bullet");
         explosionPrefab = Resources.Load<ExplosionBehaviour>("Prefabs/ExplosionCannon");
     }

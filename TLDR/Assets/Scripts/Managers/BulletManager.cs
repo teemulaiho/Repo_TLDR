@@ -81,20 +81,17 @@ public class BulletManager : MonoBehaviour
     {
         if (type == BulletType.Direct)
         {
-            BulletBehaviour bullet = new BulletBehaviour();
-            bullet = Instantiate(directBulletPrefab);
+            BulletBehaviour bullet = Instantiate(directBulletPrefab);
             SetBulletTypeAttributes(bullet, type);
         }
         else if (type == BulletType.Cone)
         {
-            BulletBehaviour bullet = new BulletBehaviour();
-            bullet = Instantiate(coneBulletPrefab);
+            BulletBehaviour bullet = Instantiate(coneBulletPrefab);
             SetBulletTypeAttributes(bullet, type);
         } 
         else if (type == BulletType.AOE)
         {
-            BulletBehaviour bullet = new BulletBehaviour();
-            bullet = Instantiate(aoeBulletPrefab);
+            BulletBehaviour bullet = Instantiate(aoeBulletPrefab);
             SetBulletTypeAttributes(bullet, type);
         }
     }
