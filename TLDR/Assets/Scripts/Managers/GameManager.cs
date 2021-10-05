@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     public TimerManager timerManager;
     public DebugManager debugManager;
 
+    bool debugMode = true;
+
     float elapsedTime = 0f;
 
     private void Awake()
@@ -209,5 +211,15 @@ public class GameManager : MonoBehaviour
     public DebugManager GetDebugManager()
     {
         return debugManager;
+    }
+
+    public void SetDebugView()
+    {
+        debugMode = !debugMode;
+    }
+
+    public bool GetDebugView()
+    {
+        return debugMode;
     }
 }

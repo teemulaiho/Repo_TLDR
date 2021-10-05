@@ -7,6 +7,8 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
+    bool debugMode;
+
     GameManager gameManager;
     DebugManager debugManager;
     public Canvas UIprefab;
@@ -74,6 +76,7 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
+        debugMode = true;
         ui = Instantiate(UIprefab);
 
         cameraController = GameObject.Find("CameraMovement");
@@ -216,6 +219,10 @@ public class UIManager : MonoBehaviour
                 {
                     b.onClick.AddListener(SpawnAOETurret);
                 }
+                else if (b.name == "ButtonDebugView")
+                {
+                    b.onClick.AddListener(ShowDebugView);
+                }
             }
         }
 
@@ -242,43 +249,40 @@ public class UIManager : MonoBehaviour
 
         gameManager.SetTimer(sliderEnemyHealth.name, sliderEnemyHealth.value);
 
-
-
-
-
         if (uiSliders != null &&
             uiSliders.Count > 0)
         {
             foreach (Slider s in uiSliders)
             {
-                if (s.name == "SliderDirectBulletDamage")
+                if (s.gameObject.activeSelf)
                 {
-                    debugManager.SetValue((int)s.value, true, BulletManager.BulletType.Direct);
-                }
-                else if (s.name == "SliderDirectBulletSpeed")
-                {
-                    debugManager.SetValue((int)s.value, false, BulletManager.BulletType.Direct);
-                }
-                else if (s.name == "SliderConeBulletDamage")
-                {
-                    debugManager.SetValue((int)s.value, true, BulletManager.BulletType.Cone);
-                }
-                else if (s.name == "SliderConeBulletSpeed")
-                {
-                    debugManager.SetValue((int)s.value, false, BulletManager.BulletType.Cone);
-                }
-                else if (s.name == "SliderAOEBulletDamage")
-                {
-                    debugManager.SetValue((int)s.value, true, BulletManager.BulletType.AOE);
-                }
-                else if (s.name == "SliderAOEBulletSpeed")
-                {
-                    debugManager.SetValue((int)s.value, false, BulletManager.BulletType.AOE);
-                }
+                    if (s.name == "SliderDirectBulletDamage")
+                    {
+                        debugManager.SetValue((int)s.value, true, BulletManager.BulletType.Direct);
+                    }
+                    else if (s.name == "SliderDirectBulletSpeed")
+                    {
+                        debugManager.SetValue((int)s.value, false, BulletManager.BulletType.Direct);
+                    }
+                    else if (s.name == "SliderConeBulletDamage")
+                    {
+                        debugManager.SetValue((int)s.value, true, BulletManager.BulletType.Cone);
+                    }
+                    else if (s.name == "SliderConeBulletSpeed")
+                    {
+                        debugManager.SetValue((int)s.value, false, BulletManager.BulletType.Cone);
+                    }
+                    else if (s.name == "SliderAOEBulletDamage")
+                    {
+                        debugManager.SetValue((int)s.value, true, BulletManager.BulletType.AOE);
+                    }
+                    else if (s.name == "SliderAOEBulletSpeed")
+                    {
+                        debugManager.SetValue((int)s.value, false, BulletManager.BulletType.AOE);
+                    }
+                }            
             }
-        }
-
-
+        }   
     }
 
     private void SetUI()
@@ -450,7 +454,6 @@ public class UIManager : MonoBehaviour
             selectedObject = obj.transform.gameObject;
             gameManager.SelectObject(selectedObject, mouseButton);
         }
-
     }
 
     private void DeselectObject(GameObject obj)
@@ -469,5 +472,29 @@ public class UIManager : MonoBehaviour
             mouseCameraControlButtonTxt.text = "Mouse + Keyboard\nCamera Control";
         else
             mouseCameraControlButtonTxt.text = "Keyboard Camera Control";
+    }
+
+    private void ShowDebugView()
+    {
+        gameManager.SetDebugView();
+        debugMode = gameManager.GetDebugView();
+
+        if (debugMode)
+        {
+
+        }
+        else
+        {
+
+        }
+
+        foreach (Slider s in uiSliders)
+        {
+            s.gameObject.SetActive(debugMode);
+        }
+
+        changeTowerBulletTypeToDirectButton.gameObject.SetActive(debugMode);
+        changeTowerBulletTypeToAOEButton.gameObject.SetActive(debugMode);
+        changeTowerBulletTypeToConeButton.gameObject.SetActive(debugMode);
     }
 }
