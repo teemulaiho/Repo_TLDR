@@ -89,25 +89,30 @@ public class BulletBehaviour : MonoBehaviour
     {
         if (type == UpgradeManager.UpgradeType.Strength)
         {
-            Debug.Log("Bullet received message: StrengthLevel increased.\n Bullet damage increased by 1.");
-            bulletDamage++;
+            Debug.Log("Bullet received message: StrengthLevel increased.\n Bullet damage increased by " + newVal);
+            bulletDamage += newVal;
         }
         else if (type == UpgradeManager.UpgradeType.Speed)
         {
-            Debug.Log("Bullet received message: SpeedLevel increased.\n Bullet speed increased by 1.");
-            bulletDamage++;
+            Debug.Log("Bullet received message: SpeedLevel increased.\n Bullet speed increased by " + newVal);
+            bulletSpeed += newVal;
         }
     }
 
-    private void VariableChangeHandlerSlider(int newVal, bool isDmg, BulletManager.BulletType type)
+    private void VariableChangeHandlerSlider(int newVal, bool isDmg, PlayerManager.PlayerStructures type)
     {
-        if (isDmg)
+        if (castle.GetTowerType() == type)
         {
-            bulletDamage = newVal;
-        }
-        else
-        {
-            bulletSpeed = newVal;
+            if (isDmg)
+            {
+                Debug.Log("type: " + type.ToString() + " damage is now: " + newVal);
+                bulletDamage = newVal;
+            }
+            else
+            {
+                Debug.Log("type: " + type.ToString() + " speed is now: " + newVal);
+                bulletSpeed = newVal;
+            }
         }
     }
 

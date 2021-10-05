@@ -373,4 +373,9 @@ public class TurretBehaviour : MonoBehaviour
     {
         turretType = type;
     }
+
+    public PlayerManager.PlayerStructures GetTowerType()
+    {
+        return turretType;
+    }
 }

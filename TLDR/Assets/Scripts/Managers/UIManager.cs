@@ -253,27 +253,27 @@ public class UIManager : MonoBehaviour
             {
                 if (s.name == "SliderDirectBulletDamage")
                 {
-                    debugManager.SetValue(s.value, true, BulletManager.BulletType.Direct);
+                    debugManager.SetValue((int)s.value, true, BulletManager.BulletType.Direct);
                 }
                 else if (s.name == "SliderDirectBulletSpeed")
                 {
-                    debugManager.SetValue(s.value, false, BulletManager.BulletType.Direct);
+                    debugManager.SetValue((int)s.value, false, BulletManager.BulletType.Direct);
                 }
                 else if (s.name == "SliderConeBulletDmage")
                 {
-                    debugManager.SetValue(s.value, true, BulletManager.BulletType.Cone);
+                    debugManager.SetValue((int)s.value, true, BulletManager.BulletType.Cone);
                 }
                 else if (s.name == "SliderConeBulletSpeed")
                 {
-                    debugManager.SetValue(s.value, false, BulletManager.BulletType.Cone);
+                    debugManager.SetValue((int)s.value, false, BulletManager.BulletType.Cone);
                 }
                 else if (s.name == "SliderAOEBulletDamage")
                 {
-                    debugManager.SetValue(s.value, true, BulletManager.BulletType.AOE);
+                    debugManager.SetValue((int)s.value, true, BulletManager.BulletType.AOE);
                 }
                 else if (s.name == "SliderAOEBulletSpeed")
                 {
-                    debugManager.SetValue(s.value, false, BulletManager.BulletType.AOE);
+                    debugManager.SetValue((int)s.value, false, BulletManager.BulletType.AOE);
                 }
             }
         }

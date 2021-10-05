@@ -176,13 +176,13 @@ public class UpgradeManager : MonoBehaviour
     {
         if (type == UpgradeType.Strength)
         {
-            strengthLevel++;
-            StrengthLevel = strengthLevel;
+            //strengthLevel++;
+            StrengthLevel = strengthLevel + 1;
         }
         else if (type == UpgradeType.Speed)
         {
-            speedLevel++;
-            SpeedLevel = speedLevel;
+            //speedLevel++;
+            SpeedLevel = speedLevel + 1;
         }
         else if (type == UpgradeType.Range)
         {
