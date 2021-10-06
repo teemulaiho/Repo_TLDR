@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyBehaviour : MonoBehaviour
 {
     EnemyManager enemyManager;
     EnemySpawnPointBehaviour spawnPoint;
+
+    NavMeshAgent agent;
 
     List<GameObject> targets = new List<GameObject>();
     GameObject target;
@@ -18,6 +21,7 @@ public class EnemyBehaviour : MonoBehaviour
     int enemyMaxHealth = 10;
     int enemyHealth = 10;
     int enemyDamage = 1;
+    bool isDead = false;
 
     float senseDT = 0;
     float senseTime = 4f;
@@ -45,6 +49,8 @@ public class EnemyBehaviour : MonoBehaviour
         {
             reactionBar.Initialize(this);
         }
+
+        agent = GetComponent<NavMeshAgent>();
     }
 
     // Start is called before the first frame update
@@ -57,9 +63,12 @@ public class EnemyBehaviour : MonoBehaviour
     void Update()
     {
         CheckHealth();
-        Sense();
-        CheckReaction();
-        Move();
+        if (!isDead)
+        { 
+            Sense();
+            CheckReaction();
+            Move();
+        }
     }
 
     private void CheckHealth()
@@ -138,10 +147,12 @@ public class EnemyBehaviour : MonoBehaviour
 
     private void Die()
     {
+        isDead = true;
         this.gameObject.SetActive(false);
+        this.GetComponent<EnemyBehaviour>().enabled = false;
         enemyManager.EnemyHasDied(this);
         transform.position = new Vector3(999f, 999f, 999f);
-        inSpawnQueue = true;
+        inSpawnQueue = true;    
     }
 
     private void UpdateHealthBar()
@@ -153,9 +164,17 @@ public class EnemyBehaviour : MonoBehaviour
     {
         if (target != null &&
             target.gameObject.activeSelf)
-            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, enemySpeed * Time.deltaTime);
+        {
+            if (agent.destination != target.transform.position)
+                agent.SetDestination(target.transform.position);
+            //transform.position = Vector3.MoveTowards(transform.position, target.transform.position, enemySpeed * Time.deltaTime);
+        }
         else
-            transform.position = Vector3.MoveTowards(transform.position, noTargetPos, enemySpeed * Time.deltaTime);
+        {
+            if (agent.destination != noTargetPos)
+                agent.SetDestination(noTargetPos);
+            //transform.position = Vector3.MoveTowards(transform.position, noTargetPos, enemySpeed * Time.deltaTime);
+        }
     }
 
     public void Spawn(Vector3 spawnPosition)

@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 090164db63c47934ba3aab4bd4d32f7e, type: 2}
 --- !u!1 &10807005
 GameObject:
   m_ObjectHideFlags: 0
@@ -211,6 +211,76 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b21c70cb7102a7448870d70de70b181, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &156529645
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 344011350}
+    m_Modifications:
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_RootOrder
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 7.59
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7991953954510173429, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_Name
+      value: WarturtlesRockPlaceholder_Test
+      objectReference: {fileID: 0}
+    - target: {fileID: 7991953954510173429, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7991953954510173429, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+--- !u!4 &156529646 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+  m_PrefabInstance: {fileID: 156529645}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &210751273
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -221,6 +291,10 @@ PrefabInstance:
     - target: {fileID: 389754356417816698, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
       propertyPath: m_Name
       value: WarturtlesTreePlaceholder_Test (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 389754356417816698, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1018797755612639936, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
       propertyPath: m_RootOrder
@@ -266,12 +340,90 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1201044006729834866, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7507603898534010832, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
 --- !u!4 &210751274 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1018797755612639936, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
   m_PrefabInstance: {fileID: 210751273}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &304542475
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 344011350}
+    m_Modifications:
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_RootOrder
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 7.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7991953954510173429, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_Name
+      value: WarturtlesRockPlaceholder_Test (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7991953954510173429, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7991953954510173429, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+--- !u!4 &304542476 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+  m_PrefabInstance: {fileID: 304542475}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &344011349
 GameObject:
@@ -321,6 +473,11 @@ Transform:
   - {fileID: 784130248}
   - {fileID: 1849816502}
   - {fileID: 1103196605}
+  - {fileID: 156529646}
+  - {fileID: 1953113362}
+  - {fileID: 1343963849}
+  - {fileID: 929163154}
+  - {fileID: 304542476}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -334,6 +491,10 @@ PrefabInstance:
     - target: {fileID: 389754356417816698, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
       propertyPath: m_Name
       value: WarturtlesTreePlaceholder_Test (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 389754356417816698, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1018797755612639936, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
       propertyPath: m_RootOrder
@@ -379,6 +540,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1201044006729834866, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7507603898534010832, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
 --- !u!4 &436943763 stripped
@@ -421,6 +590,7 @@ Transform:
   - {fileID: 6441680938859144175}
   - {fileID: 1830200849}
   - {fileID: 5051948400332507350}
+  - {fileID: 3084582607854335346}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -486,6 +656,14 @@ PrefabInstance:
     - target: {fileID: 7991953954510173429, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
       propertyPath: m_Name
       value: WarturtlesRockPlaceholder_Test (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7991953954510173429, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7991953954510173429, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
@@ -618,6 +796,36 @@ Transform:
   m_Father: {fileID: 610241411}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &776940993
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 776940994}
+  m_Layer: 0
+  m_Name: NavMesh
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &776940994
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 776940993}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &784130247
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -628,6 +836,10 @@ PrefabInstance:
     - target: {fileID: 389754356417816698, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
       propertyPath: m_Name
       value: WarturtlesTreePlaceholder_Test (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 389754356417816698, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1018797755612639936, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
       propertyPath: m_RootOrder
@@ -673,6 +885,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1201044006729834866, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7507603898534010832, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
 --- !u!4 &784130248 stripped
@@ -706,6 +926,10 @@ PrefabInstance:
     - target: {fileID: 389754356417816698, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
       propertyPath: m_Name
       value: WarturtlesTreePlaceholder_Test (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 389754356417816698, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1018797755612639936, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
       propertyPath: m_RootOrder
@@ -751,6 +975,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1201044006729834866, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7507603898534010832, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
 --- !u!4 &829306494 stripped
@@ -769,6 +1001,76 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9b34ac79c6d95a4bbc1d28ce1c07fd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &929163153
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 344011350}
+    m_Modifications:
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_RootOrder
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.49
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 7.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7991953954510173429, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_Name
+      value: WarturtlesRockPlaceholder_Test (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7991953954510173429, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7991953954510173429, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+--- !u!4 &929163154 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+  m_PrefabInstance: {fileID: 929163153}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &949450817
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -779,6 +1081,10 @@ PrefabInstance:
     - target: {fileID: 389754356417816698, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
       propertyPath: m_Name
       value: WarturtlesTreePlaceholder_Test (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 389754356417816698, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1018797755612639936, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
       propertyPath: m_RootOrder
@@ -823,6 +1129,14 @@ PrefabInstance:
     - target: {fileID: 1018797755612639936, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1201044006729834866, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7507603898534010832, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
@@ -925,6 +1239,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WarturtlesTreePlaceholder_Test (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 389754356417816698, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1018797755612639936, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -969,6 +1287,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1201044006729834866, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7507603898534010832, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
 --- !u!4 &1077668163 stripped
@@ -986,6 +1312,10 @@ PrefabInstance:
     - target: {fileID: 389754356417816698, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
       propertyPath: m_Name
       value: WarturtlesTreePlaceholder_Test
+      objectReference: {fileID: 0}
+    - target: {fileID: 389754356417816698, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1018797755612639936, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
       propertyPath: m_RootOrder
@@ -1030,6 +1360,14 @@ PrefabInstance:
     - target: {fileID: 1018797755612639936, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1201044006729834866, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7507603898534010832, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
@@ -1115,6 +1453,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WarturtlesTreePlaceholder_Test (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 389754356417816698, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1018797755612639936, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -1159,12 +1501,90 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1201044006729834866, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7507603898534010832, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
 --- !u!4 &1139182002 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1018797755612639936, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
   m_PrefabInstance: {fileID: 1139182001}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1343963848
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 344011350}
+    m_Modifications:
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_RootOrder
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 7.54
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7991953954510173429, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_Name
+      value: WarturtlesRockPlaceholder_Test (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7991953954510173429, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7991953954510173429, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+--- !u!4 &1343963849 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+  m_PrefabInstance: {fileID: 1343963848}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1347418702
 GameObject:
@@ -1183,7 +1603,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!64 &1347418703
 MeshCollider:
@@ -1308,6 +1728,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WarturtlesTreePlaceholder_Test (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 389754356417816698, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1018797755612639936, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
       propertyPath: m_RootOrder
       value: 13
@@ -1352,6 +1776,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1201044006729834866, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7507603898534010832, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
 --- !u!4 &1487607050 stripped
@@ -1374,6 +1806,10 @@ PrefabInstance:
     - target: {fileID: 389754356417816698, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
       propertyPath: m_Name
       value: WarturtlesTreePlaceholder_Test (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 389754356417816698, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1018797755612639936, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
       propertyPath: m_RootOrder
@@ -1419,6 +1855,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1201044006729834866, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7507603898534010832, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
 --- !u!4 &1641313922 stripped
@@ -1436,6 +1880,10 @@ PrefabInstance:
     - target: {fileID: 389754356417816698, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
       propertyPath: m_Name
       value: WarturtlesTreePlaceholder_Test (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 389754356417816698, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1018797755612639936, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
       propertyPath: m_RootOrder
@@ -1481,6 +1929,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1201044006729834866, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7507603898534010832, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
 --- !u!4 &1676646266 stripped
@@ -1498,6 +1954,10 @@ PrefabInstance:
     - target: {fileID: 389754356417816698, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
       propertyPath: m_Name
       value: WarturtlesTreePlaceholder_Test (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 389754356417816698, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1018797755612639936, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
       propertyPath: m_RootOrder
@@ -1543,6 +2003,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1201044006729834866, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7507603898534010832, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
 --- !u!4 &1712475633 stripped
@@ -1560,6 +2028,10 @@ PrefabInstance:
     - target: {fileID: 389754356417816698, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
       propertyPath: m_Name
       value: WarturtlesTreePlaceholder_Test (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 389754356417816698, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1018797755612639936, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
       propertyPath: m_RootOrder
@@ -1605,6 +2077,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1201044006729834866, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7507603898534010832, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
 --- !u!4 &1719412618 stripped
@@ -1622,6 +2102,10 @@ PrefabInstance:
     - target: {fileID: 389754356417816698, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
       propertyPath: m_Name
       value: WarturtlesTreePlaceholder_Test (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 389754356417816698, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1018797755612639936, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
       propertyPath: m_RootOrder
@@ -1667,6 +2151,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1201044006729834866, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7507603898534010832, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
 --- !u!4 &1787406596 stripped
@@ -1684,6 +2176,10 @@ PrefabInstance:
     - target: {fileID: 389754356417816698, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
       propertyPath: m_Name
       value: WarturtlesTreePlaceholder_Test
+      objectReference: {fileID: 0}
+    - target: {fileID: 389754356417816698, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1018797755612639936, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
       propertyPath: m_RootOrder
@@ -1729,6 +2225,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1201044006729834866, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7507603898534010832, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
 --- !u!4 &1826766113 stripped
@@ -1751,6 +2255,10 @@ PrefabInstance:
     - target: {fileID: 389754356417816698, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
       propertyPath: m_Name
       value: WarturtlesTreePlaceholder_Test (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 389754356417816698, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1018797755612639936, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
       propertyPath: m_RootOrder
@@ -1796,6 +2304,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1201044006729834866, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7507603898534010832, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
 --- !u!4 &1849816502 stripped
@@ -1824,6 +2340,10 @@ PrefabInstance:
     - target: {fileID: 389754356417816698, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
       propertyPath: m_Name
       value: WarturtlesTreePlaceholder_Test (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 389754356417816698, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1018797755612639936, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
       propertyPath: m_RootOrder
@@ -1869,12 +2389,90 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1201044006729834866, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7507603898534010832, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
 --- !u!4 &1904274502 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1018797755612639936, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
   m_PrefabInstance: {fileID: 1904274501}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1953113361
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 344011350}
+    m_Modifications:
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_RootOrder
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 7.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7991953954510173429, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_Name
+      value: WarturtlesRockPlaceholder_Test (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7991953954510173429, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7991953954510173429, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+--- !u!4 &1953113362 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7323644006241087055, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+  m_PrefabInstance: {fileID: 1953113361}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2141804582 stripped
 GameObject:
@@ -1900,6 +2498,7 @@ MonoBehaviour:
   spawnManager: {fileID: 919506820}
   timerManager: {fileID: 2534931533561412171}
   debugManager: {fileID: 105503498615661123, guid: 9215a45cba68e764b8b71ec072bd6d70, type: 3}
+  navMeshManager: {fileID: 3084582607854335347}
 --- !u!4 &2141804584 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 677715671039235674, guid: 031c43d966afddc48972ecddb029529c, type: 3}
@@ -1983,6 +2582,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WarturtlesTreePlaceholder_Test
       objectReference: {fileID: 0}
+    - target: {fileID: 389754356417816698, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1018797755612639936, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -2026,6 +2629,14 @@ PrefabInstance:
     - target: {fileID: 1018797755612639936, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1201044006729834866, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7507603898534010832, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 577c1291eca45c34796aca7adc37bdd4, type: 3}
@@ -2095,6 +2706,79 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7178af22e8208d64eaf3a63611f3c006, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1001 &3084582607854335345
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 495436851}
+    m_Modifications:
+    - target: {fileID: 378308551817013961, guid: 4fb3507ab116ccd418aaea33314b16d0, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 378308551817013961, guid: 4fb3507ab116ccd418aaea33314b16d0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 378308551817013961, guid: 4fb3507ab116ccd418aaea33314b16d0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 378308551817013961, guid: 4fb3507ab116ccd418aaea33314b16d0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 378308551817013961, guid: 4fb3507ab116ccd418aaea33314b16d0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 378308551817013961, guid: 4fb3507ab116ccd418aaea33314b16d0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 378308551817013961, guid: 4fb3507ab116ccd418aaea33314b16d0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 378308551817013961, guid: 4fb3507ab116ccd418aaea33314b16d0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 378308551817013961, guid: 4fb3507ab116ccd418aaea33314b16d0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 378308551817013961, guid: 4fb3507ab116ccd418aaea33314b16d0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 378308551817013961, guid: 4fb3507ab116ccd418aaea33314b16d0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6696486573442923120, guid: 4fb3507ab116ccd418aaea33314b16d0, type: 3}
+      propertyPath: m_Name
+      value: NavMeshManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4fb3507ab116ccd418aaea33314b16d0, type: 3}
+--- !u!4 &3084582607854335346 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 378308551817013961, guid: 4fb3507ab116ccd418aaea33314b16d0, type: 3}
+  m_PrefabInstance: {fileID: 3084582607854335345}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3084582607854335347 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3986816916512675644, guid: 4fb3507ab116ccd418aaea33314b16d0, type: 3}
+  m_PrefabInstance: {fileID: 3084582607854335345}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7b64ccf88a08e34baffff6945dc22cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &4000968513426045882
@@ -2414,6 +3098,14 @@ PrefabInstance:
     - target: {fileID: 7991953954510173429, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
       propertyPath: m_Name
       value: WarturtlesRockPlaceholder_Test
+      objectReference: {fileID: 0}
+    - target: {fileID: 7991953954510173429, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7991953954510173429, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0551f7a1a55e5d5498372a59c739b031, type: 3}
