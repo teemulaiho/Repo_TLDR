@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public TimerManager timerManager;
     public DebugManager debugManager;
     public NavMeshManager navMeshManager;
+    public EnvironmentManager environmentManager;
 
     bool debugMode = true;
 
