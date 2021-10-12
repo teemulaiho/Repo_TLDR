@@ -10,6 +10,11 @@ public class GameManager : MonoBehaviour
     public UpgradeManager upgradeManager;
     public SpawnManager spawnManager;
     public TimerManager timerManager;
+    public DebugManager debugManager;
+    public NavMeshManager navMeshManager;
+    public EnvironmentManager environmentManager;
+
+    bool debugMode = true;
 
     float elapsedTime = 0f;
 
@@ -167,5 +172,56 @@ public class GameManager : MonoBehaviour
         {
             spawnManager.DeselectObject(obj);
         }
+    }
+
+    public void RemoveObject(GameObject obj)
+    {
+        if (obj.GetComponent<TurretBehaviour>())
+            upgradeManager.DecreaseLevel(UpgradeManager.UpgradeType.NewTower);
+    }
+
+    public void CheckUpgrade()
+    {
+    }
+
+    public TimerManager GetTimerManager()
+    {
+        return timerManager;
+    }
+
+    public void SetTimer(string name, float value)
+    {
+        if (name == "SliderSpawnPoint")
+        {
+            timerManager.SetSpawnPointActivationTimer(value);
+        }
+        else if (name == "SliderEnemySpawnRate")
+        {
+            timerManager.SetEnemySpawnRateTimer(value);
+        }
+        else if (name == "SliderEnemyHealth")
+        {
+
+        }
+    }
+
+    public UpgradeManager GetUpgradeManager()
+    {
+        return upgradeManager;
+    }
+
+    public DebugManager GetDebugManager()
+    {
+        return debugManager;
+    }
+
+    public void SetDebugView()
+    {
+        debugMode = !debugMode;
+    }
+
+    public bool GetDebugView()
+    {
+        return debugMode;
     }
 }

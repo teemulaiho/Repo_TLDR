@@ -8,19 +8,19 @@ public class BulletManager : MonoBehaviour
     {
         Direct,
         Cone,
-        AOE,
-        Cannon
+        AOE
     }
 
     PlayerManager playerManager;
-    CastleBehaviour castle;
+    TurretBehaviour castle;
 
     [SerializeField] BulletBehaviour directBulletPrefab;
     [SerializeField] BulletBehaviour coneBulletPrefab;
+    [SerializeField] BulletBehaviour aoeBulletPrefab;
 
     public List<BulletBehaviour> bullets;
 
-    public void Initialize(PlayerManager pm, CastleBehaviour cs)
+    public void Initialize(PlayerManager pm, TurretBehaviour cs)
     {
         playerManager = pm;
         castle = cs;
@@ -28,8 +28,9 @@ public class BulletManager : MonoBehaviour
 
     private void Awake()
     {
-        directBulletPrefab = Resources.Load<BulletBehaviour>("Prefabs/DirectBullet");
-        coneBulletPrefab = Resources.Load<BulletBehaviour>("Prefabs/ConeBullet");
+        directBulletPrefab = Resources.Load<BulletBehaviour>("Prefabs/Bullets/DirectBullet");
+        coneBulletPrefab = Resources.Load<BulletBehaviour>("Prefabs/Bullets/ConeBullet");
+        aoeBulletPrefab = Resources.Load<BulletBehaviour>("Prefabs/Bullets/AOEBullet");
     }
 
     // Start is called before the first frame update
@@ -44,12 +45,36 @@ public class BulletManager : MonoBehaviour
         
     }
 
-    public void SpawnBulletType(BulletType type)
+    private void SetBulletTypeAttributes(BulletBehaviour bullet, BulletType type)
     {
+        bullet.transform.position = this.transform.position;
+        bullet.transform.SetParent(this.transform);
+        bullet.name = "Bullet";
+        bullet.gameObject.SetActive(false);
+        bullet.Initialize(castle, type);
+        //Vector4 upgradeLevels = new Vector4();
+        //upgradeLevels = playerManager.GetUpgradeLevel();
+        //bullet.SetNewBulletStats((int)upgradeLevels.x, (int)upgradeLevels.y);
+
         if (type == BulletType.Direct)
         {
-            SpawnBullet(type);
+            bullet.SetNewBulletStats(2, 4);
         }
+        else if (type == BulletType.Cone)
+        {
+            bullet.SetNewBulletStats(6, 2);
+        }
+        else if (type == BulletType.AOE)
+        {
+            bullet.SetNewBulletStats(10, 1);
+        }
+
+        bullets.Add(bullet);
+    }
+
+    public void SpawnBulletType(BulletType type)
+    {
+        SpawnBullet(type);
     }
 
     public void SpawnBullet(BulletType type)
@@ -57,29 +82,18 @@ public class BulletManager : MonoBehaviour
         if (type == BulletType.Direct)
         {
             BulletBehaviour bullet = Instantiate(directBulletPrefab);
-            bullet.transform.position = this.transform.position;
-            bullet.transform.SetParent(this.transform);
-            bullet.name = "Bullet";
-            bullet.gameObject.SetActive(false);
-            bullet.Initialize(castle, type);
-            Vector4 upgradeLevels = new Vector4();
-            upgradeLevels = playerManager.GetUpgradeLevel();
-            bullet.SetNewBulletStats((int)upgradeLevels.x, (int)upgradeLevels.y);
-            bullets.Add(bullet);
+            SetBulletTypeAttributes(bullet, type);
         }
         else if (type == BulletType.Cone)
         {
             BulletBehaviour bullet = Instantiate(coneBulletPrefab);
-            bullet.transform.position = this.transform.position;
-            bullet.transform.SetParent(this.transform);
-            bullet.name = "Bullet";
-            bullet.gameObject.SetActive(false);
-            bullet.Initialize(castle, type);
-            Vector4 upgradeLevels = new Vector4();
-            upgradeLevels = playerManager.GetUpgradeLevel();
-            bullet.SetNewBulletStats((int)upgradeLevels.x, (int)upgradeLevels.y);
-            bullets.Add(bullet);
+            SetBulletTypeAttributes(bullet, type);
         } 
+        else if (type == BulletType.AOE)
+        {
+            BulletBehaviour bullet = Instantiate(aoeBulletPrefab);
+            SetBulletTypeAttributes(bullet, type);
+        }
     }
 
     public void Shoot(List<EnemyBehaviour> enemies)

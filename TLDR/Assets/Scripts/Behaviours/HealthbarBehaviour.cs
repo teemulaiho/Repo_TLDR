@@ -9,6 +9,16 @@ public class HealthbarBehaviour : MonoBehaviour
     public Gradient gradient;
     public Image fill;
 
+    /*
+     * When adding a HealthBar to a GameObject, remember to add the following code to the GameObjects Awake -function:
+     * 
+     * healthBar = GetComponentInChildren<HealthbarBehaviour>();
+     * if (healthBar != null)
+     * {
+     *      healthBar.SetMaxHealth(baseMaxHealth);
+     * }   
+    */
+
     public void SetMaxHealth(float health)
     {
         slider.maxValue = health;

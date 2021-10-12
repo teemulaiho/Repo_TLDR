@@ -6,27 +6,38 @@ public class BulletBehaviour : MonoBehaviour
 {
     BulletManager.BulletType bulletType;
 
-    CastleBehaviour castle;
+    DebugManager debugManager;
+    UpgradeManager upgradeManager;
+
+    TurretBehaviour castle;
     public Vector3 castlePosition;
     public GameObject target;
     public ExplosionBehaviour explosionPrefab;
 
+    GameObject blastRadius;
+
     public List<ExplosionBehaviour> explosions;
 
-    int bulletSpeed = 4;
-    int bulletDamage = 2;
+    int bulletSpeed = 0;
+    int bulletDamage = 0;
 
-    public void Initialize(CastleBehaviour cb)
-    {
-        castle = cb;
-        castlePosition = castle.transform.position;
-    }
+    //public void Initialize(CastleBehaviour cb)
+    //{
+    //    castle = cb;
+    //    castlePosition = castle.transform.position;
+    //}
 
-    public void Initialize(CastleBehaviour cb, BulletManager.BulletType type)
+    public void Initialize(TurretBehaviour cb, BulletManager.BulletType type)
     {
         castle = cb;
         castlePosition = castle.transform.position;
         bulletType = type;
+
+        if (upgradeManager == null)
+            upgradeManager = castle.GetUpgradeManager();
+
+        if (blastRadius)
+            blastRadius.SetActive(false);
 
         if (bulletType == BulletManager.BulletType.Direct)
         {
@@ -36,11 +47,27 @@ public class BulletBehaviour : MonoBehaviour
         {
             SetBulletStartingStats(6, 2);
         }
+        else if (bulletType == BulletManager.BulletType.AOE)
+        {
+            GetComponent<MeshRenderer>().material.color = Color.black;
+            SetBulletStartingStats(10, 1);
+
+            blastRadius.SetActive(true);
+        }
+
+        if (debugManager == null)
+            debugManager = upgradeManager.GetDebugManager();
     }
 
     private void Awake()
     {
         transform.position = castlePosition;
+
+        if (transform.Find("BlastRadius"))
+        {
+            blastRadius = transform.Find("BlastRadius").gameObject;
+            blastRadius.gameObject.SetActive(false);
+        }
 
         SpawnExplosion();
     }
@@ -48,7 +75,16 @@ public class BulletBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        upgradeManager = castle.GetUpgradeManager();
+        upgradeManager.OnVariableChange += VariableChangeHandler;
+        debugManager.OnVariableChange += VariableChangeHandlerSlider;
+
+        if (debugManager != null)
+        {
+            Vector2 stats = debugManager.GetSpeedAndDamage(bulletType);
+            bulletDamage = (int)stats.x;
+            bulletSpeed = (int)stats.y;
+        }
     }
 
     // Update is called once per frame
@@ -57,10 +93,56 @@ public class BulletBehaviour : MonoBehaviour
         Move();
     }
 
+    private void VariableChangeHandler(int newVal, UpgradeManager.UpgradeType type)
+    {
+        if (type == UpgradeManager.UpgradeType.Strength)
+        {
+            Debug.Log("Bullet received message: StrengthLevel increased.\n Bullet damage increased by " + newVal);
+            bulletDamage += newVal;
+        }
+        else if (type == UpgradeManager.UpgradeType.Speed)
+        {
+            Debug.Log("Bullet received message: SpeedLevel increased.\n Bullet speed increased by " + newVal);
+            bulletSpeed += newVal;
+        }
+    }
+
+    private void VariableChangeHandlerSlider(int newVal, bool isDmg, PlayerManager.PlayerStructures type)
+    {
+        if (castle.GetTowerType() == type)
+        {
+            if (isDmg)
+            {
+                bulletDamage = newVal;
+            }
+            else
+            {
+                bulletSpeed = newVal;
+            }
+        }
+    }
+
     private void Move()
     {
         if (target.activeSelf)
-            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, bulletSpeed * Time.deltaTime);
+        {
+            if (bulletType == BulletManager.BulletType.Direct)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, target.transform.position, bulletSpeed * Time.deltaTime);
+            }
+            else if (bulletType == BulletManager.BulletType.Cone)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, target.transform.position, bulletSpeed * Time.deltaTime);
+            }
+            else if (bulletType == BulletManager.BulletType.AOE)
+            {
+                transform.position = GetArcPosition(transform.position);
+
+                Vector3 blastRadiusPos = transform.position;
+                blastRadiusPos.y = 0.1f;
+                blastRadius.transform.position = blastRadiusPos;
+            }
+        }
         else
         {
             ResetPosition();
@@ -93,8 +175,10 @@ public class BulletBehaviour : MonoBehaviour
     /// <param name="speed"></param>
     public void SetNewBulletStats(int damage, int speed)
     {
-        bulletDamage += damage;
-        bulletSpeed += speed;
+        bulletDamage = damage;
+        bulletSpeed = speed;
+
+        AddUpgradeStats();
     }
 
     private void Hit()
@@ -158,8 +242,16 @@ public class BulletBehaviour : MonoBehaviour
 
     public void SetBulletStartingStats(int damage, int speed)
     {
-        bulletDamage += damage;
-        bulletSpeed += speed;
+        bulletDamage = damage;
+        bulletSpeed = speed;
+
+        AddUpgradeStats();
+    }
+
+    public void AddUpgradeStats()
+    {
+        bulletDamage += upgradeManager.StrengthLevel;
+        bulletSpeed += upgradeManager.SpeedLevel;
     }
 
     private void OnDestroy()
@@ -171,5 +263,17 @@ public class BulletBehaviour : MonoBehaviour
         }
 
         explosions.Clear();
+    }
+
+    private Vector3 GetArcPosition(Vector3 pos)
+    {
+        Vector3 newPos = Vector3.MoveTowards(pos, target.transform.position, bulletSpeed * Time.deltaTime);
+        //float dist = Vector3.Distance(pos, target.transform.position);
+        //float timeToDist = dist / bulletSpeed;
+
+        //float yPos = 1f * timeToDist + -0.1f * (timeToDist * timeToDist);
+        //newPos.y = yPos;
+
+        return newPos;
     }
 }

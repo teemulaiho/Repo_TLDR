@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CastleBehaviour : MonoBehaviour
+public class TurretBehaviour : MonoBehaviour
 {
+    PlayerManager.PlayerStructures turretType;
+
     PlayerManager playerManager;
     BulletManager bulletManager;
     BulletManager bulletManagerPrefab;
@@ -46,7 +48,7 @@ public class CastleBehaviour : MonoBehaviour
 
     private void Awake()
     {
-        bulletManagerPrefab = Resources.Load<BulletManager>("Prefabs/BulletManager");
+        bulletManagerPrefab = Resources.Load<BulletManager>("Prefabs/Managers/BulletManager");
         bulletPrefab = Resources.Load<BulletBehaviour>("Prefabs/Bullet");
         explosionPrefab = Resources.Load<ExplosionBehaviour>("Prefabs/ExplosionCannon");
     }
@@ -95,6 +97,7 @@ public class CastleBehaviour : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            playerManager.RemoveObject(this.gameObject);
             Destroy(this.gameObject);
         }
 
@@ -117,30 +120,42 @@ public class CastleBehaviour : MonoBehaviour
         this.tag = "Castle";
     }
 
-    void SpawnBullets()
-    {
-        if (enemies.Count > 0)
-        {
-            for (int i = 0; i < enemies.Count; i++)
-            {
-                BulletBehaviour bullet = Instantiate(bulletPrefab, this.transform);
-                bullet.name = "Bullet";
+    //void SpawnBullets()
+    //{
+    //    if (enemies.Count > 0)
+    //    {
+    //        for (int i = 0; i < enemies.Count; i++)
+    //        {
+    //            BulletBehaviour bullet = Instantiate(bulletPrefab, this.transform);
+    //            bullet.name = "Bullet";
 
-                bullet.gameObject.SetActive(false);
+    //            bullet.gameObject.SetActive(false);
 
-                bullet.Initialize(this);
-                bullets.Add(bullet);
-            }
-        }
-        else
-        {
-            GetEnemies();
-        }
-    }
+    //            bullet.Initialize(this);
+    //            bullets.Add(bullet);
+    //        }
+    //    }
+    //    else
+    //    {
+    //        GetEnemies();
+    //    }
+    //}
 
     private void SpawnBullet()
     {
-        bulletManager.SpawnBulletType(BulletManager.BulletType.Direct);
+        if (turretType == PlayerManager.PlayerStructures.TowerDirect)
+        {
+            bulletManager.SpawnBulletType(BulletManager.BulletType.Direct);
+        }
+        else if (turretType == PlayerManager.PlayerStructures.TowerCone)
+        {
+            bulletManager.SpawnBulletType(BulletManager.BulletType.Cone);
+        }        
+        else if (turretType == PlayerManager.PlayerStructures.TowerAOE)
+        {
+            bulletManager.SpawnBulletType(BulletManager.BulletType.AOE);
+        }
+
 
         //BulletBehaviour bullet = Instantiate(bulletPrefab);
         //bullet.transform.position = this.transform.position;
@@ -185,34 +200,6 @@ public class CastleBehaviour : MonoBehaviour
     private void Shoot()
     {
         bulletManager.Shoot(enemies);
-
-        //EnemyBehaviour nearestEnemy = null;
-        //float dist = float.MaxValue;
-
-        //if (enemies != null && enemies.Count > 0)
-        //{
-        //    for (int i = 0; i < enemies.Count; i++)
-        //    {
-        //        if (enemies[i] != null)
-        //        {
-        //            float newDist = Vector3.Distance(this.transform.position, enemies[i].transform.position);
-
-        //            if (newDist < dist)
-        //            {
-        //                dist = newDist;
-        //                nearestEnemy = enemies[i];
-        //            }
-        //        }
-        //    }
-        //}
-
-        //if (dist <= castleRange)
-        //{
-        //    if (!nearestEnemy.InSpawnQueue())
-        //    {
-        //        ShootAvailableBullet(nearestEnemy.gameObject);
-        //    }
-        //}
     }
 
     private void ShootAvailableBullet(GameObject target)
@@ -250,8 +237,12 @@ public class CastleBehaviour : MonoBehaviour
 
     private void ResizeRangeAreaIndicator()
     {
-        Vector3 curSize = castleRangeIndicator.transform.localScale;
-        curSize = new Vector3(castleRange * 2, curSize.y, castleRange * 2);
+        //Vector3 curSize = castleRangeIndicator.transform.localScale;
+        //curSize = new Vector3(castleRange * 2, curSize.y, castleRange * 2);
+        //castleRangeIndicator.transform.localScale = curSize;
+
+        //Vector3 curSize = castleRangeIndicator.transform.lossyScale;
+        Vector3 curSize = new Vector3(castleRange * (1 - 1 / transform.localScale.x), castleRangeIndicator.transform.localScale.y, castleRange * (1 - 1 / transform.localScale.x));
         castleRangeIndicator.transform.localScale = curSize;
     }
 
@@ -371,5 +362,20 @@ public class CastleBehaviour : MonoBehaviour
     public void DeselectCastle()
     {
         selected = false;
+    }
+
+    public UpgradeManager GetUpgradeManager()
+    {
+        return playerManager.GetUpgradeManager();
+    }
+
+    public void SetTowerType(PlayerManager.PlayerStructures type)
+    {
+        turretType = type;
+    }
+
+    public PlayerManager.PlayerStructures GetTowerType()
+    {
+        return turretType;
     }
 }

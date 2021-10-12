@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 
 public class UIManager : MonoBehaviour
 {
+    bool debugMode;
+
     GameManager gameManager;
+    DebugManager debugManager;
     public Canvas UIprefab;
     Canvas ui;
 
@@ -38,6 +42,9 @@ public class UIManager : MonoBehaviour
 
     TMP_Text castlePurchaseText;
 
+    [SerializeField] List<Button> uiButtons;
+    [SerializeField] List<Slider> uiSliders;
+
     Button strengthButton;
     Button speedButton;
     Button rangeButton;
@@ -47,16 +54,34 @@ public class UIManager : MonoBehaviour
 
     Button changeTowerBulletTypeToDirectButton;
     Button changeTowerBulletTypeToConeButton;
+    Button changeTowerBulletTypeToAOEButton;
 
+    TMP_Text mouseCameraControlButtonTxt;
+    Button mouseCameraControlButton;
+    GameObject cameraController;
+
+    Slider sliderSpawnPoint;
+    TMP_Text txtSpawnPoint;
+
+    Slider sliderEnemySpawnRate;
+    TMP_Text txtEnemySpawnRate;
+
+    Slider sliderEnemyHealth;
 
     public void Initialize(GameManager gm)
     {
         gameManager = gm;
+        debugManager = gameManager.GetDebugManager();
     }
 
     private void Awake()
     {
+        debugMode = true;
         ui = Instantiate(UIprefab);
+
+        cameraController = GameObject.Find("CameraMovement");
+        uiButtons = new List<Button>();
+        uiSliders = new List<Slider>();
     }
 
     // Start is called before the first frame update
@@ -142,16 +167,122 @@ public class UIManager : MonoBehaviour
                 changeTowerBulletTypeToConeButton = ui.transform.GetChild(i).gameObject.GetComponent<Button>();
                 changeTowerBulletTypeToConeButton.onClick.AddListener(ChangeTowerBulletToCone);
             }
+            else if (ui.transform.GetChild(i).name == "ButtonChangeBulletTypeAOE")
+            {
+                changeTowerBulletTypeToAOEButton = ui.transform.GetChild(i).gameObject.GetComponent<Button>();
+                changeTowerBulletTypeToAOEButton.onClick.AddListener(ChangeTowerBulletToAOE);
+            }
+            else if (ui.transform.GetChild(i).name == "CameraControl")
+            {
+                mouseCameraControlButton = ui.transform.GetChild(i).gameObject.GetComponent<Button>();
+                mouseCameraControlButton.onClick.AddListener(ChangeCameraControl);
+
+                mouseCameraControlButtonTxt = mouseCameraControlButton.GetComponentInChildren<TMP_Text>();
+            }
+            else if (ui.transform.GetChild(i).name == "SliderSpawnPoint")
+            {
+                sliderSpawnPoint = ui.transform.GetChild(i).gameObject.GetComponent<Slider>();
+                txtSpawnPoint = sliderSpawnPoint.transform.Find("TxtValue").GetComponent<TMP_Text>();
+            }
+            else if (ui.transform.GetChild(i).name == "SliderEnemySpawnRate")
+            {
+                sliderEnemySpawnRate = ui.transform.GetChild(i).gameObject.GetComponent<Slider>();
+                txtEnemySpawnRate = sliderEnemySpawnRate.transform.Find("TxtValue").GetComponent<TMP_Text>();
+            }
+            else if (ui.transform.GetChild(i).name == "SliderEnemyHealth")
+            {
+                sliderEnemyHealth = ui.transform.GetChild(i).gameObject.GetComponent<Slider>();
+            }
         }
+
+        uiButtons.AddRange(ui.GetComponentsInChildren<Button>());
+
+        if (uiButtons != null &&
+            uiButtons.Count > 0)
+        {
+            foreach (Button b in uiButtons)
+            {
+                // For reference, delete comment once done.
+                //castleSpawnButton = ui.transform.GetChild(i).gameObject.GetComponent<Button>();
+                //castlePurchaseText = castleSpawnButton.transform.Find("PurchaseCost").GetComponent<TMP_Text>();
+                //castleSpawnButton.onClick.AddListener(SpawnCastle);
+
+                if (b.name == "ButtonSpawnTurretDirect")
+                {
+                    b.onClick.AddListener(SpawnDirectTurret);
+                }
+                else if (b.name == "ButtonSpawnTurretCone")
+                {
+                    b.onClick.AddListener(SpawnConeTurret);
+                }
+                else if (b.name == "ButtonSpawnTurretAOE")
+                {
+                    b.onClick.AddListener(SpawnAOETurret);
+                }
+                else if (b.name == "ButtonDebugView")
+                {
+                    b.onClick.AddListener(ShowDebugView);
+                }
+            }
+        }
+
+        uiSliders.AddRange(ui.GetComponentsInChildren<Slider>());
     }
 
     // Update is called once per frame
     void Update()
     {
-        GetPlayerInput();
-
-        SetUI();
         CheckButtons();
+        CheckSliders();
+
+        GetPlayerInput();
+        SetUI();
+    }
+
+    private void CheckSliders()
+    {
+        gameManager.SetTimer(sliderSpawnPoint.name, sliderSpawnPoint.value);
+        txtSpawnPoint.text = sliderSpawnPoint.value.ToString();
+
+        gameManager.SetTimer(sliderEnemySpawnRate.name, sliderEnemySpawnRate.value);
+        txtEnemySpawnRate.text = sliderEnemySpawnRate.value.ToString();
+
+        gameManager.SetTimer(sliderEnemyHealth.name, sliderEnemyHealth.value);
+
+        if (uiSliders != null &&
+            uiSliders.Count > 0)
+        {
+            foreach (Slider s in uiSliders)
+            {
+                if (s.gameObject.activeSelf)
+                {
+                    if (s.name == "SliderDirectBulletDamage")
+                    {
+                        debugManager.SetValue((int)s.value, true, BulletManager.BulletType.Direct);
+                    }
+                    else if (s.name == "SliderDirectBulletSpeed")
+                    {
+                        debugManager.SetValue((int)s.value, false, BulletManager.BulletType.Direct);
+                    }
+                    else if (s.name == "SliderConeBulletDamage")
+                    {
+                        debugManager.SetValue((int)s.value, true, BulletManager.BulletType.Cone);
+                    }
+                    else if (s.name == "SliderConeBulletSpeed")
+                    {
+                        debugManager.SetValue((int)s.value, false, BulletManager.BulletType.Cone);
+                    }
+                    else if (s.name == "SliderAOEBulletDamage")
+                    {
+                        debugManager.SetValue((int)s.value, true, BulletManager.BulletType.AOE);
+                    }
+                    else if (s.name == "SliderAOEBulletSpeed")
+                    {
+                        debugManager.SetValue((int)s.value, false, BulletManager.BulletType.AOE);
+                    }
+                }            
+            }
+        }   
     }
 
     private void SetUI()
@@ -200,6 +331,21 @@ public class UIManager : MonoBehaviour
         IncreaseTowerCount();
     }
 
+    private void SpawnDirectTurret()
+    {
+        gameManager.Spawn(PlayerManager.PlayerStructures.TowerDirect);
+    }
+
+    private void SpawnConeTurret()
+    {
+        gameManager.Spawn(PlayerManager.PlayerStructures.TowerCone);
+    }
+
+    private void SpawnAOETurret()
+    {
+        gameManager.Spawn(PlayerManager.PlayerStructures.TowerAOE);
+    }
+
     private void CheckButtons()
     {
         //CheckStrengthUpgrade();
@@ -215,6 +361,7 @@ public class UIManager : MonoBehaviour
 
         CheckBulletType(changeTowerBulletTypeToDirectButton);
         CheckBulletType(changeTowerBulletTypeToConeButton);
+        CheckBulletType(changeTowerBulletTypeToAOEButton);
     }
 
     private void CheckUpgradeType(UpgradeManager.UpgradeType type, Button button)
@@ -246,6 +393,8 @@ public class UIManager : MonoBehaviour
                 button.interactable = false;
             }
         }
+        else
+            button.interactable = false;
     }
 
     private void ChangeTowerBulletToDirect()
@@ -260,17 +409,29 @@ public class UIManager : MonoBehaviour
             gameManager.SetTowerBulletType(BulletManager.BulletType.Cone, selectedObject);
     }
 
+    private void ChangeTowerBulletToAOE()
+    {
+        if (selectedObject != null)
+            gameManager.SetTowerBulletType(BulletManager.BulletType.AOE, selectedObject);
+    }
+
     private void GetPlayerInput()
     {
         if (Input.GetMouseButtonDown(0))
         {
+            if (EventSystem.current.IsPointerOverGameObject())
+                return;
+
+            RaycastHit hitInfo = new RaycastHit();
+            Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo);
+
             // First deselect current object.
             if (selectedObject != null)
             {
                 DeselectObject(selectedObject);
+                selectedObject = null;
             }
 
-            RaycastHit hitInfo = new RaycastHit();
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo))
             {
                 if (hitInfo.transform != null)
@@ -283,12 +444,57 @@ public class UIManager : MonoBehaviour
 
     private void SelectObject(GameObject obj, int mouseButton)
     {
-        selectedObject = obj.transform.gameObject;
-        gameManager.SelectObject(selectedObject, mouseButton);
+        if (obj.tag == "Castle")
+        {
+            selectedObject = obj.transform.gameObject;
+            gameManager.SelectObject(selectedObject, mouseButton);
+        }
+        else if (obj.tag == "EnemySpawnPoint")
+        {
+            selectedObject = obj.transform.gameObject;
+            gameManager.SelectObject(selectedObject, mouseButton);
+        }
     }
 
     private void DeselectObject(GameObject obj)
     {
         gameManager.DeselectObject(obj);
+    }
+
+    private void ChangeCameraControl()
+    {
+        cameraController.GetComponent<CameraMouseMovementController>().enabled = 
+            !cameraController.GetComponent<CameraMouseMovementController>().enabled;
+
+        bool isEnabled = cameraController.GetComponent<CameraMouseMovementController>().enabled;
+     
+        if (isEnabled)
+            mouseCameraControlButtonTxt.text = "Mouse + Keyboard\nCamera Control";
+        else
+            mouseCameraControlButtonTxt.text = "Keyboard Camera Control";
+    }
+
+    private void ShowDebugView()
+    {
+        gameManager.SetDebugView();
+        debugMode = gameManager.GetDebugView();
+
+        if (debugMode)
+        {
+
+        }
+        else
+        {
+
+        }
+
+        foreach (Slider s in uiSliders)
+        {
+            s.gameObject.SetActive(debugMode);
+        }
+
+        changeTowerBulletTypeToDirectButton.gameObject.SetActive(debugMode);
+        changeTowerBulletTypeToAOEButton.gameObject.SetActive(debugMode);
+        changeTowerBulletTypeToConeButton.gameObject.SetActive(debugMode);
     }
 }

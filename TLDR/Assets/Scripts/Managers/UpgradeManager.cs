@@ -14,12 +14,37 @@ public class UpgradeManager : MonoBehaviour
     }
 
     GameManager gameManager;
+    DebugManager debugManager;
 
     int strengthLevel = 0;
     int speedLevel = 0;
     int rangeLevel = 0;
     int ammoLevel = 0;
     int towerCount = 0;
+
+    public int StrengthLevel
+    {
+        get { return strengthLevel; }
+        set
+        {
+            if (strengthLevel == value) return;
+            strengthLevel = value;
+            if (OnVariableChange != null)
+                OnVariableChange(strengthLevel, UpgradeType.Strength);
+        }
+    }
+
+    public int SpeedLevel
+    {
+        get { return speedLevel; }
+        set
+        {
+            if (speedLevel == value) return;
+            speedLevel = value;
+            if (OnVariableChange != null)
+                OnVariableChange(speedLevel, UpgradeType.Speed);
+        }
+    }
 
     int strengthUpgradeCost = 10;
     int speedUpgradeCost = 15;
@@ -31,6 +56,9 @@ public class UpgradeManager : MonoBehaviour
     public void Initialize(GameManager gm)
     {
         gameManager = gm;
+
+        if (gameManager != null)
+            debugManager = gameManager.GetDebugManager();
     }
 
     // Start is called before the first frame update
@@ -45,6 +73,71 @@ public class UpgradeManager : MonoBehaviour
         
     }
 
+    public delegate void OnVariableChangeDelegate(int newVal, UpgradeManager.UpgradeType type);
+
+    public event OnVariableChangeDelegate OnVariableChange;
+
+
+    private void IncreaseUpgradeCost(UpgradeType type)
+    {
+        if (type == UpgradeType.Strength)
+        {
+            strengthUpgradeCost++;
+        }
+        else if (type == UpgradeType.Speed)
+        {
+            speedUpgradeCost++;
+        }
+        else if (type == UpgradeType.Range)
+        {
+            rangeUpgradeCost++;
+        }
+        else if (type == UpgradeType.Ammo)
+        {
+            ammoUpgradeCost++;
+        }
+        else if (type == UpgradeType.NewTower)
+        {
+            if (towerCount == 1)
+                newTowerCost = 45;
+            else
+                newTowerCost = (int)((float)newTowerCost * 1.25f);
+        }
+    }
+
+    private void DecreaseUpgradeCost(UpgradeType type)
+    {
+        if (type == UpgradeType.Strength)
+        {
+            strengthUpgradeCost--;
+        }
+        else if (type == UpgradeType.Speed)
+        {
+            speedUpgradeCost--;
+        }
+        else if (type == UpgradeType.Range)
+        {
+            rangeUpgradeCost--;
+        }
+        else if (type == UpgradeType.Ammo)
+        {
+            ammoUpgradeCost--;
+        }
+        else if (type == UpgradeType.NewTower)
+        {
+            if (towerCount == 0)
+                newTowerCost = 0;
+            else if (towerCount == 1)
+                newTowerCost = 45;
+            else
+                newTowerCost = (int)((float)newTowerCost * 1.25f);
+        }
+    }
+
+    /// <summary>
+    /// Returns Vector4(strengthLevel, speedLevel, rangeLevel, ammoLevel);
+    /// </summary>
+    /// <returns></returns>
     public Vector4 GetUpgradeLevel()
     {
         return new Vector4(strengthLevel, speedLevel, rangeLevel, ammoLevel);
@@ -83,55 +176,58 @@ public class UpgradeManager : MonoBehaviour
     {
         if (type == UpgradeType.Strength)
         {
-            strengthLevel++;
-            IncreaseUpgradeCost(type);
+            //strengthLevel++;
+            StrengthLevel = strengthLevel + 1;
         }
         else if (type == UpgradeType.Speed)
         {
-            speedLevel++;
-            IncreaseUpgradeCost(type);
+            //speedLevel++;
+            SpeedLevel = speedLevel + 1;
         }
         else if (type == UpgradeType.Range)
         {
             rangeLevel++;
-            IncreaseUpgradeCost(type);
         }
         else if (type == UpgradeType.Ammo)
         {
             ammoLevel++;
-            IncreaseUpgradeCost(type);
         }
         else if (type == UpgradeType.NewTower)
         {
             towerCount++;
-            IncreaseUpgradeCost(type);
         }
+
+        IncreaseUpgradeCost(type);
     }
 
-    private void IncreaseUpgradeCost(UpgradeType type)
+    public void DecreaseLevel(UpgradeType type)
     {
         if (type == UpgradeType.Strength)
         {
-            strengthUpgradeCost++;
+            strengthLevel--;
         }
         else if (type == UpgradeType.Speed)
         {
-            speedUpgradeCost++;
+            speedLevel--;
         }
         else if (type == UpgradeType.Range)
         {
-            rangeUpgradeCost++;
+            rangeLevel--;
         }
         else if (type == UpgradeType.Ammo)
         {
-            ammoUpgradeCost++;
+            ammoLevel--;
         }
         else if (type == UpgradeType.NewTower)
         {
-            if (towerCount == 1)
-                newTowerCost = 45;
-            else
-                newTowerCost = (int)((float)newTowerCost * 1.25f);
+            towerCount--;
         }
+
+        DecreaseUpgradeCost(type);
+    }
+
+    public DebugManager GetDebugManager()
+    {
+        return debugManager;
     }
 }
