@@ -4,7 +4,9 @@ using UnityEngine.AI;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private NavMeshAgent enemyAgent;
-    [SerializeField] private float damage;
+    [SerializeField] private Health healthScript;
+
+    private float enemyDamage;
 
     private void Start()
     {
@@ -15,15 +17,28 @@ public class Enemy : MonoBehaviour
     {
         if (other.CompareTag("Base"))
         {
-            // Deal damage to base
             Health baseHealth = other.transform.GetComponent<Health>();
 
             if (baseHealth != null)
             {
-                baseHealth.TakeDamage(damage);
+                baseHealth.TakeDamage(enemyDamage);
             }
 
             Destroy(gameObject);
+        }
+
+        if (other.CompareTag("Bullet"))
+        {
+            Bullet bullet = other.transform.GetComponent<Bullet>();
+
+            if (bullet != null)
+            {
+                float damage = bullet.GetDamage();
+
+                healthScript.TakeDamage(damage);
+            }
+
+            Destroy(other.gameObject);
         }
     }
 }

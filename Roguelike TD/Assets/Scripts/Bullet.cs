@@ -2,58 +2,39 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private Transform target;
-    private Transform targetStartPos;
-
-    private Vector3 vTarget;
-
     [SerializeField] float speed = 70f;
     [SerializeField] float damage = 1f;
 
-    public void Seek(Transform newTarget)
-    {
-        target = newTarget;
-        targetStartPos = target;
-    }
+    private Vector3 vTarget;
 
-    public void Seek(Vector3 newTarget)
+    public float GetDamage() { return damage; }
+
+    public void Seek( Vector3 vectorTarget)
     {
-        //target.position = newTarget;
-        vTarget = newTarget;
+        vTarget = vectorTarget;
     }
 
     void Update()
     {
-        //if (target == null)
-        //{
-        //    Destroy(gameObject);
-        //    return;
-        //}
+        MoveStraight();
+    }
 
+    private void MoveStraight()
+    {
         Vector3 dir = vTarget - transform.position;
         float distanceThisFrame = speed * Time.deltaTime;
 
         if (dir.magnitude <= distanceThisFrame)
         {
-            HitTarget();
+            HitDestination();
             return;
         }
 
-        //transform.Translate(dir.normalized * distanceThisFrame, Space.World);
         transform.Translate(dir.normalized * distanceThisFrame, Space.World);
     }
 
-    private void HitTarget()
+    private void HitDestination()
     {
-        Debug.Log("Hit Target");
-
-        //Health targetHealth = target.GetComponent<Health>();
-
-        //if (targetHealth)
-        //{
-        //    targetHealth.TakeDamage(damage);
-        //}
-
         Destroy(gameObject);
     }
 }

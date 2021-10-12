@@ -53,7 +53,7 @@ public class TurretType_Shotgun : MonoBehaviour
         float x = Mathf.Cos(radians);
         float z = -Mathf.Sin(radians);
 
-        Vector3 t = new Vector3(x, 0.1f, z);
+        Vector3 t = new Vector3(x, 0.35f, z);
         t = t * radius;
 
         t += transform.position;

@@ -51,17 +51,10 @@ public class Turret : MonoBehaviour
 
     private void Shoot()
     {
-        /*GameObject bulletGO = Instantiate(bulletPrefab, shootPosGO.position, shootPosGO.rotation);
-        Bullet bullet = bulletGO.GetComponent<Bullet>();
-
-        if (bullet != null)
-            bullet.Seek(target);*/
-
         if (ShootNow != null)
         {
             ShootNow(target);
-        }
-            
+        }     
     }
 
     private void FindTarget()
@@ -93,7 +86,7 @@ public class Turret : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmosSelected() // Turret range indicator (only inspector)
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, range);

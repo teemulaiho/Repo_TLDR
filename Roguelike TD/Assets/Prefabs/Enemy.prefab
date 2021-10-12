@@ -42,9 +42,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 1.2
-  m_Height: 1
+  m_Height: 5.860786
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1.7303932, z: 0}
 --- !u!1 &2215571489817360123
 GameObject:
   m_ObjectHideFlags: 0
@@ -218,9 +218,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2215571491547683931}
   - component: {fileID: 2215571491547683929}
+  - component: {fileID: 2116900131037883142}
   - component: {fileID: 2215571491547683928}
   - component: {fileID: 5846794111726167408}
-  - component: {fileID: 2116900131037883142}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Enemy
@@ -257,6 +257,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyAgent: {fileID: 2215571491547683928}
+  damage: 1
+  healthScript: {fileID: 2116900131037883142}
+--- !u!114 &2116900131037883142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2215571491547683930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 797bbf4130c38be47ba4f9090fd90682, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 3
 --- !u!195 &2215571491547683928
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -295,16 +310,3 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2116900131037883142
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2215571491547683930}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 797bbf4130c38be47ba4f9090fd90682, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 3
