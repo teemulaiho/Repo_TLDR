@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 1517501288235668533}
   - component: {fileID: 5686484539855725058}
   m_Layer: 7
-  m_Name: Turret
+  m_Name: TurretDirect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -160,7 +160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 1917661331763139517, guid: bc6b59283934e0f48a7cd320dad0e302, type: 3}
   shootPosGO: {fileID: 6551157647725566486}
-  bulletAmount: 5
+  bulletAmount: 1
   bulletSpacing: 16
   yDirection: 0
   newTarget: {fileID: 0}

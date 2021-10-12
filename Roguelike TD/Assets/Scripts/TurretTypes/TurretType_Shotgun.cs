@@ -14,6 +14,14 @@ public class TurretType_Shotgun : MonoBehaviour
 
     private Turret turretScript;
 
+    private void Awake()
+    {
+        if (bulletPrefab == null)
+            bulletPrefab = Resources.Load<GameObject>("Prefabs/Bullet");
+
+        if (shootPosGO == null)
+            shootPosGO = transform.Find("ShootPos");
+    }
     void Start()
     {
         turretScript = GetComponent<Turret>();
