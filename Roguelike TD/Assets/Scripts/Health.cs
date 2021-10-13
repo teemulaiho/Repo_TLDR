@@ -1,10 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class Health : MonoBehaviour
 {
     [SerializeField] private float maxHealth = 5f;
+    public event Action<float> SetHealth;
 
     private float currentHealth;
 
@@ -16,10 +16,27 @@ public class Health : MonoBehaviour
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
+        SetHealthEvent();
 
         if (currentHealth <= 0)
         {
             Destroy(gameObject);
         }
+    }
+
+    private void SetHealthEvent()
+    {
+        if (SetHealth != null)
+            SetHealth(currentHealth);
+    }
+
+    public float GetCurrentHealth()
+    {
+        return currentHealth;
+    }
+
+    public float GetMaxHealth()
+    {
+        return maxHealth;
     }
 }
