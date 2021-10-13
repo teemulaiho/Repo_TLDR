@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     public void StartNextWave()
     {
         navMeshMngr.UpdateNavMeshSurface();
-        waveMngr.StartNextWave(30f);
+        waveMngr.StartNextWave(5f);
 
         foreach (Spawner spawner in spawners)
         {
@@ -28,7 +28,9 @@ public class GameManager : MonoBehaviour
 
     public void WaveIsOver()
     {
-        uiManager.ActivateTurretButtons(turretPool[0], turretPool[1], turretPool[2]);
+        uiManager.ActivateTurretButtons(turretPool[0].GetComponent<Turret>(), 
+                                        turretPool[1].GetComponent<Turret>(), 
+                                        turretPool[2].GetComponent<Turret>());
 
         RemoveOldSpawners();
         SpawnNewSpawners();

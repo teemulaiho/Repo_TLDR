@@ -29,6 +29,7 @@ public class WaveManager : MonoBehaviour
                 waveTimer = 0;
 
                 gameManager.WaveIsOver();
+                uiManager.ResetNextWaveButton();
 
                 waveIncoming = false;
             }
