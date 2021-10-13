@@ -38,13 +38,13 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 443911037}
-  m_Material: {fileID: 13400000, guid: d4aacf62ae5f1634fbcb2491e9bc9309, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 1.95
-  m_Height: 1
+  m_Height: 5.9536233
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: -1.0268118, z: 0}
 --- !u!1 &478792653
 GameObject:
   m_ObjectHideFlags: 0
@@ -90,7 +90,7 @@ NavMeshObstacle:
   m_MoveThreshold: 0.3
   m_Carve: 1
   m_CarveOnlyStationary: 0
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
 --- !u!1 &2542568002385266506
 GameObject:
@@ -102,10 +102,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2542568002385266505}
   - component: {fileID: 6556104613189321896}
-  - component: {fileID: 1517501288235668533}
+  - component: {fileID: 5673155488459069490}
   - component: {fileID: 5686484539855725058}
   m_Layer: 7
-  m_Name: TurretDirect
+  m_Name: TurretShotgun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -141,12 +141,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5fd7637774941446b3806c14417d841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootPosGO: {fileID: 6551157647725566486}
-  bulletPrefab: {fileID: 1917661331763139517, guid: bc6b59283934e0f48a7cd320dad0e302, type: 3}
-  attackSpeed: 1
+  turretName: Shotgunner
+  turretDescription: Shoots 5 bullets in an arch.
+  attackSpeed: 2
   range: 10
-  rotationSpeed: 5
---- !u!114 &1517501288235668533
+  rotationSpeed: 10
+--- !u!114 &5673155488459069490
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -160,7 +160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 1917661331763139517, guid: bc6b59283934e0f48a7cd320dad0e302, type: 3}
   shootPosGO: {fileID: 6551157647725566486}
-  bulletAmount: 1
+  bulletAmount: 5
   bulletSpacing: 16
   yDirection: 0
   newTarget: {fileID: 0}
@@ -270,7 +270,7 @@ PrefabInstance:
     - target: {fileID: -7635826562936255635, guid: 16801daa5aefed141ac7391160b7141b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 6474bfc5aad097c47b2149fb1b4d785f, type: 2}
+      objectReference: {fileID: 2100000, guid: 166be215decd05c468c8b4f1df915c1f, type: 2}
     - target: {fileID: 919132149155446097, guid: 16801daa5aefed141ac7391160b7141b, type: 3}
       propertyPath: m_Name
       value: Turtle_Model

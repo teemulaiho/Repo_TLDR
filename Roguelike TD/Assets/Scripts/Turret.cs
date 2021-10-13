@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class Turret : MonoBehaviour
 {
-    //[SerializeField] private Transform shootPosGO;
-    //[SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private string turretName = "name here";
+    [SerializeField, TextArea] private string turretDescription = "description here";
 
     [Header("Turret Stats")]
     [SerializeField] private float attackSpeed = 1f;
@@ -12,10 +12,13 @@ public class Turret : MonoBehaviour
     [SerializeField] private float rotationSpeed = 5f;
 
     private float attackCountdown;
+    
+    private Transform target;
 
     public event Action<Transform> ShootNow;
 
-    private Transform target;
+    public string GetTurretName() { return turretName; }
+    public string GetTurretDescription() { return turretDescription; }
 
     private void Start()
     {

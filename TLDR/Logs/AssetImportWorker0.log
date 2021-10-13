@@ -15,11 +15,11 @@ C:/Users/Pesch/UnityProjects/Roguelike_TD_Prototype/Rougelike_TD_Prototype/TLDR
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-57769
+63071
 Successfully changed project path to: C:/Users/Pesch/UnityProjects/Roguelike_TD_Prototype/Rougelike_TD_Prototype/TLDR
 C:/Users/Pesch/UnityProjects/Roguelike_TD_Prototype/Rougelike_TD_Prototype/TLDR
 Using Asset Import Pipeline V2.
-Refreshing native plugins compatible for Editor in 24.30 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 22.63 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2020.3.2f1 (8fd9074bf66c)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2020.3.2f1/Editor/Data/Resources/UnitySubsystems
@@ -35,60 +35,116 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2020.3.2f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2020.3.2f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/2020.3.2f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56192
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56596
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.3.2f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.3.2f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.002431 seconds.
+Registered in 0.002377 seconds.
 Native extension for WindowsStandalone target not found
 Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 23.17 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 23.75 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.744 seconds
+- Completed reload, in  1.623 seconds
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.000656 seconds.
+Registered in 0.000814 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
 Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 0.25 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 0.24 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  0.697 seconds
+- Completed reload, in  0.686 seconds
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
 Launched and connected shader compiler UnityShaderCompiler.exe after 0.04 seconds
-Refreshing native plugins compatible for Editor in 0.24 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 0.27 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 1187 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 62.5 MB.
-System memory in use after: 62.6 MB.
+System memory in use before: 74.0 MB.
+System memory in use after: 74.1 MB.
 
-Unloading 9 unused Assets to reduce memory usage. Loaded Objects now: 1633.
-Total: 1.938300 ms (FindLiveObjects: 0.206900 ms CreateObjectMapping: 0.032600 ms MarkObjects: 1.636800 ms  DeleteObjects: 0.061000 ms)
-
-========================================================================
-Received Import Request.
-  path: Assets/Scenes/FoliageTest.unity
-  artifactKey: Guid(1a3d9f5f05350444faaf3ab482c3c25f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/FoliageTest.unity using Guid(1a3d9f5f05350444faaf3ab482c3c25f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '360367f407a67b022b95b88beb59f06d') in 0.010968 seconds
-  Import took 0.012963 seconds .
+Unloading 9 unused Assets to reduce memory usage. Loaded Objects now: 1646.
+Total: 1.805900 ms (FindLiveObjects: 0.262800 ms CreateObjectMapping: 0.030700 ms MarkObjects: 1.420400 ms  DeleteObjects: 0.091000 ms)
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000228 seconds.
-  path: Assets/Scenes/SampleScene.unity
-  artifactKey: Guid(9fc0d4010bbf28b4594072e72b8655ab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/SampleScene.unity using Guid(9fc0d4010bbf28b4594072e72b8655ab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b866bf52ca24acb5a4cf09ae611cb4ec') in 0.001948 seconds
-  Import took 0.003529 seconds .
+  path: Assets/Models/WarturtlesRockPlaceholder_Test.fbx
+  artifactKey: Guid(4bd317e27f68f2e4c87d29644118d314) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/WarturtlesRockPlaceholder_Test.fbx using Guid(4bd317e27f68f2e4c87d29644118d314) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b060e43a49f83b789f143a48993c52a9') in 0.121671 seconds
+  Import took 0.123789 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000244 seconds.
+  path: Assets/Models/WarturtlesTreePlaceholder_Test.fbx
+  artifactKey: Guid(f0c7d198b962312408d0bb76305b4eaa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/WarturtlesTreePlaceholder_Test.fbx using Guid(f0c7d198b962312408d0bb76305b4eaa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fdf97bcc4683782cfee90fb6a317d43d') in 0.039709 seconds
+  Import took 0.041664 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 9.660312 seconds.
+  path: Assets/Textures/Placeholder_Leaf_Tree_1_White.png
+  artifactKey: Guid(271af99088eb5c34e8267d1bdd943f2b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Placeholder_Leaf_Tree_1_White.png using Guid(271af99088eb5c34e8267d1bdd943f2b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e7668bb07f71a5d5ba8ccf546e73ecf6') in 0.032311 seconds
+  Import took 0.034391 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.007400 seconds.
+  path: Assets/Textures/Placeholder_Leaf_Tree_1_White.png
+  artifactKey: Guid(271af99088eb5c34e8267d1bdd943f2b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Placeholder_Leaf_Tree_1_White.png using Guid(271af99088eb5c34e8267d1bdd943f2b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e7668bb07f71a5d5ba8ccf546e73ecf6') in 0.006911 seconds
+  Import took 0.008702 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.623884 seconds.
+  path: Assets/Textures/Placeholder_Grass_1_White.png
+  artifactKey: Guid(22f530b9aad83384cbb1e1d1e8683406) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Placeholder_Grass_1_White.png using Guid(22f530b9aad83384cbb1e1d1e8683406) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3cc399c6c23933d129e6747416877d65') in 0.007486 seconds
+  Import took 0.009536 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.001684 seconds.
+  path: Assets/Textures/Placeholder_Grass_1_White.png
+  artifactKey: Guid(22f530b9aad83384cbb1e1d1e8683406) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Placeholder_Grass_1_White.png using Guid(22f530b9aad83384cbb1e1d1e8683406) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3cc399c6c23933d129e6747416877d65') in 0.006869 seconds
+  Import took 0.008566 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 724.991737 seconds.
+  path: Assets/Materials/Foliage
+  artifactKey: Guid(db1d0fb75fb17074889976cbaea58da8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/Foliage using Guid(db1d0fb75fb17074889976cbaea58da8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '73023f1d2e1f584bbc8d678ce00d9d8a') in 0.002493 seconds
+  Import took 0.004542 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2188.184352 seconds.
+  path: Assets/Materials/Foliage/Leaf.shader
+  artifactKey: Guid(d71c4a1216fa8ef4a97432474b832669) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/Foliage/Leaf.shader using Guid(d71c4a1216fa8ef4a97432474b832669) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '70869790afa3a48dc6d9b8a181e91097') in 0.021171 seconds
+  Import took 0.023557 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.055362 seconds.
+  path: Assets/Materials/Foliage/Leaf.shader
+  artifactKey: Guid(d71c4a1216fa8ef4a97432474b832669) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/Foliage/Leaf.shader using Guid(d71c4a1216fa8ef4a97432474b832669) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '70869790afa3a48dc6d9b8a181e91097') in 0.002071 seconds
+  Import took 0.003722 seconds .
 
 AssetImportWorkerClient::OnTransportError - code=2 error=End of file

@@ -12,6 +12,11 @@ public class Spawner : MonoBehaviour
 
     private Vector3 range;
 
+    public void SetActiveBool(bool state)
+    {
+        active = state;
+    }
+
     private void Awake()
     {
         enemyParent = GameObject.Find("ENEMYPARENT").transform;

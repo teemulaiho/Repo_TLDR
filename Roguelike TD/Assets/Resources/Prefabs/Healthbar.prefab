@@ -284,7 +284,6 @@ MonoBehaviour:
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
   fill: {fileID: 5897652024981406249}
-  health: {fileID: 0}
 --- !u!1 &5897652025891835365
 GameObject:
   m_ObjectHideFlags: 0
@@ -443,7 +442,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &5897652025921751453
 MonoBehaviour:
   m_ObjectHideFlags: 0

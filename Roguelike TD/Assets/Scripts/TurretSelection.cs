@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TurretSelection : MonoBehaviour
@@ -13,11 +11,17 @@ public class TurretSelection : MonoBehaviour
     private bool grabbedObject;
     private GameObject grabbedGO;
 
-    void Update()
+    public void SetGrabbedGO(GameObject newGrabbedGO)
+    {
+        grabbedObject = true;
+        grabbedGO = newGrabbedGO;
+    }
+
+    private void Update()
     {
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Input.GetMouseButtonDown(0) && !grabbedObject)
+        if (Input.GetMouseButtonDown(0) && !grabbedObject)  // Grab turtle
         {
             if (Physics.Raycast(ray, out hitInfo, float.PositiveInfinity, turretLayerMask))
             {
@@ -26,7 +30,7 @@ public class TurretSelection : MonoBehaviour
                 grabbedObject = true;
             }
         }
-        else if (Input.GetMouseButtonDown(0) && grabbedObject)
+        else if (Input.GetMouseButtonDown(0) && grabbedObject)  // Drop turtle if already grabbed
         {
             if (Physics.Raycast(ray, out hitInfo, float.PositiveInfinity, groundLayerMask))
             {
@@ -36,7 +40,7 @@ public class TurretSelection : MonoBehaviour
             }
         }
 
-        if (grabbedObject)
+        if (grabbedObject)  // Turtle follow mouse pos
         {
             if (Physics.Raycast(ray, out hitInfo, float.PositiveInfinity, groundLayerMask))
             {
