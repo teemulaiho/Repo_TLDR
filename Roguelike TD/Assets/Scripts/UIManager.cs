@@ -27,17 +27,10 @@ public class UIManager : MonoBehaviour
             buttonSpawnTowerShotgun = GameObject.Find("SpawnTowerShotgun").GetComponent<Button>();
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         buttonSpawnTowerDirect.onClick.AddListener(SpawnTowerDirect);
         buttonSpawnTowerShotgun.onClick.AddListener(SpawnTowerShotgun);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void SpawnTowerDirect()
