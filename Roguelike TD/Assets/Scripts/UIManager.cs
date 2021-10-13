@@ -2,9 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
+    [SerializeField] private Transform turretParent;
+
+    [Space]
     [SerializeField] private Turret towerDirect;
     [SerializeField] private Turret towerShotgun;
 
@@ -12,8 +16,16 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Button buttonSpawnTowerDirect;
     [SerializeField] private Button buttonSpawnTowerShotgun;
 
+    [Space]
+    [SerializeField] private int maxTurretCount = 3;
+    [SerializeField] private int curTurretCount = 0;
+    [SerializeField] private TMP_Text shellText;
+
     private void Awake()
     {
+        if (turretParent == null)
+            turretParent = GameObject.Find("TURRETPARENT").transform;
+
         if (towerDirect == null)
             towerDirect = Resources.Load<Turret>("Prefabs/TurretDirect");
 
@@ -25,6 +37,9 @@ public class UIManager : MonoBehaviour
 
         if (buttonSpawnTowerShotgun == null)
             buttonSpawnTowerShotgun = GameObject.Find("SpawnTowerShotgun").GetComponent<Button>();
+
+        if (shellText == null)
+            shellText = GetComponentInChildren<TMP_Text>();
     }
 
     // Start is called before the first frame update
@@ -32,23 +47,27 @@ public class UIManager : MonoBehaviour
     {
         buttonSpawnTowerDirect.onClick.AddListener(SpawnTowerDirect);
         buttonSpawnTowerShotgun.onClick.AddListener(SpawnTowerShotgun);
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        shellText.text = "Turrets left: " + maxTurretCount.ToString();
     }
 
     private void SpawnTowerDirect()
     {
         Turret t = Instantiate(towerDirect);
-        t.transform.position = GetMousePosition();
+        SetTurretPosition(t);
+        UpdateTurretCount();
     }
 
     private void SpawnTowerShotgun()
     {
         Turret t = Instantiate(towerShotgun);
+        SetTurretPosition(t);
+        UpdateTurretCount();
+    }
+
+    private void SetTurretPosition(Turret t)
+    {
+        t.transform.SetParent(turretParent);
         t.transform.position = GetMousePosition();
     }
 
@@ -67,5 +86,18 @@ public class UIManager : MonoBehaviour
         }
 
         return mousePos;
+    }
+
+    private void UpdateTurretCount()
+    {
+        curTurretCount++;
+
+        shellText.text = "Turrets left: " + (maxTurretCount - curTurretCount).ToString();
+
+        if (curTurretCount == maxTurretCount)
+        {
+            buttonSpawnTowerDirect.interactable = false;
+            buttonSpawnTowerShotgun.interactable = false;
+        }
     }
 }

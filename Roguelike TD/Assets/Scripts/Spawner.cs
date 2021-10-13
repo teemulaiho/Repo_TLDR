@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
+    [SerializeField] Transform enemyParent;
     [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private Transform spriteTransform;
 
@@ -10,6 +11,11 @@ public class Spawner : MonoBehaviour
     [Space, SerializeField] private bool active = true;
 
     private Vector3 range;
+
+    private void Awake()
+    {
+        enemyParent = GameObject.Find("ENEMYPARENT").transform;
+    }
 
     private void Start()
     {
@@ -28,7 +34,7 @@ public class Spawner : MonoBehaviour
                 Vector3 spawnPos = new Vector3(Random.Range(-range.x, range.x),
                                                 Random.Range(-range.y, range.y),
                                                 Random.Range(-range.z * 4, range.z * 4));
-                Instantiate(enemyPrefab, transform.position + spawnPos, Quaternion.identity);
+                Instantiate(enemyPrefab, transform.position + spawnPos, Quaternion.identity, enemyParent);
 
                 yield return new WaitForSeconds(waitTime);
             }
