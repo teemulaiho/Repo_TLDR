@@ -3,10 +3,16 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] private WaveManager waveManager;
     [SerializeField] private NavMeshAgent enemyAgent;
     [SerializeField] private Health healthScript;
 
     private float enemyDamage;
+
+    private void Awake()
+    {
+        waveManager = FindObjectOfType<WaveManager>();
+    }
 
     private void Start()
     {
@@ -40,5 +46,10 @@ public class Enemy : MonoBehaviour
 
             Destroy(other.gameObject);
         }
+    }
+
+    private void OnDestroy()
+    {
+        waveManager.RemoveEnemyFromList(this);
     }
 }

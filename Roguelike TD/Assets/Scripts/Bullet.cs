@@ -2,16 +2,22 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] float speed = 70f;
-    [SerializeField] float damage = 1f;
+    private float speed = 70f;
+    private float damage = 1f;
 
     private Vector3 vTarget;
 
     public float GetDamage() { return damage; }
 
-    public void Seek( Vector3 vectorTarget)
+    public void SetTargetPos( Vector3 vectorTarget)
     {
         vTarget = vectorTarget;
+    }
+
+    public void SetBulletValues(float bulletSpeed, float bulletDamage)
+    {
+        speed = bulletSpeed;
+        damage = bulletDamage;
     }
 
     void Update()

@@ -23,6 +23,9 @@ public class Turret : MonoBehaviour
 
     public string GetTurretName() { return turretName; }
     public string GetTurretDescription() { return turretDescription; }
+    
+    public float GetBulletDamage() { return bulletDamage; }
+    public float GetBulletSpeed() { return bulletSpeed; }
 
     private void Start()
     {

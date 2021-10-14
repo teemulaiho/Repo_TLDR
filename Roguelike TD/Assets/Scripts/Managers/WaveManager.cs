@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class WaveManager : MonoBehaviour
@@ -9,10 +10,23 @@ public class WaveManager : MonoBehaviour
     private float waveTimer;
     private bool waveIncoming;
 
+    [Space, SerializeField] private List<Enemy> enemies = new List<Enemy>(); 
+
     [Space]
     [SerializeField] private int waveCount = 0;
 
     public bool WaveIncomingCheck() { return waveIncoming; }
+    public List<Enemy> GetEmemyList() { return enemies; }
+
+    public void AddEnemyToList(Enemy enemy)
+    {
+        enemies.Add(enemy);
+    }
+
+    public void RemoveEnemyFromList(Enemy enemy)
+    {
+        enemies.Remove(enemy);
+    }
 
     public void StartNextWave(float waveLength)
     {
@@ -20,7 +34,6 @@ public class WaveManager : MonoBehaviour
         waveIncoming = true;
 
         waveCount++;
-        spawnManager.SpawnSpawner(waveCount);
         spawnManager.ActivateSpawners();
     }
 
@@ -36,12 +49,22 @@ public class WaveManager : MonoBehaviour
             else
             {
                 waveTimer = 0;
+                spawnManager.DeactivateSpawners();
 
-                gameManager.WaveIsOver();
-                uiManager.ResetNextWaveButton();
-                spawnManager.ResetSpawners();
+                if (enemies.Count <= 0)
+                {
+                    foreach (Enemy enemy in enemies)
+                    {
+                        Destroy(enemy.gameObject);
+                    }
+                    enemies.Clear();
 
-                waveIncoming = false;
+                    gameManager.WaveIsOver();
+                    uiManager.ResetNextWaveButton();
+                    spawnManager.ResetSpawners();
+
+                    waveIncoming = false;
+                }
             }
         }        
     }

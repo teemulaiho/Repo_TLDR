@@ -6,19 +6,29 @@ public class GameManager : MonoBehaviour
     [SerializeField] private WaveManager waveMngr;
     [SerializeField] private NavMeshManager navMeshMngr;
     [SerializeField] private UIManager uiManager;
+    [SerializeField] private SpawnManager spawnManager;
 
     [Space, SerializeField] private List<GameObject> turretPool;
     [SerializeField] private List<Spawner> spawners;
 
+    private void Awake()
+    {
+        waveMngr = FindObjectOfType<WaveManager>();
+        navMeshMngr = FindObjectOfType<NavMeshManager>();
+        uiManager = FindObjectOfType<UIManager>();
+        spawnManager = FindObjectOfType<SpawnManager>();
+    }
+
     private void Start()
     {
         WaveIsOver();
+        spawnManager.SpawnSpawner(1);
     }
 
     public void StartNextWave()
     {
         navMeshMngr.UpdateNavMeshSurface();
-        waveMngr.StartNextWave(5f);
+        waveMngr.StartNextWave(20f);
 
         foreach (Spawner spawner in spawners)
         {
@@ -32,22 +42,7 @@ public class GameManager : MonoBehaviour
                                         turretPool[1].GetComponent<Turret>(), 
                                         turretPool[2].GetComponent<Turret>());
 
-        RemoveOldSpawners();
-        SpawnNewSpawners();
-    }
-
-    private void RemoveOldSpawners()
-    {
-        foreach (Spawner spawner in spawners)
-        {
-            Destroy(spawner.gameObject);
-            spawners.Remove(spawner);
-        }
-    }
-
-    private void SpawnNewSpawners() 
-    { 
-        // Spawn in new spawner from prefab (circle thing here?)
-        // Add spawners to list
+        spawnManager.ResetSpawners();
+        spawnManager.SpawnSpawner(1);
     }
 }
