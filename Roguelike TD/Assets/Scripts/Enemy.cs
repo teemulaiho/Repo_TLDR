@@ -1,14 +1,18 @@
-using System.Collections.Generic;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] private WaveManager waveManager;
     [SerializeField] private NavMeshAgent enemyAgent;
     [SerializeField] private Health healthScript;
 
     private float enemyDamage;
+
+    private void Awake()
+    {
+        waveManager = FindObjectOfType<WaveManager>();
+    }
 
     private void Start()
     {
@@ -44,24 +48,8 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void DebuffSlowDown(float slowTimer)
+    private void OnDestroy()
     {
-        StartCoroutine("AddDebuff", slowTimer);
-    }
-
-    private IEnumerator AddDebuff(float slowTimer)
-    {
-        MeshRenderer originalMR = GetComponentInChildren<MeshRenderer>();
-
-        Color originalColor = originalMR.material.color;        
-        originalMR.material.color = Color.blue;
-
-        float originalEnemySpeed = enemyAgent.speed;
-        enemyAgent.speed  = originalEnemySpeed * 0.2f;
-
-        yield return new WaitForSeconds(slowTimer);
-
-        enemyAgent.speed = originalEnemySpeed;
-        originalMR.material.color = originalColor;
+        waveManager.RemoveEnemyFromList(this);
     }
 }

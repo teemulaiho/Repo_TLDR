@@ -146,6 +146,8 @@ MonoBehaviour:
   attackSpeed: 2
   range: 10
   rotationSpeed: 10
+  bulletDamage: 1
+  bulletSpeed: 15
 --- !u!114 &5673155488459069490
 MonoBehaviour:
   m_ObjectHideFlags: 0

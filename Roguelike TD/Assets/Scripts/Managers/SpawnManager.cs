@@ -75,7 +75,6 @@ public class SpawnManager : MonoBehaviour
     {
         foreach(Spawner s in spawnerList)
         {
-            s.ClearEnemies();
             Destroy(s.gameObject);
         }
 
@@ -87,6 +86,14 @@ public class SpawnManager : MonoBehaviour
         foreach (Spawner s in spawnerList)
         {
             s.SetActiveBool(true);
+        }
+    }
+
+    public void DeactivateSpawners()
+    {
+        foreach (Spawner s in spawnerList)
+        {
+            s.SetActiveBool(false);
         }
     }
 }
