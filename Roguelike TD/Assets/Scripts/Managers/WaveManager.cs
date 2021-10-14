@@ -59,9 +59,9 @@ public class WaveManager : MonoBehaviour
                     }
                     enemies.Clear();
 
-                    gameManager.WaveIsOver();
-                    uiManager.ResetNextWaveButton();
                     spawnManager.ResetSpawners();
+                    uiManager.ResetNextWaveButton();
+                    gameManager.WaveIsOver();
 
                     waveIncoming = false;
                 }

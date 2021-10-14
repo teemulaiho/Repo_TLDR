@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-1635518912019210705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5570953152004871308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1342b46a258a9ba45bdf29711f1ae3f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 1917661331763139517, guid: bc6b59283934e0f48a7cd320dad0e302, type: 3}
+  bulletAmount: 5
+  bulletSpacing: 16
+--- !u!1001 &865007972806358680
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -5949473741078025308, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
+      propertyPath: turretName
+      value: Shotgunner
+      objectReference: {fileID: 0}
+    - target: {fileID: -5949473741078025308, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
+      propertyPath: turretDescription
+      value: Shoots 5 bullets in an arch.
+      objectReference: {fileID: 0}
+    - target: {fileID: 3233324927651172853, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 166be215decd05c468c8b4f1df915c1f, type: 2}
+    - target: {fileID: 4706578592989389332, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
+      propertyPath: m_Name
+      value: Turret_Shotgun_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8831438693530330636, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8831438693530330636, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8831438693530330636, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8831438693530330636, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8831438693530330636, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8831438693530330636, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8831438693530330636, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8831438693530330636, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8831438693530330636, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8831438693530330636, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8831438693530330636, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
+--- !u!1 &5570953152004871308 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4706578592989389332, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
+  m_PrefabInstance: {fileID: 865007972806358680}
+  m_PrefabAsset: {fileID: 0}

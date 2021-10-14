@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4468553729684130355}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: RockFormation1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7493013354830490218}
   - component: {fileID: 6505881337929076837}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: NavMeshObstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6666352375069598560}
   - component: {fileID: 126318118211801588}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -134,7 +134,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6226006592399913135}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Models
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -226,6 +226,10 @@ PrefabInstance:
       value: WarturtlesRockPlaceholder_Test (1)
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 276aa0771aff31f47999e77bd826f26f, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 276aa0771aff31f47999e77bd826f26f, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
@@ -304,6 +308,10 @@ PrefabInstance:
       value: WarturtlesRockPlaceholder_Test (2)
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 276aa0771aff31f47999e77bd826f26f, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 276aa0771aff31f47999e77bd826f26f, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
@@ -368,6 +376,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 276aa0771aff31f47999e77bd826f26f, type: 3}
       propertyPath: m_Name
       value: WarturtlesRockPlaceholder_Test
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 276aa0771aff31f47999e77bd826f26f, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 276aa0771aff31f47999e77bd826f26f, type: 3}
       propertyPath: m_StaticEditorFlags

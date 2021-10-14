@@ -4,13 +4,13 @@ using UnityEngine;
 public class TurretType_Shotgun : MonoBehaviour
 {
     [SerializeField] private GameObject bulletPrefab;
-    [SerializeField] private Transform shootPosGO;
+    private Transform shootPosGO;
 
-    [SerializeField] int bulletAmount = 5;
+    [Space, SerializeField] int bulletAmount = 5;
     [SerializeField] float bulletSpacing = 16f;
-    [SerializeField] float yDirection = 0f;
+    private float yDirection = 0f;
 
-    [SerializeField] Transform newTarget;
+    private Transform newTarget;
 
     private Turret turretScript;
 

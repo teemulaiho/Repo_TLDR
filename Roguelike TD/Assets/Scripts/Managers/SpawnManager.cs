@@ -26,12 +26,12 @@ public class SpawnManager : MonoBehaviour
 
         if (spawnerCount % 2 != 0)
         {
-            float myAngle = 0 - ((spawnerCount - 1) / 2 * spawnerSpacing) + (i * spawnerSpacing);
+            float myAngle = 0 - ((spawnerCount - 1) / 2 * spawnerSpacing) + (spawnerSpacing); //(i * spawnerSpacing)
             yDirection += myAngle;
         }
         else if (spawnerCount % 2 == 0)
         {
-            float myAngle = 0 - (((spawnerCount / 2) * spawnerSpacing) - (spawnerSpacing / 2)) + (i * spawnerSpacing);
+            float myAngle = 0 - (((spawnerCount / 2) * spawnerSpacing) - (spawnerSpacing / 2)) + (spawnerSpacing); //(i * spawnerSpacing)
             yDirection += myAngle;
         }
 
