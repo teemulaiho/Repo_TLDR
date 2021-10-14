@@ -4,26 +4,22 @@ public class WaveManager : MonoBehaviour
 {
     [SerializeField] GameManager gameManager;
     [SerializeField] UIManager uiManager;
-    [SerializeField] TurretSelection turretSelection;
+    [SerializeField] SpawnManager spawnManager;
 
     private float waveTimer;
-
     private bool waveIncoming;
 
-    public bool WaveIncomingCheck() { return waveIncoming; }
-
-    private void Awake()
-    {
-        gameManager = FindObjectOfType<GameManager>();
-        uiManager = FindObjectOfType<UIManager>();
-        turretSelection = FindObjectOfType<TurretSelection>();
-    }
+    [Space]
+    [SerializeField] private int waveCount = 0;
 
     public void StartNextWave(float waveLength)
     {
-        turretSelection.DropTurret();
         waveTimer = waveLength;
         waveIncoming = true;
+
+        waveCount++;
+        spawnManager.SpawnSpawner(waveCount);
+        spawnManager.ActivateSpawners();
     }
 
     private void Update()
@@ -41,10 +37,10 @@ public class WaveManager : MonoBehaviour
 
                 gameManager.WaveIsOver();
                 uiManager.ResetNextWaveButton();
+                spawnManager.ResetSpawners();
 
                 waveIncoming = false;
             }
-        }
-        
+        }        
     }
 }
