@@ -11,6 +11,10 @@ public class Turret : MonoBehaviour
     [SerializeField] private float range = 10f;
     [SerializeField] private float rotationSpeed = 5f;
 
+    [Header("Bullet Stats")]
+    [SerializeField] private float bulletDamage = 1f;
+    [SerializeField] private float bulletSpeed = 5f;
+
     private float attackCountdown;
     
     private Transform target;
@@ -30,13 +34,14 @@ public class Turret : MonoBehaviour
         if (target == null)
             return;
 
-        TurretRotation();
         AttackCountdown();
+        TurretRotation();
+        AmILookingAtEnemy();
     }
 
     private void AttackCountdown()
     {
-        if (attackCountdown <= 0f)
+        if (attackCountdown <= 0f && AmILookingAtEnemy())
         {
             Shoot();
             attackCountdown = 1f / attackSpeed;
@@ -50,6 +55,17 @@ public class Turret : MonoBehaviour
         Quaternion lookRotation = Quaternion.LookRotation(dir);
         Vector3 rotation = Quaternion.Lerp(transform.rotation, lookRotation, rotationSpeed * Time.deltaTime).eulerAngles;
         transform.rotation = Quaternion.Euler(0f, rotation.y, 0f);
+    }
+
+    private bool AmILookingAtEnemy()
+    {
+        Vector3 dir = (target.transform.position - transform.position).normalized;
+        float dot = Vector3.Dot(dir, transform.forward);
+
+        if (dot > 0.9)
+            return true;
+        else
+            return false;
     }
 
     private void Shoot()

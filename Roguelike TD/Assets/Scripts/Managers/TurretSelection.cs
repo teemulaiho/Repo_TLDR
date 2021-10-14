@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class TurretSelection : MonoBehaviour
 {
+    [SerializeField] private WaveManager waveManager;
+
     [SerializeField] private LayerMask groundLayerMask = new LayerMask();
     [SerializeField] private LayerMask turretLayerMask = new LayerMask();
 
@@ -10,6 +12,11 @@ public class TurretSelection : MonoBehaviour
 
     private bool grabbedObject;
     private GameObject grabbedGO;
+
+    private void Awake()
+    {
+        waveManager = FindObjectOfType<WaveManager>();
+    }
 
     public void SetGrabbedGO(GameObject newGrabbedGO)
     {
@@ -21,23 +28,13 @@ public class TurretSelection : MonoBehaviour
     {
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Input.GetMouseButtonDown(0) && !grabbedObject)  // Grab turtle
+        if (Input.GetMouseButtonDown(0) && !grabbedObject && !waveManager.WaveIncomingCheck())  // Grab turtle
         {
-            if (Physics.Raycast(ray, out hitInfo, float.PositiveInfinity, turretLayerMask))
-            {
-                grabbedGO = hitInfo.transform.parent.gameObject;
-
-                grabbedObject = true;
-            }
+            GrabTurret();
         }
-        else if (Input.GetMouseButtonDown(0) && grabbedObject)  // Drop turtle if already grabbed
+        else if (Input.GetMouseButtonDown(0) && grabbedObject && !waveManager.WaveIncomingCheck())  // Drop turtle if already grabbed
         {
-            if (Physics.Raycast(ray, out hitInfo, float.PositiveInfinity, groundLayerMask))
-            {
-                grabbedGO.transform.position = hitInfo.point;
-
-                grabbedObject = false;
-            }
+            DropTurret();
         }
 
         if (grabbedObject)  // Turtle follow mouse pos
@@ -46,6 +43,28 @@ public class TurretSelection : MonoBehaviour
             {
                 grabbedGO.transform.position = hitInfo.point;
             }            
+        }
+    }
+
+    private void GrabTurret()
+    {
+        if (Physics.Raycast(ray, out hitInfo, float.PositiveInfinity, turretLayerMask))
+        {
+            grabbedGO = hitInfo.transform.parent.gameObject;
+
+            grabbedObject = true;
+        }
+    }
+
+    public void DropTurret()
+    {
+        if (!grabbedObject) { return; }
+
+        if (Physics.Raycast(ray, out hitInfo, float.PositiveInfinity, groundLayerMask))
+        {
+            grabbedGO.transform.position = hitInfo.point;
+
+            grabbedObject = false;
         }
     }
 }

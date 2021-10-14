@@ -2612,6 +2612,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b996d4df3897834495245c8fcf39da1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waveManager: {fileID: 1355081663}
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 512
@@ -4314,6 +4315,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 1296117297}
   uiManager: {fileID: 1962277811}
+  turretSelection: {fileID: 820476756}
 --- !u!1001 &1391837013
 PrefabInstance:
   m_ObjectHideFlags: 0
