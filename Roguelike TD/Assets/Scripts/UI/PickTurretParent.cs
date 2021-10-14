@@ -52,7 +52,7 @@ public class PickTurretParent : MonoBehaviour
 
     private void SpawnTurret(Turret turretToSpawn)
     {
-        Turret t = Instantiate(turretToSpawn);
+        Turret t = Instantiate(turretToSpawn, turretParent);
         turretSelection.SetGrabbedGO(t.transform.gameObject);
 
         gameObject.SetActive(false);

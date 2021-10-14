@@ -64,6 +64,7 @@ public class SpawnManager : MonoBehaviour
             Spawner s = Instantiate<Spawner>(spawnerPrefab);
             s.transform.parent = spawnerParent;
             s.transform.position = GetSpawnerArc(spawnerCount, i);
+            // Switch scaling of the spawner aswell, if you want.
             s.transform.LookAt(baseTransform);
 
             spawnerList.Add(s);

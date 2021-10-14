@@ -12,6 +12,8 @@ public class WaveManager : MonoBehaviour
     [Space]
     [SerializeField] private int waveCount = 0;
 
+    public bool WaveIncomingCheck() { return waveIncoming; }
+
     public void StartNextWave(float waveLength)
     {
         waveTimer = waveLength;

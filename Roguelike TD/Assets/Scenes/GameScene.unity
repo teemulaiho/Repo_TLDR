@@ -2627,7 +2627,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc621e1513d040048a568999d3ca65e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnerParent: {fileID: 0}
+  spawnerParent: {fileID: 555940944}
   spawnerPrefab: {fileID: 0}
   baseTransform: {fileID: 907289537}
   spawnerList: []
@@ -2660,6 +2660,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b996d4df3897834495245c8fcf39da1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waveManager: {fileID: 1355081663}
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 512
