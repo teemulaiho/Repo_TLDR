@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour
@@ -11,6 +12,9 @@ public class Spawner : MonoBehaviour
     [Space, SerializeField] private bool active = true;
 
     private Vector3 range;
+
+    [Space]
+    [SerializeField] private List<GameObject> enemyList;
 
     public void SetActiveBool(bool state)
     {
@@ -39,12 +43,22 @@ public class Spawner : MonoBehaviour
                 Vector3 spawnPos = new Vector3(Random.Range(-range.x, range.x),
                                                 Random.Range(-range.y, range.y),
                                                 Random.Range(-range.z * 4, range.z * 4));
-                Instantiate(enemyPrefab, transform.position + spawnPos, Quaternion.identity, enemyParent);
+                enemyList.Add(Instantiate(enemyPrefab, transform.position + spawnPos, Quaternion.identity, enemyParent));
 
                 yield return new WaitForSeconds(waitTime);
             }
 
             yield return null;
         }
+    }
+
+    public void ClearEnemies()
+    {
+        foreach(GameObject go in enemyList)
+        {
+            Destroy(go);
+        }
+
+        enemyList.Clear();
     }
 }
