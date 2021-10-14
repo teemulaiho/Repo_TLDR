@@ -1,12 +1,22 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
+    public enum Debuff
+    {
+        Slow,
+    }
+
     [SerializeField] private WaveManager waveManager;
     [SerializeField] private NavMeshAgent enemyAgent;
     [SerializeField] private Health healthScript;
+    [SerializeField] private float enemyAgentSpeed = 3f;
+    [SerializeField] private float enemySpeedMultiplier = 1f;
+    [SerializeField] private Color originalColor;
+    [SerializeField] private List<Debuff> debuffList;
 
     private float enemyDamage;
 
@@ -17,7 +27,12 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
+        debuffList = new List<Debuff>();
+
         enemyAgent.SetDestination(new Vector3(0, 0, 0));
+        enemyAgent.speed = enemyAgentSpeed;
+
+        originalColor = GetComponentInChildren<MeshRenderer>().material.color;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -49,25 +64,28 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void DebuffSlowDown(float slowTimer)
+    public void DebuffSlowDown(float slowTimer, float speedMultiplier)
     {
-        StartCoroutine("AddDebuff", slowTimer);
+        enemySpeedMultiplier = speedMultiplier;
+
+        if (!debuffList.Contains(Debuff.Slow))
+            StartCoroutine("AddDebuff", slowTimer);
     }
 
     private IEnumerator AddDebuff(float slowTimer)
     {
-        MeshRenderer originalMR = GetComponentInChildren<MeshRenderer>();
+        debuffList.Add(Debuff.Slow);
+        float newSpeed = enemyAgentSpeed * enemySpeedMultiplier;
+        enemyAgent.speed = newSpeed;
 
-        Color originalColor = originalMR.material.color;
-        originalMR.material.color = Color.blue;
-
-        float originalEnemySpeed = enemyAgent.speed;
-        enemyAgent.speed = originalEnemySpeed * 0.2f;
+        MeshRenderer mr = GetComponentInChildren<MeshRenderer>();
+        mr.material.color = Color.blue;
 
         yield return new WaitForSeconds(slowTimer);
 
-        enemyAgent.speed = originalEnemySpeed;
-        originalMR.material.color = originalColor;
+        enemyAgent.speed = enemyAgentSpeed;
+        mr.material.color = originalColor;
+        debuffList.Remove(Debuff.Slow);
     }
 
     private void OnDestroy()

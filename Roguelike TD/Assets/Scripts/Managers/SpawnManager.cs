@@ -68,7 +68,6 @@ public class SpawnManager : MonoBehaviour
             s.transform.LookAt(baseTransform);
 
             spawnerList.Add(s);
-            Debug.Log(i);
         }
     }
 
