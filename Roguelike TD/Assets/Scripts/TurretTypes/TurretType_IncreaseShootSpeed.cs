@@ -13,8 +13,17 @@ public class TurretType_IncreaseShootSpeed : MonoBehaviour
     [SerializeField] private float aoeRange = 10f;
 
     [Space]
-    [SerializeField] private float debuffTimer = 2f;
-    [SerializeField] private float slowDownMultiplier = 0.7f;
+    [SerializeField] private float buffDuration = 2f;
+    [SerializeField] private float speedIncrease = 0.7f;
+
+    private void Awake()
+    {
+        aoeEffectArea = transform.Find("AOEEffectArea").gameObject;
+        shootPosGO = transform.Find("ShootPos").gameObject.transform;
+
+        if (aoeEffectArea != null)
+            aoeEffectArea.transform.localScale = new Vector3(aoeRange * 2, 0.01f, aoeRange * 2);
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +34,21 @@ public class TurretType_IncreaseShootSpeed : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        ShootSpeedIncreasArea(shootPosGO.position, aoeRange);
+    }
+
+    void ShootSpeedIncreasArea(Vector3 center, float radius)
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(center, radius, towerLayer);
+        foreach (var hitCollider in hitColliders)
+        {
+            Turret t = hitCollider.gameObject.GetComponentInParent<Turret>();
+            t.AddBuffIncreaseAttackSpeed(Turret.Buff.ShootSpeed, buffDuration, speedIncrease);
+        }
+    }
+
+    public Vector2 GetBuffAttributes()
+    {
+        return new Vector2(speedIncrease, 0f);
     }
 }

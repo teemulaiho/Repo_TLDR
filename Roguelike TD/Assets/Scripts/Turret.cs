@@ -1,8 +1,15 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Turret : MonoBehaviour
 {
+    public enum Buff
+    {
+        ShootSpeed,
+    }
+
     [SerializeField] private string turretName = "name here";
     [SerializeField, TextArea] private string turretDescription = "description here";
 
@@ -14,6 +21,10 @@ public class Turret : MonoBehaviour
     [Header("Bullet Stats")]
     [SerializeField] private float bulletDamage = 1f;
     [SerializeField] private float bulletSpeed = 5f;
+
+    [Header("Buffs")]
+    [SerializeField] private List<Buff> buffList;
+    [SerializeField] private float attackSpeedMultiplier = 1f;
 
     private float attackCountdown;
     
@@ -30,6 +41,8 @@ public class Turret : MonoBehaviour
     private void Start()
     {
         InvokeRepeating("FindTarget", 0f, 0.5f);
+
+        buffList = new List<Buff>();
     }
 
     private void Update()
@@ -107,6 +120,29 @@ public class Turret : MonoBehaviour
             target = null;
         }
     }
+
+    public void AddBuffIncreaseAttackSpeed(Buff buff, float duration, float speedMultiplier)
+    {
+        attackSpeedMultiplier = speedMultiplier;
+
+        if (!buffList.Contains(buff))
+        {
+            StartCoroutine("AddBuff", duration);
+        }
+    }
+
+    private IEnumerator AddBuff(float duration)
+    {
+        float originalAttackSpeed = attackSpeed;
+        attackSpeed = originalAttackSpeed * attackSpeedMultiplier * 10;
+        buffList.Add(Buff.ShootSpeed);
+
+        yield return new WaitForSeconds(duration);
+
+        attackSpeed = originalAttackSpeed;
+        buffList.Remove(Buff.ShootSpeed);
+    }
+
 
     private void OnDrawGizmosSelected() // Turret range indicator (only inspector)
     {
