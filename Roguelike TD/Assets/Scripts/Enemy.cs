@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -40,5 +42,26 @@ public class Enemy : MonoBehaviour
 
             Destroy(other.gameObject);
         }
+    }
+
+    public void DebuffSlowDown(float slowTimer)
+    {
+        StartCoroutine("AddDebuff", slowTimer);
+    }
+
+    private IEnumerator AddDebuff(float slowTimer)
+    {
+        MeshRenderer originalMR = GetComponentInChildren<MeshRenderer>();
+
+        Color originalColor = originalMR.material.color;        
+        originalMR.material.color = Color.blue;
+
+        float originalEnemySpeed = enemyAgent.speed;
+        enemyAgent.speed  = originalEnemySpeed * 0.2f;
+
+        yield return new WaitForSeconds(slowTimer);
+
+        enemyAgent.speed = originalEnemySpeed;
+        originalMR.material.color = originalColor;
     }
 }
