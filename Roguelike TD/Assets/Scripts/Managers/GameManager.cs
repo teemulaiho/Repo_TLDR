@@ -22,7 +22,6 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         WaveIsOver();
-        spawnManager.SpawnSpawner(1);
     }
 
     public void StartNextWave()
