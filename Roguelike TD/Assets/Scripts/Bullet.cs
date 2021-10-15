@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -6,6 +7,8 @@ public class Bullet : MonoBehaviour
     private float damage = 1f;
 
     private Vector3 vTarget;
+
+    public event Action<Transform> HitNow;
 
     public float GetDamage() { return damage; }
 
@@ -39,8 +42,13 @@ public class Bullet : MonoBehaviour
         transform.Translate(dir.normalized * distanceThisFrame, Space.World);
     }
 
-    private void HitDestination()
+    public void HitDestination()
     {
+        if (HitNow != null)
+        {
+            HitNow(transform);
+        }
+
         Destroy(gameObject);
     }
 }

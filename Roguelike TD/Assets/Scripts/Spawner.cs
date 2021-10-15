@@ -6,7 +6,7 @@ public class Spawner : MonoBehaviour
 {
     [SerializeField] private WaveManager waveManager;
     [SerializeField] private Transform enemyParent;
-    [SerializeField] private GameObject enemyPrefab;
+    [SerializeField] private List<GameObject> enemyPrefabList;
     [SerializeField] private Transform spriteTransform;
 
     private bool inCombat = true;
@@ -23,6 +23,10 @@ public class Spawner : MonoBehaviour
     {
         enemyParent = GameObject.Find("ENEMYPARENT").transform;
         waveManager = FindObjectOfType<WaveManager>();
+        enemyPrefabList = new List<GameObject>();
+
+        enemyPrefabList.Add(Resources.Load<GameObject>("Prefabs/Enemies/Enemy"));
+        enemyPrefabList.Add(Resources.Load<GameObject>("Prefabs/Enemies/BigEnemy"));
     }
 
     private void Start()
@@ -42,7 +46,9 @@ public class Spawner : MonoBehaviour
                 Vector3 spawnPos = new Vector3(Random.Range(-range.x, range.x),
                                                 Random.Range(-range.y, range.y),
                                                 Random.Range(-range.z * 4, range.z * 4));
-                GameObject enemyGO = (Instantiate(enemyPrefab, transform.position + spawnPos, Quaternion.identity, enemyParent));
+
+                int randomEnemy = Random.Range(0, enemyPrefabList.Count);
+                GameObject enemyGO = (Instantiate(enemyPrefabList[randomEnemy], transform.position + spawnPos, Quaternion.identity, enemyParent));
                 if (enemyGO != null)
                     waveManager.AddEnemyToList(enemyGO.GetComponent<Enemy>());
 
