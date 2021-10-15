@@ -44,8 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d597fc497adf2dd448473070bf2a0a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waveManager: {fileID: 0}
   enemyParent: {fileID: 0}
-  enemyPrefab: {fileID: 2215571491547683930, guid: 5cf38a3c50605f14e893bf7e1b639b1c, type: 3}
+  enemyPrefab: {fileID: 8874989453287714648, guid: c480a355dcb62864687c05a63ed6d06b, type: 3}
   spriteTransform: {fileID: 3867347047374974483}
   active: 0
 --- !u!1 &3867347047374974482
