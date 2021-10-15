@@ -38,10 +38,10 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2215571489684330416}
-  m_Material: {fileID: 13400000, guid: d4aacf62ae5f1634fbcb2491e9bc9309, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1.2
+  m_Radius: 1.51
   m_Height: 5.860786
   m_Direction: 1
   m_Center: {x: 0, y: 1.7303932, z: 0}
@@ -104,7 +104,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4c11bacde202f244cbd579053dc21fbe, type: 2}
+  - {fileID: 2100000, guid: a74fea27474842d478b3da2eded8e552, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -153,7 +153,7 @@ Transform:
   m_GameObject: {fileID: 2215571490671201432}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.97, z: 0}
-  m_LocalScale: {x: 1.6970904, y: 1.6970904, z: 1.6970904}
+  m_LocalScale: {x: 2.728582, y: 2.728582, z: 2.728582}
   m_Children:
   - {fileID: 2215571489817360120}
   m_Father: {fileID: 2215571491547683931}
@@ -186,7 +186,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4c11bacde202f244cbd579053dc21fbe, type: 2}
+  - {fileID: 2100000, guid: a74fea27474842d478b3da2eded8e552, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -257,8 +257,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec6c921ae30716e4fbcd5b969d8b64f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waveManager: {fileID: 0}
   enemyAgent: {fileID: 2215571491547683928}
   healthScript: {fileID: 2116900131037883142}
+  enemyAgentSpeed: 1.5
+  enemySpeedMultiplier: 1
+  originalColor: {r: 0, g: 0, b: 0, a: 0}
+  debuffList: 
 --- !u!114 &2116900131037883142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -271,7 +276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 797bbf4130c38be47ba4f9090fd90682, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 3
+  maxHealth: 10
 --- !u!195 &2215571491547683928
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -403,7 +408,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5897652025921751454, guid: fa4d7e36ac3a7ac4fa45bccb4bd3dc1a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2.81
+      value: 3.42
       objectReference: {fileID: 0}
     - target: {fileID: 5897652025921751454, guid: fa4d7e36ac3a7ac4fa45bccb4bd3dc1a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
