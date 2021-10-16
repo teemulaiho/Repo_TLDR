@@ -64,6 +64,11 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    public void TakeDamage(float damage)
+    {
+        healthScript.TakeDamage(damage);
+    }
+
     public void DebuffSlowDown(float slowTimer, float speedMultiplier)
     {
         enemySpeedMultiplier = speedMultiplier;

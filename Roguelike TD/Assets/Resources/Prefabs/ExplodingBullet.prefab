@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1467102444329031333}
   - component: {fileID: 246506183497992487}
   - component: {fileID: 7105588469331502533}
-  - component: {fileID: 7992863570441907933}
+  - component: {fileID: 7666954992199986882}
   m_Layer: 0
   m_Name: ExplodingBullet
   m_TagString: Bullet
@@ -110,8 +110,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletScript: {fileID: 0}
   explosionPrefab: {fileID: 0}
-  bulletExplosionCollider: {fileID: 0}
---- !u!135 &7992863570441907933
+  bulletCollider: {fileID: 0}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  explosionRadius: 4
+  enemies: []
+--- !u!135 &7666954992199986882
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

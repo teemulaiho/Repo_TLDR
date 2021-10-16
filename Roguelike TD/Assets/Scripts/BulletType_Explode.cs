@@ -1,10 +1,15 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BulletType_Explode : MonoBehaviour
 {
     [SerializeField] private Bullet bulletScript;
     [SerializeField] private ParticleSystem explosionPrefab;
-    [SerializeField] SphereCollider bulletExplosionCollider;
+    [SerializeField] private SphereCollider bulletCollider;
+    [SerializeField] private LayerMask enemyLayer;
+    [SerializeField] private List<Collider> enemies;
+    private float explosionRadius = 8f;
 
     private void Awake()
     {
@@ -14,40 +19,47 @@ public class BulletType_Explode : MonoBehaviour
         if (explosionPrefab == null)
             explosionPrefab = Resources.Load<ParticleSystem>("Prefabs/Explosion");
 
-        if (bulletExplosionCollider == null)
-            bulletExplosionCollider = GetComponent<SphereCollider>();
-
-        if (bulletExplosionCollider != null)
-        {
-            bulletExplosionCollider.enabled = false;
-        }
+        if (bulletCollider == null)
+            bulletCollider = GetComponent<SphereCollider>();
     }
 
     private void Start()
     {
+        enemies = new List<Collider>();
+
         if (bulletScript != null)
         {
             bulletScript.HitNow += HitNow;
         }
     }
 
+    public void SetExplosionRadius(float r)
+    {
+        explosionRadius = r;
+    }
+
     private void HitNow(Transform transform)
     {
-        ParticleSystem explosion = Instantiate(explosionPrefab);
-        explosion.tag = "Bullet";
-        //explosion.GetComponent<SphereCollider>().enabled = true;
-        explosion.transform.position = transform.position;
+        enemies.AddRange(Physics.OverlapSphere(transform.position, explosionRadius, enemyLayer));
 
-        explosion.Play();
+        foreach (Collider c in enemies)
+        {
+            Debug.Log(enemies.Count);
+            c.GetComponentInParent<Enemy>().TakeDamage(bulletScript.GetDamage());
+        }
+
+        enemies.Clear();
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            Debug.Log("Hit enemy collider.");
+            ParticleSystem explosion = Instantiate(explosionPrefab);
+            explosion.transform.position = transform.position;
+            explosion.Play();
+
             bulletScript.HitDestination();
-            //HitNow(collision.gameObject.transform);
         }
     }
 }
