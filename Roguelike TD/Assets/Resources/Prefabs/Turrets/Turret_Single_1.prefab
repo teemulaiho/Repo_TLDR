@@ -24,7 +24,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -5949473741078025308, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
       propertyPath: range
-      value: 12.5
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: -5949473741078025308, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
       propertyPath: turretName

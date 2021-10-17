@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour
     private float damage = 1f;
 
     private Vector3 vTarget;
+    private Vector3 movementDirection;
 
     public event Action<Transform> HitNow;
 
@@ -15,6 +16,7 @@ public class Bullet : MonoBehaviour
     public void SetTargetPos( Vector3 vectorTarget)
     {
         vTarget = vectorTarget;
+        movementDirection = vTarget - transform.position;
     }
 
     public void SetBulletValues(float bulletSpeed, float bulletDamage)
@@ -30,16 +32,23 @@ public class Bullet : MonoBehaviour
 
     private void MoveStraight()
     {
-        Vector3 dir = vTarget - transform.position;
+        //Vector3 dir = vTarget - transform.position;
         float distanceThisFrame = speed * Time.deltaTime;
 
-        if (dir.magnitude <= distanceThisFrame)
-        {
-            HitDestination();
-            return;
-        }
+        //if (dir.magnitude <= distanceThisFrame)
+        //{
+        //    HitDestination();
+        //    return;
+        //}
 
-        transform.Translate(dir.normalized * distanceThisFrame, Space.World);
+        //transform.Translate(dir.normalized * distanceThisFrame, Space.World);
+
+        transform.Translate(movementDirection.normalized * distanceThisFrame, Space.World);
+
+        if (Vector3.Distance(Vector3.zero, transform.position) >= 100f)
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void HitDestination()
