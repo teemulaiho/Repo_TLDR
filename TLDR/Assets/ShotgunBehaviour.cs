@@ -36,10 +36,10 @@ public class ShotgunBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            SpawnBullets();
-        }
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    SpawnBullets();
+        //}
 
         if (bullets != null &&
             bullets.Count > 0)
