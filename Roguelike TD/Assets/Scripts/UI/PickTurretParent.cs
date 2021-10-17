@@ -1,9 +1,12 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class PickTurretParent : MonoBehaviour
 {
+    [SerializeField] RectTransform rectTransform;
+
     [SerializeField] private Transform turretParent;
     [SerializeField] private TurretSelection turretSelection;
 
@@ -20,6 +23,8 @@ public class PickTurretParent : MonoBehaviour
 
     private void Start()
     {
+        rectTransform = GetComponent<RectTransform>();
+
         firstOptionName.transform.parent.GetComponent<Button>().onClick.AddListener(FirstButton);
         secondOptionName.transform.parent.GetComponent<Button>().onClick.AddListener(SecondButton);
         thirdOptionName.transform.parent.GetComponent<Button>().onClick.AddListener(ThirdButton);
@@ -56,7 +61,6 @@ public class PickTurretParent : MonoBehaviour
         turretSelection.SetGrabbedGO(t.transform.gameObject);
 
         gameObject.SetActive(false);
-
         // Tell gameManager what you picked so it can be removed from the pool
     }
 }

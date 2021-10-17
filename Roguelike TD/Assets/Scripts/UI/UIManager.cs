@@ -16,6 +16,11 @@ public class UIManager : MonoBehaviour
             buttonsParent = GameObject.Find("ThreeOptionChoice");
     }
 
+    private void Update()
+    {
+        
+    }
+
     public void ActivateTurretButtons(Turret firstOption, Turret secondOption, Turret thirdOption)
     {
         pickTurretParent.UpdateButtons(firstOption, secondOption, thirdOption);
