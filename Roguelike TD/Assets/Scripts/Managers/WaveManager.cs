@@ -18,6 +18,8 @@ public class WaveManager : MonoBehaviour
     public bool WaveIncomingCheck() { return waveIncoming; }
     public List<Enemy> GetEmemyList() { return enemies; }
 
+    public int GetWaveCount() { return waveCount; }
+
     public void AddEnemyToList(Enemy enemy)
     {
         enemies.Add(enemy);
@@ -34,7 +36,7 @@ public class WaveManager : MonoBehaviour
         waveIncoming = true;
 
         waveCount++;
-        spawnManager.ActivateSpawners();
+        //spawnManager.ActivateSpawners();
     }
 
     private void Update()
@@ -59,7 +61,7 @@ public class WaveManager : MonoBehaviour
                     }
                     enemies.Clear();
 
-                    spawnManager.ResetSpawners();
+                    spawnManager.ClearSpawners();
                     uiManager.ResetNextWaveButton();
                     gameManager.WaveIsOver();
 

@@ -4366,7 +4366,7 @@ MonoBehaviour:
   uiManager: {fileID: 1962277811}
   spawnManager: {fileID: 813104764}
   enemies: []
-  waveCount: 0
+  waveCount: 7
 --- !u!1001 &1391837013
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4914,6 +4914,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fea8e3a86acd513459864656054d4e5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rectTransform: {fileID: 0}
   turretParent: {fileID: 849196918}
   turretSelection: {fileID: 820476756}
   firstOptionName: {fileID: 1429343274}
