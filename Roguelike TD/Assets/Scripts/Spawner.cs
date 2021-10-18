@@ -32,10 +32,9 @@ public class Spawner : MonoBehaviour
         waveManager = FindObjectOfType<WaveManager>();
         enemyPrefabList = new List<GameObject>();
 
+        enemyPrefabList.Add(Resources.Load<GameObject>("Prefabs/Enemies/SmallEnemy"));
         enemyPrefabList.Add(Resources.Load<GameObject>("Prefabs/Enemies/MediumEnemy"));
         enemyPrefabList.Add(Resources.Load<GameObject>("Prefabs/Enemies/BigEnemy"));
-        enemyPrefabList.Add(Resources.Load<GameObject>("Prefabs/Enemies/SmallEnemy"));
-        //enemyPrefabList.Add(Resources.Load<GameObject>("Prefabs/Enemies/EnemyGroup_3Small"));
     }
 
     private void Start()
@@ -56,17 +55,60 @@ public class Spawner : MonoBehaviour
                                                 Random.Range(-range.y, range.y),
                                                 Random.Range(-range.z * 4, range.z * 4));
 
-                int randomEnemy = Random.Range(0, enemyPrefabList.Count);
-                GameObject enemyGO = (Instantiate(enemyPrefabList[randomEnemy], transform.position + spawnPos, Quaternion.identity, enemyParent));
-                //if (enemyGO != null)
-                //    waveManager.AddEnemyToList(enemyGO.GetComponent<Enemy>());
-
-                //enemyGO.GetComponent<Enemy>().
+                if (spawnerResource > 0)
+                {
+                    int randomEnemy = GetEnemyToSpawn();
+                    GameObject enemyGO = (Instantiate(enemyPrefabList[randomEnemy], transform.position + spawnPos, Quaternion.identity, enemyParent));
+                    UseResource(enemyGO);
+                }
 
                 yield return new WaitForSeconds(waitTime);
             }
 
             yield return null;
+        }
+    }
+
+    private int GetEnemyToSpawn()
+    {
+        int randomEnemy = 0;
+        int maxEnemy = 0;
+
+        if (spawnerResource >= 3 &&
+            enemyPrefabList.Count >= 3)
+        {
+            maxEnemy = 2;
+        }
+        else if (spawnerResource >= 2 &&
+            enemyPrefabList.Count >= 2)
+        {
+            maxEnemy = 1;
+        }
+        else if (spawnerResource >= 1 &&
+            enemyPrefabList.Count >= 1)
+        {
+            maxEnemy = 0;
+        }
+
+        randomEnemy = Random.Range(0, maxEnemy + 1);
+        return randomEnemy;
+    }
+
+    private void UseResource(GameObject enemyGO)
+    {
+        Enemy e = enemyGO.GetComponent<Enemy>();
+
+        if (e.GetEnemyType() == Enemy.EnemyType.Small)
+        {
+            spawnerResource -= 1;
+        }
+        else if (e.GetEnemyType() == Enemy.EnemyType.Medium)
+        {
+            spawnerResource -= 2;
+        }
+        else if (e.GetEnemyType() == Enemy.EnemyType.Big)
+        {
+            spawnerResource -= 3;
         }
     }
 }

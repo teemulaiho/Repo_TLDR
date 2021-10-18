@@ -15,7 +15,7 @@ public class TurretType_ExplodeOnImpact : MonoBehaviour
             bulletPrefab = Resources.Load<Bullet>("Prefabs/ExplodingBullet");
 
         if (shootposGo == null)
-            shootposGo = GameObject.Find("ShootPos").transform;
+            shootposGo = transform.Find("ShootPos").transform;
     
     }
     // Start is called before the first frame update

@@ -44,7 +44,6 @@ public class BulletType_Explode : MonoBehaviour
 
         foreach (Collider c in enemies)
         {
-            Debug.Log(enemies.Count);
             c.GetComponentInParent<Enemy>().TakeDamage(bulletScript.GetDamage());
         }
 
