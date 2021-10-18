@@ -64,6 +64,12 @@ public class SpawnManager : MonoBehaviour
             Spawner s = Instantiate<Spawner>(spawnerPrefab);
             s.transform.parent = spawnerParent;
             s.transform.position = GetSpawnerArc(spawnerCount, i);
+
+            // Calculate new position if too close to another spawner.
+            if (i >= 1)
+            {
+                CheckIfTooCloseToAnotherSpawner(s);
+            }
             // Switch scaling of the spawner aswell, if you want.
             s.transform.LookAt(baseTransform);
 
@@ -71,7 +77,7 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    public void ResetSpawners()
+    public void ClearSpawners()
     {
         foreach(Spawner s in spawnerList)
         {
@@ -94,6 +100,20 @@ public class SpawnManager : MonoBehaviour
         foreach (Spawner s in spawnerList)
         {
             s.SetActiveBool(false);
+        }
+    }
+
+    public void CheckIfTooCloseToAnotherSpawner(Spawner s)
+    {
+        foreach (Spawner spawner in spawnerList)
+        {
+            Debug.Log(Vector3.Distance(s.transform.position, spawner.transform.position));
+
+            if (Vector3.Distance(s.transform.position, spawner.transform.position) <= 25f)
+            {
+                s.transform.position = GetSpawnerArc(0, 0);
+                CheckIfTooCloseToAnotherSpawner(s);
+            }
         }
     }
 }

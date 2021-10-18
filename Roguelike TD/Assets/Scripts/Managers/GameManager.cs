@@ -22,12 +22,21 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         WaveIsOver();
+        //InitializeNewWave();
+    }
+
+    public void InitializeNewWave()
+    {
+        int spawnerCount = GetSpawnerCount();
+        spawnManager.SpawnSpawner(spawnerCount);
     }
 
     public void StartNextWave()
     {
         navMeshMngr.UpdateNavMeshSurface();
         waveMngr.StartNextWave(20f);
+
+        spawnManager.ActivateSpawners();
 
         foreach (Spawner spawner in spawners)
         {
@@ -41,7 +50,27 @@ public class GameManager : MonoBehaviour
                                         turretPool[1].GetComponent<Turret>(), 
                                         turretPool[2].GetComponent<Turret>());
 
-        spawnManager.ResetSpawners();
-        spawnManager.SpawnSpawner(waveMngr.GetNumberOfCracksToSpawn());
+        spawnManager.ClearSpawners();
+        InitializeNewWave();
+    }
+
+    public int GetSpawnerCount()
+    {
+        int curWave = waveMngr.GetWaveCount();
+
+        // Use computer counting (0, 1, 2, 3, etc.)
+        // So the 3rd element is number 2.
+        // Ie. Array[i];
+
+        if (curWave <= 2)
+        {
+            return 1;
+        }
+        else if (curWave <= 5)
+        {
+            return 2;
+        }
+        else
+            return 3;
     }
 }
