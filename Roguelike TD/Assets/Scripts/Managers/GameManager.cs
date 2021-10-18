@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     [Space, SerializeField] private List<GameObject> turretPool;
     [SerializeField] private List<Spawner> spawners;
 
+    private float timeScale = 1f;
+
     private void Awake()
     {
         waveMngr = FindObjectOfType<WaveManager>();
@@ -23,6 +25,16 @@ public class GameManager : MonoBehaviour
     {
         WaveIsOver();
         //InitializeNewWave();
+    }
+
+    private void Update()
+    {
+        Time.timeScale = timeScale;
+    }
+
+    public void SetTimeScale(float newTimeScale)
+    {
+        timeScale = newTimeScale;
     }
 
     public void InitializeNewWave()

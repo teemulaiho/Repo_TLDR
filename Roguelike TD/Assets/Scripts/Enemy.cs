@@ -5,6 +5,13 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
+    public enum EnemyType
+    {
+        Small,
+        Medium,
+        Big
+    }
+
     public enum Debuff
     {
         Slow,
@@ -13,16 +20,23 @@ public class Enemy : MonoBehaviour
     [SerializeField] private WaveManager waveManager;
     [SerializeField] private NavMeshAgent enemyAgent;
     [SerializeField] private Health healthScript;
+    [Space, SerializeField] private EnemyType enemyType;
     [SerializeField] private float enemyAgentSpeed = 3f;
     [SerializeField] private float enemySpeedMultiplier = 1f;
-    [SerializeField] private Color originalColor;
+    [Space, SerializeField] private Color originalColor;
     [SerializeField] private List<Debuff> debuffList;
+    
 
     private float enemyDamage;
 
     private void Awake()
     {
         waveManager = FindObjectOfType<WaveManager>();
+    }
+
+    private void OnEnable()
+    {
+        waveManager.AddEnemyToList(this);
     }
 
     private void Start()
