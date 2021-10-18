@@ -4366,7 +4366,7 @@ MonoBehaviour:
   uiManager: {fileID: 1962277811}
   spawnManager: {fileID: 813104764}
   enemies: []
-  waveCount: 7
+  waveCount: 0
 --- !u!1001 &1391837013
 PrefabInstance:
   m_ObjectHideFlags: 0
