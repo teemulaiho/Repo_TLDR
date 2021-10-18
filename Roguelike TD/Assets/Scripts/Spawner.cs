@@ -111,4 +111,16 @@ public class Spawner : MonoBehaviour
             spawnerResource -= 3;
         }
     }
+
+    public bool CheckIfSpawnable()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 10f);
+
+        if (hitColliders.Length <= 1)
+        {
+            return true;
+        }
+        else
+            return false;
+    }
 }
