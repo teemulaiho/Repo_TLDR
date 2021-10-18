@@ -15,6 +15,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1917661331763139517, guid: bc6b59283934e0f48a7cd320dad0e302, type: 3}
   bulletAmount: 1
   bulletSpacing: 0
+  radius: 5
 --- !u!1001 &1524294348942051779
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24,7 +25,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -5949473741078025308, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
       propertyPath: range
-      value: 35
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: -5949473741078025308, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
       propertyPath: turretName
@@ -36,7 +37,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -5949473741078025308, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
       propertyPath: bulletSpeed
-      value: 30
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: -5949473741078025308, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
       propertyPath: bulletDamage
@@ -44,7 +45,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -5949473741078025308, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
       propertyPath: rotationSpeed
-      value: 4
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: -5949473741078025308, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
       propertyPath: turretDescription

@@ -8,6 +8,7 @@ public class TurretType_Shotgun : MonoBehaviour
 
     [Space, SerializeField] int bulletAmount = 5;
     [SerializeField] float bulletSpacing = 16f;
+    [SerializeField] float radius = 5f;
     private float yDirection = 0f;
 
     private Transform newTarget;
@@ -55,8 +56,6 @@ public class TurretType_Shotgun : MonoBehaviour
 
     private Vector3 GetBulletArc(int i)
     {
-        float radius = 10f;
-
         float radians = (yDirection - 90) * Mathf.Deg2Rad;
         float x = Mathf.Cos(radians);
         float z = -Mathf.Sin(radians);
@@ -65,6 +64,7 @@ public class TurretType_Shotgun : MonoBehaviour
         t = t * radius;
 
         t += transform.position;
+        t = new Vector3(t.x, shootPosGO.transform.position.y, t.z);
 
         return t;
     }

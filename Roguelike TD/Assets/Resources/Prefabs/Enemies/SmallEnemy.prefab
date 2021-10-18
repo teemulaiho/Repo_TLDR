@@ -53,7 +53,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 9cb3754a4d878eb44a3a1812013731fd, type: 2}
     - target: {fileID: 2215571491547683929, guid: 5cf38a3c50605f14e893bf7e1b639b1c, type: 3}
       propertyPath: enemyAgentSpeed
-      value: 3.5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2215571491547683930, guid: 5cf38a3c50605f14e893bf7e1b639b1c, type: 3}
       propertyPath: m_Name

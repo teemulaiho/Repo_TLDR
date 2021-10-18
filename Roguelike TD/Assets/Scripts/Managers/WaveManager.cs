@@ -17,6 +17,7 @@ public class WaveManager : MonoBehaviour
 
     public bool WaveIncomingCheck() { return waveIncoming; }
     public List<Enemy> GetEmemyList() { return enemies; }
+    public int GetWaveCount() { return waveCount; }
     public int GetNumberOfCracksToSpawn() 
     {
         if (waveCount <= 3)
@@ -26,8 +27,6 @@ public class WaveManager : MonoBehaviour
         else
             return 3;
     }
-
-    public int GetWaveCount() { return waveCount; }
 
     public void AddEnemyToList(Enemy enemy)
     {

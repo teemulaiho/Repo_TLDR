@@ -1,19 +1,59 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &7319758326900978434
+--- !u!1001 &7526474540800123058
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 643753302775373306, guid: 5cf38a3c50605f14e893bf7e1b639b1c, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 643753302775373306, guid: 5cf38a3c50605f14e893bf7e1b639b1c, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 643753303177795146, guid: 5cf38a3c50605f14e893bf7e1b639b1c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 3.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 2116900131037883142, guid: 5cf38a3c50605f14e893bf7e1b639b1c, type: 3}
+      propertyPath: maxHealth
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2215571489817360070, guid: 5cf38a3c50605f14e893bf7e1b639b1c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4c11bacde202f244cbd579053dc21fbe, type: 2}
+    - target: {fileID: 2215571490671201433, guid: 5cf38a3c50605f14e893bf7e1b639b1c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.0925722
+      objectReference: {fileID: 0}
+    - target: {fileID: 2215571490671201433, guid: 5cf38a3c50605f14e893bf7e1b639b1c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.0925722
+      objectReference: {fileID: 0}
+    - target: {fileID: 2215571490671201433, guid: 5cf38a3c50605f14e893bf7e1b639b1c, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.0925722
+      objectReference: {fileID: 0}
+    - target: {fileID: 2215571490671201433, guid: 5cf38a3c50605f14e893bf7e1b639b1c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 2215571490671201511, guid: 5cf38a3c50605f14e893bf7e1b639b1c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4c11bacde202f244cbd579053dc21fbe, type: 2}
     - target: {fileID: 2215571491547683929, guid: 5cf38a3c50605f14e893bf7e1b639b1c, type: 3}
       propertyPath: enemyAgentSpeed
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2215571491547683930, guid: 5cf38a3c50605f14e893bf7e1b639b1c, type: 3}
       propertyPath: m_Name
-      value: BigEnemy
+      value: MediumEnemy
       objectReference: {fileID: 0}
     - target: {fileID: 2215571491547683931, guid: 5cf38a3c50605f14e893bf7e1b639b1c, type: 3}
       propertyPath: m_RootOrder

@@ -125,9 +125,11 @@ MonoBehaviour:
   turretDescription: description here
   attackSpeed: 1
   range: 10
-  rotationSpeed: 5
+  rotationSpeed: 10
   bulletDamage: 1
   bulletSpeed: 25
+  buffList: 
+  attackSpeedMultiplier: 1
 --- !u!1001 &2085525164442117868
 PrefabInstance:
   m_ObjectHideFlags: 0

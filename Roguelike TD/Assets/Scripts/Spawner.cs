@@ -25,7 +25,7 @@ public class Spawner : MonoBehaviour
         waveManager = FindObjectOfType<WaveManager>();
         enemyPrefabList = new List<GameObject>();
 
-        enemyPrefabList.Add(Resources.Load<GameObject>("Prefabs/Enemies/Enemy"));
+        enemyPrefabList.Add(Resources.Load<GameObject>("Prefabs/Enemies/MediumEnemy"));
         enemyPrefabList.Add(Resources.Load<GameObject>("Prefabs/Enemies/BigEnemy"));
         enemyPrefabList.Add(Resources.Load<GameObject>("Prefabs/Enemies/SmallEnemy"));
         enemyPrefabList.Add(Resources.Load<GameObject>("Prefabs/Enemies/EnemyGroup_3Small"));

@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 1917661331763139517, guid: bc6b59283934e0f48a7cd320dad0e302, type: 3}
   bulletAmount: 5
-  bulletSpacing: 16
+  bulletSpacing: 8
+  radius: 7
 --- !u!1001 &865007972806358680
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24,11 +25,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -5949473741078025308, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
       propertyPath: range
-      value: 22.5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: -5949473741078025308, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
       propertyPath: turretName
       value: Shotgunner
+      objectReference: {fileID: 0}
+    - target: {fileID: -5949473741078025308, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
+      propertyPath: attackSpeed
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: -5949473741078025308, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
+      propertyPath: bulletSpeed
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: -5949473741078025308, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
+      propertyPath: rotationSpeed
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: -5949473741078025308, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
       propertyPath: turretDescription
