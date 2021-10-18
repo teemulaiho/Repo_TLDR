@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
+    [SerializeField] WaveManager waveManager;
     [SerializeField] Transform spawnerParent;
     [SerializeField] Spawner spawnerPrefab;
     [SerializeField] Transform baseTransform;
@@ -64,6 +65,7 @@ public class SpawnManager : MonoBehaviour
             Spawner s = Instantiate<Spawner>(spawnerPrefab);
             s.transform.parent = spawnerParent;
             s.transform.position = GetSpawnerArc(spawnerCount, i);
+            s.SetSpawnerResource(waveManager.GetWaveCount() * 2);
 
             // Calculate new position if too close to another spawner.
             if (i >= 1)

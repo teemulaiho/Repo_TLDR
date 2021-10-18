@@ -9,10 +9,17 @@ public class Spawner : MonoBehaviour
     [SerializeField] private List<GameObject> enemyPrefabList;
     [SerializeField] private Transform spriteTransform;
 
+    [Space, SerializeField] private int spawnerResource = 0;
+
     private bool inCombat = true;
     [Space, SerializeField] private bool active = true;
 
     private Vector3 range;
+
+    public void SetSpawnerResource(int value)
+    {
+        spawnerResource = value;
+    }
 
     public void SetActiveBool(bool state)
     {
@@ -28,7 +35,7 @@ public class Spawner : MonoBehaviour
         enemyPrefabList.Add(Resources.Load<GameObject>("Prefabs/Enemies/MediumEnemy"));
         enemyPrefabList.Add(Resources.Load<GameObject>("Prefabs/Enemies/BigEnemy"));
         enemyPrefabList.Add(Resources.Load<GameObject>("Prefabs/Enemies/SmallEnemy"));
-        enemyPrefabList.Add(Resources.Load<GameObject>("Prefabs/Enemies/EnemyGroup_3Small"));
+        //enemyPrefabList.Add(Resources.Load<GameObject>("Prefabs/Enemies/EnemyGroup_3Small"));
     }
 
     private void Start()
@@ -53,6 +60,8 @@ public class Spawner : MonoBehaviour
                 GameObject enemyGO = (Instantiate(enemyPrefabList[randomEnemy], transform.position + spawnPos, Quaternion.identity, enemyParent));
                 if (enemyGO != null)
                     waveManager.AddEnemyToList(enemyGO.GetComponent<Enemy>());
+
+                //enemyGO.GetComponent<Enemy>().
 
                 yield return new WaitForSeconds(waitTime);
             }

@@ -44,6 +44,8 @@ public class WaveManager : MonoBehaviour
         waveIncoming = true;
 
         waveCount++;
+
+        uiManager.UpdateWaveCounterText();
         //spawnManager.ActivateSpawners();
     }
 
