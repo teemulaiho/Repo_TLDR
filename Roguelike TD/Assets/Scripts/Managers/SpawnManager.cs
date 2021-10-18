@@ -107,9 +107,7 @@ public class SpawnManager : MonoBehaviour
     {
         foreach (Spawner spawner in spawnerList)
         {
-            Debug.Log(Vector3.Distance(s.transform.position, spawner.transform.position));
-
-            if (Vector3.Distance(s.transform.position, spawner.transform.position) <= 25f)
+            if (Vector3.Distance(s.transform.position, spawner.transform.position) <= 50f)
             {
                 s.transform.position = GetSpawnerArc(0, 0);
                 CheckIfTooCloseToAnotherSpawner(s);
