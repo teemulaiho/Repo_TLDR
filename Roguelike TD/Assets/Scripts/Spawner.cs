@@ -32,10 +32,9 @@ public class Spawner : MonoBehaviour
         waveManager = FindObjectOfType<WaveManager>();
         enemyPrefabList = new List<GameObject>();
 
+        enemyPrefabList.Add(Resources.Load<GameObject>("Prefabs/Enemies/SmallEnemy"));
         enemyPrefabList.Add(Resources.Load<GameObject>("Prefabs/Enemies/MediumEnemy"));
         enemyPrefabList.Add(Resources.Load<GameObject>("Prefabs/Enemies/BigEnemy"));
-        enemyPrefabList.Add(Resources.Load<GameObject>("Prefabs/Enemies/SmallEnemy"));
-        enemyPrefabList.Add(Resources.Load<GameObject>("Prefabs/Enemies/EnemyGroup_3Small"));
     }
 
     private void Start()
@@ -53,11 +52,15 @@ public class Spawner : MonoBehaviour
             {
                 float waitTime = Random.Range(1.5f, 4f);
                 Vector3 spawnPos = new Vector3(Random.Range(-range.x, range.x),
-                                                0,
-                                                Random.Range(-range.z * 2, range.z * 2));
+                                                Random.Range(-range.y, range.y),
+                                                Random.Range(-range.z * 4, range.z * 4));
 
-                int randomEnemy = Random.Range(0, enemyPrefabList.Count);
-                Instantiate(enemyPrefabList[randomEnemy], transform.position + spawnPos, Quaternion.identity, enemyParent);
+                if (spawnerResource > 0)
+                {
+                    int randomEnemy = GetEnemyToSpawn();
+                    GameObject enemyGO = (Instantiate(enemyPrefabList[randomEnemy], transform.position + spawnPos, Quaternion.identity, enemyParent));
+                    UseResource(enemyGO);
+                }
 
                 yield return new WaitForSeconds(waitTime);
             }
@@ -66,15 +69,46 @@ public class Spawner : MonoBehaviour
         }
     }
 
-    public bool CheckIfSpawnable()
+    private int GetEnemyToSpawn()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 10f);
+        int randomEnemy = 0;
+        int maxEnemy = 0;
 
-        if (hitColliders.Length <= 1)
+        if (spawnerResource >= 3 &&
+            enemyPrefabList.Count >= 3)
         {
-            return true;
+            maxEnemy = 2;
         }
-        else
-            return false;
+        else if (spawnerResource >= 2 &&
+            enemyPrefabList.Count >= 2)
+        {
+            maxEnemy = 1;
+        }
+        else if (spawnerResource >= 1 &&
+            enemyPrefabList.Count >= 1)
+        {
+            maxEnemy = 0;
+        }
+
+        randomEnemy = Random.Range(0, maxEnemy + 1);
+        return randomEnemy;
+    }
+
+    private void UseResource(GameObject enemyGO)
+    {
+        Enemy e = enemyGO.GetComponent<Enemy>();
+
+        if (e.GetEnemyType() == Enemy.EnemyType.Small)
+        {
+            spawnerResource -= 1;
+        }
+        else if (e.GetEnemyType() == Enemy.EnemyType.Medium)
+        {
+            spawnerResource -= 2;
+        }
+        else if (e.GetEnemyType() == Enemy.EnemyType.Big)
+        {
+            spawnerResource -= 3;
+        }
     }
 }

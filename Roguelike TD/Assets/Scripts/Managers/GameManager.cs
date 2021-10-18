@@ -24,7 +24,6 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         WaveIsOver();
-        //InitializeNewWave();
     }
 
     private void Update()

@@ -27,6 +27,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private List<Debuff> debuffList;
     
 
+    public EnemyType GetEnemyType() { return enemyType; }
+
     private float enemyDamage;
 
     private void Awake()
