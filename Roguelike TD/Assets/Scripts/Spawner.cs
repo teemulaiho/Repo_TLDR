@@ -58,8 +58,8 @@ public class Spawner : MonoBehaviour
 
                 int randomEnemy = Random.Range(0, enemyPrefabList.Count);
                 GameObject enemyGO = (Instantiate(enemyPrefabList[randomEnemy], transform.position + spawnPos, Quaternion.identity, enemyParent));
-                if (enemyGO != null)
-                    waveManager.AddEnemyToList(enemyGO.GetComponent<Enemy>());
+                //if (enemyGO != null)
+                //    waveManager.AddEnemyToList(enemyGO.GetComponent<Enemy>());
 
                 //enemyGO.GetComponent<Enemy>().
 
