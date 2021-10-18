@@ -19,6 +19,9 @@ public class SpawnManager : MonoBehaviour
             spawnerPrefab = Resources.Load<Spawner>("Prefabs/Spawner");
 
         spawnerList = new List<Spawner>();
+
+        if (waveManager == null)
+            waveManager = GameObject.Find("WaveManager").GetComponent<WaveManager>();
     }
 
     private float SetSpawnPosition(float yDirection, int spawnerCount, int i)

@@ -23,6 +23,9 @@ public class UIManager : MonoBehaviour
 
         if (waveCounter == null)
             waveCounter = GameObject.Find("WaveCounterText").GetComponent<TMP_Text>();
+
+        if (waveManager == null)
+            waveManager = GameObject.Find("WaveManager").GetComponent<WaveManager>();
     }
 
     private void Update()
