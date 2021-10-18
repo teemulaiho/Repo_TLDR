@@ -27,6 +27,8 @@ public class Turret : MonoBehaviour
     [SerializeField] private float attackSpeedMultiplier = 1f;
 
     private float attackCountdown;
+
+    public bool placeable;
     
     private Transform target;
 
@@ -148,5 +150,25 @@ public class Turret : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, range);
+    }
+
+    private void OnCollisionStay(Collision other)
+    {
+        Debug.Log("1");
+        if (other.gameObject.layer == 11)
+        {
+            Debug.Log("In Obstacle");
+            placeable = false;
+        }
+    }
+
+    private void OnCollisionExit(Collision other)
+    {
+        Debug.Log("2");
+        if (other.gameObject.layer == 11)
+        {
+            Debug.Log("Exit Obstacle");
+            placeable = true;
+        }
     }
 }

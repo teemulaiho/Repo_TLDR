@@ -35,7 +35,7 @@ public class Spawner : MonoBehaviour
         enemyPrefabList.Add(Resources.Load<GameObject>("Prefabs/Enemies/MediumEnemy"));
         enemyPrefabList.Add(Resources.Load<GameObject>("Prefabs/Enemies/BigEnemy"));
         enemyPrefabList.Add(Resources.Load<GameObject>("Prefabs/Enemies/SmallEnemy"));
-        //enemyPrefabList.Add(Resources.Load<GameObject>("Prefabs/Enemies/EnemyGroup_3Small"));
+        enemyPrefabList.Add(Resources.Load<GameObject>("Prefabs/Enemies/EnemyGroup_3Small"));
     }
 
     private void Start()
@@ -53,20 +53,28 @@ public class Spawner : MonoBehaviour
             {
                 float waitTime = Random.Range(1.5f, 4f);
                 Vector3 spawnPos = new Vector3(Random.Range(-range.x, range.x),
-                                                Random.Range(-range.y, range.y),
-                                                Random.Range(-range.z * 4, range.z * 4));
+                                                0,
+                                                Random.Range(-range.z * 2, range.z * 2));
 
                 int randomEnemy = Random.Range(0, enemyPrefabList.Count);
-                GameObject enemyGO = (Instantiate(enemyPrefabList[randomEnemy], transform.position + spawnPos, Quaternion.identity, enemyParent));
-                //if (enemyGO != null)
-                //    waveManager.AddEnemyToList(enemyGO.GetComponent<Enemy>());
-
-                //enemyGO.GetComponent<Enemy>().
+                Instantiate(enemyPrefabList[randomEnemy], transform.position + spawnPos, Quaternion.identity, enemyParent);
 
                 yield return new WaitForSeconds(waitTime);
             }
 
             yield return null;
         }
+    }
+
+    public bool CheckIfSpawnable()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 10f);
+
+        if (hitColliders.Length <= 1)
+        {
+            return true;
+        }
+        else
+            return false;
     }
 }

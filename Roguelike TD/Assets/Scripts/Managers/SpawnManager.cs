@@ -73,7 +73,7 @@ public class SpawnManager : MonoBehaviour
             // Calculate new position if too close to another spawner.
             if (i >= 1)
             {
-                CheckIfTooCloseToAnotherSpawner(s);
+                CheckIfLegalPosition(s);
             }
             // Switch scaling of the spawner aswell, if you want.
             s.transform.LookAt(baseTransform);
@@ -108,14 +108,23 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    public void CheckIfTooCloseToAnotherSpawner(Spawner s)
+    public void CheckIfLegalPosition(Spawner s)
     {
-        foreach (Spawner spawner in spawnerList)
+        if (!s.CheckIfSpawnable())
         {
-            if (Vector3.Distance(s.transform.position, spawner.transform.position) <= 50f)
+            s.transform.position = GetSpawnerArc(0, 0);
+            CheckIfLegalPosition(s);
+        }
+
+        if (spawnerList.Count > 1)
+        {
+            foreach (Spawner spawner in spawnerList)
             {
-                s.transform.position = GetSpawnerArc(0, 0);
-                CheckIfTooCloseToAnotherSpawner(s);
+                if (Vector3.Distance(s.transform.position, spawner.transform.position) <= 50f)
+                {
+                    s.transform.position = GetSpawnerArc(0, 0);
+                    CheckIfLegalPosition(s);
+                }
             }
         }
     }

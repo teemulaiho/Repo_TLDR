@@ -10,7 +10,7 @@ public class TurretSelection : MonoBehaviour
     Ray ray;
     RaycastHit hitInfo;
 
-    private bool grabbedObject;
+    private bool holdingObject;
     private GameObject grabbedGO;
 
     private void Awake()
@@ -20,24 +20,26 @@ public class TurretSelection : MonoBehaviour
 
     public void SetGrabbedGO(GameObject newGrabbedGO)
     {
-        grabbedObject = true;
+        holdingObject = true;
         grabbedGO = newGrabbedGO;
     }
 
     private void Update()
     {
+        if (waveManager.WaveIncomingCheck()) { return; }
+
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Input.GetMouseButtonDown(0) && !grabbedObject && !waveManager.WaveIncomingCheck())  // Grab turtle
+        if (Input.GetMouseButtonDown(0) && !holdingObject)  // Grab turtle
         {
             GrabTurret();
         }
-        else if (Input.GetMouseButtonDown(0) && grabbedObject && !waveManager.WaveIncomingCheck())  // Drop turtle if already grabbed
+        else if (Input.GetMouseButtonDown(0) && holdingObject)  // Drop turtle if already grabbed
         {
             DropTurret();
         }
 
-        if (grabbedObject)  // Turtle follow mouse pos
+        if (holdingObject)  // Turtle follow mouse pos
         {
             if (Physics.Raycast(ray, out hitInfo, float.PositiveInfinity, groundLayerMask))
             {
@@ -52,19 +54,24 @@ public class TurretSelection : MonoBehaviour
         {
             grabbedGO = hitInfo.transform.parent.gameObject;
 
-            grabbedObject = true;
+            holdingObject = true;
         }
     }
 
     public void DropTurret()
     {
-        if (!grabbedObject) { return; }
+        if (!holdingObject) { return; }
+        if (!grabbedGO)
+        {
+            Turret grabbedTurret = grabbedGO.GetComponent<Turret>();
+            if (!grabbedTurret.placeable) { return; }
+        }
 
         if (Physics.Raycast(ray, out hitInfo, float.PositiveInfinity, groundLayerMask))
         {
             grabbedGO.transform.position = hitInfo.point;
 
-            grabbedObject = false;
+            holdingObject = false;
         }
     }
 }
