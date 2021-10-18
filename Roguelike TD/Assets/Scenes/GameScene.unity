@@ -4103,7 +4103,7 @@ MonoBehaviour:
   waveMngr: {fileID: 1355081663}
   navMeshMngr: {fileID: 1926468622}
   uiManager: {fileID: 1962277811}
-  spawnManager: {fileID: 0}
+  spawnManager: {fileID: 813104764}
   turretPool:
   - {fileID: 5570953152004871308, guid: d9b592509a21f1643a266b0ea018785e, type: 3}
   - {fileID: 6086124416885107671, guid: 3d6d2fda961f6814bac8033d71263cc4, type: 3}
@@ -4863,6 +4863,36 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
+--- !u!1 &1532229694
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1532229695}
+  m_Layer: 0
+  m_Name: EnemyGroup_6Small
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1532229695
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1532229694}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1548234908
 GameObject:
   m_ObjectHideFlags: 0
@@ -4914,6 +4944,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fea8e3a86acd513459864656054d4e5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rectTransform: {fileID: 0}
   turretParent: {fileID: 849196918}
   turretSelection: {fileID: 820476756}
   firstOptionName: {fileID: 1429343274}

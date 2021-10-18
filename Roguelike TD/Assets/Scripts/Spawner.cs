@@ -27,6 +27,8 @@ public class Spawner : MonoBehaviour
 
         enemyPrefabList.Add(Resources.Load<GameObject>("Prefabs/Enemies/Enemy"));
         enemyPrefabList.Add(Resources.Load<GameObject>("Prefabs/Enemies/BigEnemy"));
+        enemyPrefabList.Add(Resources.Load<GameObject>("Prefabs/Enemies/SmallEnemy"));
+        enemyPrefabList.Add(Resources.Load<GameObject>("Prefabs/Enemies/EnemyGroup_3Small"));
     }
 
     private void Start()

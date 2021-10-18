@@ -42,6 +42,6 @@ public class GameManager : MonoBehaviour
                                         turretPool[2].GetComponent<Turret>());
 
         spawnManager.ResetSpawners();
-        spawnManager.SpawnSpawner(2);
+        spawnManager.SpawnSpawner(waveMngr.GetNumberOfCracksToSpawn());
     }
 }
