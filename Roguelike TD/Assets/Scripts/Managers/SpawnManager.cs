@@ -11,6 +11,8 @@ public class SpawnManager : MonoBehaviour
     [Space]
     [SerializeField] List<Spawner> spawnerList;
 
+    [SerializeField] private LayerMask layersToAvoid = new LayerMask();
+
     private void Awake()
     {
         spawnerParent = GameObject.Find("SPAWNERPARENT").transform;
@@ -71,10 +73,7 @@ public class SpawnManager : MonoBehaviour
             s.SetSpawnerResource(waveManager.GetWaveCount() * 2 + 2);
 
             // Calculate new position if too close to another spawner.
-            if (i >= 1)
-            {
-                CheckIfLegalPosition(s);
-            }
+            ReplaceToLegalPosition(s);
             // Switch scaling of the spawner aswell, if you want.
             s.transform.LookAt(baseTransform);
 
@@ -108,24 +107,23 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    public void CheckIfLegalPosition(Spawner s)
+    public void ReplaceToLegalPosition(Spawner s)
     {
-        if (!s.CheckIfSpawnable())
+        while (true)
         {
-            s.transform.position = GetSpawnerArc(0, 0);
-            CheckIfLegalPosition(s);
-        }
+            Collider[] hitColliders = Physics.OverlapSphere(s.transform.position, 25f, layersToAvoid, QueryTriggerInteraction.Collide);
 
-        if (spawnerList.Count > 1)
-        {
-            foreach (Spawner spawner in spawnerList)
+            foreach (Collider collider in hitColliders)
             {
-                if (Vector3.Distance(s.transform.position, spawner.transform.position) <= 50f)
-                {
-                    s.transform.position = GetSpawnerArc(0, 0);
-                    CheckIfLegalPosition(s);
-                }
+                Debug.Log(collider.isTrigger);
             }
+
+            if (hitColliders.Length <= 1)
+            {
+                break;
+            }
+            else
+                s.transform.position = GetSpawnerArc(0, 0);
         }
     }
 }

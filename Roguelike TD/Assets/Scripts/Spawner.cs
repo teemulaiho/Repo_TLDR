@@ -39,7 +39,8 @@ public class Spawner : MonoBehaviour
 
     private void Start()
     {
-        range = spriteTransform.localScale;
+        //range = spriteTransform.localScale;
+        range = transform.localScale;
 
         StartCoroutine(SpawnEnemies());
     }
@@ -51,9 +52,9 @@ public class Spawner : MonoBehaviour
             while (active)
             {
                 float waitTime = Random.Range(1.5f, 4f);
-                Vector3 spawnPos = new Vector3(Random.Range(-range.x, range.x),
-                                                Random.Range(-range.y, range.y),
-                                                Random.Range(-range.z * 4, range.z * 4));
+                Vector3 spawnPos = new Vector3(Random.Range(-range.x / 2, range.x / 2),
+                                                0,
+                                                Random.Range(-range.z * 20, range.z * 20));
 
                 if (spawnerResource > 0)
                 {
@@ -112,15 +113,9 @@ public class Spawner : MonoBehaviour
         }
     }
 
-    public bool CheckIfSpawnable()
+    private void OnDrawGizmosSelected() // Turret range indicator (only inspector)
     {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 10f);
-
-        if (hitColliders.Length <= 1)
-        {
-            return true;
-        }
-        else
-            return false;
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, 25f);
     }
 }

@@ -21,7 +21,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2116900131037883142, guid: 5cf38a3c50605f14e893bf7e1b639b1c, type: 3}
       propertyPath: maxHealth
-      value: 6
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2215571489817360070, guid: 5cf38a3c50605f14e893bf7e1b639b1c, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -50,6 +50,10 @@ PrefabInstance:
     - target: {fileID: 2215571491547683929, guid: 5cf38a3c50605f14e893bf7e1b639b1c, type: 3}
       propertyPath: enemyType
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2215571491547683929, guid: 5cf38a3c50605f14e893bf7e1b639b1c, type: 3}
+      propertyPath: enemyDamage
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2215571491547683929, guid: 5cf38a3c50605f14e893bf7e1b639b1c, type: 3}
       propertyPath: enemyAgentSpeed

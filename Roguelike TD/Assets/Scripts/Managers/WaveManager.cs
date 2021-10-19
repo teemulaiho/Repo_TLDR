@@ -18,15 +18,6 @@ public class WaveManager : MonoBehaviour
     public bool WaveIncomingCheck() { return waveIncoming; }
     public List<Enemy> GetEmemyList() { return enemies; }
     public int GetWaveCount() { return waveCount; }
-    public int GetNumberOfCracksToSpawn() 
-    {
-        if (waveCount <= 3)
-            return 1;
-        else if (waveCount <= 6)
-            return 2;
-        else
-            return 3;
-    }
 
     public void AddEnemyToList(Enemy enemy)
     {
@@ -56,7 +47,7 @@ public class WaveManager : MonoBehaviour
             if (waveTimer > 0)
             {
                 waveTimer -= Time.deltaTime;
-                uiManager.DisplayTime(waveTimer);
+                //uiManager.DisplayTime(waveTimer);
             }
             else
             {

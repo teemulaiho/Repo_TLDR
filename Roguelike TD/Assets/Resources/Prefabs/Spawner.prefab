@@ -24,14 +24,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3867347047077457869}
-  m_LocalRotation: {x: -0, y: -0.7805662, z: -0, w: 0.62507313}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 60.3, y: 0, z: 18.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 2257194339970566401}
   - {fileID: 3867347047374974483}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -102.625, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3867347047077457867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74,14 +75,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3867347047374974482}
-  m_LocalRotation: {x: 0.1994644, y: -0.6783907, z: 0.67839074, w: 0.19946449}
-  m_LocalPosition: {x: 0, y: 0.1, z: 0}
+  m_LocalRotation: {x: -0.69801486, y: -0.1130273, z: 0.11302735, w: -0.69801503}
+  m_LocalPosition: {x: -2.5, y: 0.1, z: 0}
   m_LocalScale: {x: 4.396492, y: 4.396492, z: 4.396492}
-  m_Children:
-  - {fileID: 2257194339970566401}
+  m_Children: []
   m_Father: {fileID: 3867347047077457866}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 147.231}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 341.604}
 --- !u!212 &3867347047374974480
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -157,11 +157,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9090842874214996308}
-  m_LocalRotation: {x: 0, y: 0, z: -0.95939034, w: 0.28208202}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.70710677, y: 0.0000024139879, z: -0.0000025033949, w: 0.7071069}
+  m_LocalPosition: {x: 0, y: 0.1, z: 0}
+  m_LocalScale: {x: 4.396493, y: 4.3964925, z: 4.3964915}
   m_Children: []
-  m_Father: {fileID: 3867347047374974483}
+  m_Father: {fileID: 3867347047077457866}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -147.231}
 --- !u!65 &3576679384508868330

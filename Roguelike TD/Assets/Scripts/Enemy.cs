@@ -29,7 +29,7 @@ public class Enemy : MonoBehaviour
 
     public EnemyType GetEnemyType() { return enemyType; }
 
-    private float enemyDamage;
+    [SerializeField] private float enemyDamage;
 
     private void Awake()
     {
@@ -55,7 +55,7 @@ public class Enemy : MonoBehaviour
     {
         if (other.CompareTag("Base"))
         {
-            Health baseHealth = other.transform.GetComponent<Health>();
+            Health baseHealth = other.transform.parent.GetComponent<Health>();
 
             if (baseHealth != null)
             {

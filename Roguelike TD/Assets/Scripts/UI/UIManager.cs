@@ -143,7 +143,7 @@ public class UIManager : MonoBehaviour
         waveCountdownText.text = "NEXT WAVE";
     }
 
-    public void DisplayTime(float timeToDisplay)
+    /*public void DisplayTime(float timeToDisplay)
     {
         timeToDisplay += 1;
 
@@ -151,7 +151,7 @@ public class UIManager : MonoBehaviour
         float seconds = Mathf.FloorToInt(timeToDisplay % 60);
 
         waveCountdownText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
-    }
+    }*/
 
     public void UpdateWaveCounterText()
     {

@@ -260,10 +260,12 @@ MonoBehaviour:
   waveManager: {fileID: 0}
   enemyAgent: {fileID: 2215571491547683928}
   healthScript: {fileID: 2116900131037883142}
+  enemyType: 0
   enemyAgentSpeed: 2.5
   enemySpeedMultiplier: 1
   originalColor: {r: 0, g: 0, b: 0, a: 0}
   debuffList: 
+  enemyDamage: 1
 --- !u!114 &2116900131037883142
 MonoBehaviour:
   m_ObjectHideFlags: 0

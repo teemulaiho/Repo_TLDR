@@ -39,7 +39,8 @@ public class GameManager : MonoBehaviour
     public void InitializeNewWave()
     {
         int spawnerCount = GetSpawnerCount();
-        spawnManager.SpawnSpawner(spawnerCount);
+        //spawnManager.SpawnSpawner(spawnerCount);
+        spawnManager.SpawnSpawner(7);
     }
 
     public void StartNextWave()
@@ -77,11 +78,21 @@ public class GameManager : MonoBehaviour
         {
             return 1;
         }
-        else if (curWave <= 5)
+        else if (curWave <= 4)
         {
             return 2;
         }
-        else
+        else if (curWave <= 7)
+        {
             return 3;
+        } 
+        else if (curWave <= 10)
+        {
+            return 4;
+        }
+        else
+        {
+            return 5;
+        }
     }
 }
