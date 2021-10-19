@@ -68,6 +68,8 @@ public class SpawnManager : MonoBehaviour
         for (int i = 0; i < spawnerCount; i++)
         {
             Spawner s = Instantiate<Spawner>(spawnerPrefab);
+            s.name = "Spawner";
+            s.name += i.ToString();
             s.transform.parent = spawnerParent;
             s.transform.position = GetSpawnerArc(spawnerCount, i);
             s.SetSpawnerResource(waveManager.GetWaveCount() * 2 + 2);
@@ -109,21 +111,38 @@ public class SpawnManager : MonoBehaviour
 
     public void ReplaceToLegalPosition(Spawner s)
     {
-        while (true)
+        int i = 0; // Protection in case can't find a proper place.
+
+        while (i < 50)
         {
             Collider[] hitColliders = Physics.OverlapSphere(s.transform.position, 25f, layersToAvoid, QueryTriggerInteraction.Collide);
 
-            foreach (Collider collider in hitColliders)
+            Spawner spa = null;
+            foreach (Spawner spawner in spawnerList)
             {
-                Debug.Log(collider.isTrigger);
+                float dist = Vector3.Distance(spawner.transform.position, s.transform.position);
+
+                if (dist < 50f)
+                {
+                    spa = spawner;
+                    break;
+                }
             }
 
-            if (hitColliders.Length <= 1)
+            if (hitColliders.Length > 0 || 
+                spa)
+            {
+                s.transform.position = GetSpawnerArc(0, 0);
+            }
+            else
             {
                 break;
             }
-            else
-                s.transform.position = GetSpawnerArc(0, 0);
+
+            i++;
         }
+
+        if (i == 50)
+            Debug.Log("Tried: " + i + " times. Didn't find a free place, so gave up.");
     }
 }
