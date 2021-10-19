@@ -39,12 +39,12 @@ public class GameManager : MonoBehaviour
     public void InitializeNewWave()
     {
         int spawnerCount = GetSpawnerCount();
-        //spawnManager.SpawnSpawner(spawnerCount);
-        spawnManager.SpawnSpawner(7);
+        spawnManager.SpawnSpawner(spawnerCount);
     }
 
     public void StartNextWave()
     {
+        uiManager.ActivateNextWaveButton(1);
         navMeshMngr.UpdateNavMeshSurface();
         waveMngr.StartNextWave(20f);
 
@@ -62,6 +62,7 @@ public class GameManager : MonoBehaviour
                                         turretPool[1].GetComponent<Turret>(), 
                                         turretPool[2].GetComponent<Turret>());
 
+        uiManager.ActivateNextWaveButton(-1);
         spawnManager.ClearSpawners();
         InitializeNewWave();
     }

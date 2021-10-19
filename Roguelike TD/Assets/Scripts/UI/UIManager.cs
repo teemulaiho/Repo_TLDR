@@ -19,6 +19,13 @@ public class UIManager : MonoBehaviour
     [Space, SerializeField] public List<Slider> progressSliders;
     [Space, SerializeField] public List<Button> towerButtons;
 
+    [Header("Object Movement")]
+    [Space, SerializeField] private Button nextWaveButton;
+    [SerializeField] private bool moveNextWaveButton = false;
+    [SerializeField] private int direction;
+    [SerializeField] private Vector3 newPos;
+    [SerializeField] private float t;
+
     private bool lerpSlider = false;
     private float targetLerpValueSecondButton = 0f;
     private float targetLerpValueThirdButton = 0f;
@@ -34,6 +41,9 @@ public class UIManager : MonoBehaviour
         if (waveManager == null)
             waveManager = GameObject.Find("WaveManager").GetComponent<WaveManager>();
 
+        if (nextWaveButton == null)
+            nextWaveButton = GameObject.Find("NextWaveButton").GetComponent<Button>();
+
         foreach (Slider s in progressSliders)
         {
             s.value = 0;
@@ -41,6 +51,12 @@ public class UIManager : MonoBehaviour
     }
 
     private void Update()
+    {
+        UpdateProgressSliders();
+        UpdateNewWaveButtonPosition(direction);
+    }
+
+    private void UpdateProgressSliders()
     {
         int i = 0;
         foreach (Slider s in progressSliders)
@@ -69,6 +85,29 @@ public class UIManager : MonoBehaviour
             }
 
             i++;
+        }
+    }
+
+    private void UpdateNewWaveButtonPosition(int dir)
+    {
+        if (moveNextWaveButton)
+        {
+            float curX = nextWaveButton.transform.position.x;
+            float targetX = Screen.width + (dir * nextWaveButton.GetComponent<RectTransform>().rect.width) ;
+            t += 10.5f * Time.deltaTime;
+
+            //newPos.x = Mathf.Lerp(-targetX, targetX, t) ;
+
+            newPos.x = Mathf.MoveTowards(nextWaveButton.transform.position.x,
+                                                                  Screen.width + (dir * nextWaveButton.GetComponent<RectTransform>().rect.width),
+                                                                  Time.deltaTime * 700f);
+            newPos.y = nextWaveButton.transform.position.y;
+            newPos.z = nextWaveButton.transform.position.z;
+
+            nextWaveButton.transform.position = newPos;
+
+            if (newPos.x == Screen.width + (dir * nextWaveButton.GetComponent<RectTransform>().rect.width))
+                moveNextWaveButton = false;
         }
     }
 
@@ -158,43 +197,16 @@ public class UIManager : MonoBehaviour
         int waveCount = waveManager.GetWaveCount();
         waveCounter.text = waveCount.ToString();
         waveCounter.text += " / 10";
-
-        //StartCoroutine(AnimateText(waveCounter));
     }
 
-    private IEnumerator AnimateText(TMP_Text text)
+    public void ActivateNextWaveButton(int dir)
     {
-        bool loop = true;
-        bool loopUp = true;
+        if (dir < 0)
+            nextWaveButton.interactable = true;
+        else
+            nextWaveButton.interactable = false;
 
-        float countDownTimer = 5f;
-
-        while (countDownTimer > 1f)
-        {
-            while (loop)
-            {
-                if (loopUp)
-                {
-                    text.fontSize = Mathf.Lerp(text.fontSize, 48f, Time.deltaTime * 4f);
-                    if (waveCounter.fontSize >= 45f)
-                        loopUp = false;
-                }
-                else
-                {
-                    text.fontSize = Mathf.Lerp(text.fontSize, 36f, Time.deltaTime * 4f);
-                    if (waveCounter.fontSize <= 38f)
-                    {
-                        text.fontSize = 36f;
-                        loop = false;
-                    }
-                }
-
-                Debug.Log(text.fontSize);
-
-                countDownTimer -= Time.deltaTime;
-            }
-
-            yield return null;
-        }
+        direction = dir;
+        moveNextWaveButton = true;
     }
 }

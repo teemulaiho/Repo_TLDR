@@ -7,6 +7,8 @@ public class TurretSelection : MonoBehaviour
     [SerializeField] private LayerMask groundLayerMask = new LayerMask();
     [SerializeField] private LayerMask turretLayerMask = new LayerMask();
 
+    [SerializeField] private ParticleSystem placementSmokePrefab;
+
     Ray ray;
     RaycastHit hitInfo;
 
@@ -16,6 +18,8 @@ public class TurretSelection : MonoBehaviour
     private void Awake()
     {
         waveManager = FindObjectOfType<WaveManager>();
+
+        placementSmokePrefab = Resources.Load<ParticleSystem>("Prefabs/PlacementSmoke");
     }
 
     public void SetGrabbedGO(GameObject newGrabbedGO)
@@ -70,6 +74,10 @@ public class TurretSelection : MonoBehaviour
         if (Physics.Raycast(ray, out hitInfo, float.PositiveInfinity, groundLayerMask))
         {
             grabbedGO.transform.position = hitInfo.point;
+
+            ParticleSystem smoke = Instantiate(placementSmokePrefab);
+            smoke.transform.position += hitInfo.point;
+            smoke.Play();
 
             holdingObject = false;
         }
