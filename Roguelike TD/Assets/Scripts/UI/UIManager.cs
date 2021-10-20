@@ -54,6 +54,9 @@ public class UIManager : MonoBehaviour
     {
         UpdateProgressSliders();
         UpdateNewWaveButtonPosition(direction);
+
+
+        //Debug.Log(Mathf.Lerp(1, 0, Time.deltaTime * 100f));
     }
 
     private void UpdateProgressSliders()
@@ -96,11 +99,7 @@ public class UIManager : MonoBehaviour
             float targetX = Screen.width + (dir * nextWaveButton.GetComponent<RectTransform>().rect.width) ;
             t += 10.5f * Time.deltaTime;
 
-            //newPos.x = Mathf.Lerp(-targetX, targetX, t) ;
-
-            newPos.x = Mathf.MoveTowards(nextWaveButton.transform.position.x,
-                                                                  Screen.width + (dir * nextWaveButton.GetComponent<RectTransform>().rect.width),
-                                                                  Time.deltaTime * 700f);
+            newPos.x = Mathf.MoveTowards(curX, targetX, Time.deltaTime * 700f);
             newPos.y = nextWaveButton.transform.position.y;
             newPos.z = nextWaveButton.transform.position.z;
 
@@ -108,6 +107,20 @@ public class UIManager : MonoBehaviour
 
             if (newPos.x == Screen.width + (dir * nextWaveButton.GetComponent<RectTransform>().rect.width))
                 moveNextWaveButton = false;
+
+            Image mr = nextWaveButton.GetComponent<Image>();
+
+            float alpha = 0f;
+            float lerpSpeed = 10f;
+
+            if (dir == 0)
+                alpha = 1f;
+            else if (dir < 0)
+                alpha = Mathf.Lerp(0, 1, Time.deltaTime * lerpSpeed);
+            else if (dir > 0)
+                alpha = Mathf.Lerp(1, 0, Time.deltaTime * lerpSpeed);
+
+            mr.color = new Color(mr.color.r, mr.color.g, mr.color.b, alpha);
         }
     }
 

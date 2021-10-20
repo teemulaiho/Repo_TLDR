@@ -62,7 +62,9 @@ public class GameManager : MonoBehaviour
                                         turretPool[1].GetComponent<Turret>(), 
                                         turretPool[2].GetComponent<Turret>());
 
-        uiManager.ActivateNextWaveButton(-1);
+        if (waveMngr.GetWaveCount() > 0)
+            uiManager.ActivateNextWaveButton(-1);
+        
         spawnManager.ClearSpawners();
         InitializeNewWave();
     }
