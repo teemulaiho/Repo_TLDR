@@ -8,6 +8,7 @@ public class TurretSelection : MonoBehaviour
     [SerializeField] private LayerMask turretLayerMask = new LayerMask();
 
     [SerializeField] private ParticleSystem placementSmokePrefab;
+    [SerializeField] private AudioSource placementSound;
 
     Ray ray;
     RaycastHit hitInfo;
@@ -20,6 +21,9 @@ public class TurretSelection : MonoBehaviour
         waveManager = FindObjectOfType<WaveManager>();
 
         placementSmokePrefab = Resources.Load<ParticleSystem>("Prefabs/PlacementSmoke");
+
+        if (placementSound == null)
+            placementSound = GetComponent<AudioSource>();
     }
 
     public void SetGrabbedGO(GameObject newGrabbedGO)
@@ -78,6 +82,12 @@ public class TurretSelection : MonoBehaviour
             ParticleSystem smoke = Instantiate(placementSmokePrefab);
             smoke.transform.position += hitInfo.point;
             smoke.Play();
+
+            if (placementSound.isPlaying)
+                placementSound.Stop();
+
+            if (!placementSound.isPlaying)
+                placementSound.Play();
 
             holdingObject = false;
         }
