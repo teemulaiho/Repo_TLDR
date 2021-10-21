@@ -22,6 +22,7 @@ public class UIManager : MonoBehaviour
     [Space, SerializeField] public List<Button> towerButtons;
 
     [Space, SerializeField] public Button restartButton;
+    [Space, SerializeField] public Button quitButton;
 
     [Space, SerializeField] public Toggle backgroundMusicToggle;
     [Space, SerializeField] public Toggle backgroundMusicSwitchToggle;
@@ -74,6 +75,17 @@ public class UIManager : MonoBehaviour
             }
         }
 
+        if (quitButton == null)
+        {
+            quitButton = GameObject.Find("Quit Button").GetComponent<Button>();
+
+            if (quitButton)
+            {
+                quitButton.gameObject.SetActive(false);
+                quitButton.onClick.AddListener(gameManager.QuitGame);
+            }
+        }
+
         foreach (Slider s in progressSliders)
         {
             s.value = 0;
@@ -82,6 +94,11 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            EnableQuitButton();
+        }
+
         UpdateProgressSliders();
         UpdateNewWaveButtonPosition(direction);
         ToggleUpdate();
@@ -92,6 +109,11 @@ public class UIManager : MonoBehaviour
         }
 
         //Debug.Log(Mathf.Lerp(1, 0, Time.deltaTime * 100f));
+    }
+
+    private void EnableQuitButton()
+    {
+        quitButton.gameObject.SetActive(!quitButton.gameObject.activeSelf);
     }
 
     private void ToggleUpdate()

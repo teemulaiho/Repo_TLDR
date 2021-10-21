@@ -87,7 +87,7 @@ public class Turret : MonoBehaviour
         Vector3 dir = ((target.transform.position) - transform.position).normalized;
         float dot = Vector3.Dot(dir, transform.forward);
 
-        Debug.Log(dot + " " + distanceToEnemy);
+        //Debug.Log(dot + " " + distanceToEnemy);
 
         if (distanceToEnemy < 10)
             return dot > 0.7;
