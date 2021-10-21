@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour
 
     public void StartNextWave()
     {
+        uiManager.ActivateNextWaveButton(1);
         navMeshMngr.UpdateNavMeshSurface();
         waveMngr.StartNextWave(20f);
 
@@ -61,6 +62,9 @@ public class GameManager : MonoBehaviour
                                         turretPool[1].GetComponent<Turret>(), 
                                         turretPool[2].GetComponent<Turret>());
 
+        if (waveMngr.GetWaveCount() > 0)
+            uiManager.ActivateNextWaveButton(-1);
+        
         spawnManager.ClearSpawners();
         InitializeNewWave();
     }
