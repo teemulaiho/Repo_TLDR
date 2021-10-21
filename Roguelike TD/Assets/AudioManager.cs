@@ -10,6 +10,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] public float backgroundMusicVolume = 0.05f;
 
     int waveCount = -1;
+    int curTrack = 0;
 
 
     private void Awake()
@@ -88,5 +89,34 @@ public class AudioManager : MonoBehaviour
                 i++;
             }
         }        
+    }
+
+    public void ToggleBackgroundMusicMuted(bool isMuted)
+    {
+        if (isMuted)
+        {
+            foreach (AudioSource a in audioSources)
+            {
+                a.volume = 0;
+            }
+            //audioSources[curTrack].volume = 0;
+        }
+        else
+        {
+            foreach (AudioSource a in audioSources)
+            {
+                a.volume = 0;
+            }
+            audioSources[curTrack].volume = backgroundMusicVolume;
+        }
+    }
+
+    public void ToggleBackgroundMusicSwitch(bool isSwitched)
+    {
+        if (isSwitched)
+            curTrack = 6;
+        else
+            curTrack = 0;
+
     }
 }

@@ -6,6 +6,7 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
+    [SerializeField] AudioManager audioManager;
     [SerializeField] WaveManager waveManager;
     [SerializeField] GameManager gameManager;
 
@@ -21,6 +22,9 @@ public class UIManager : MonoBehaviour
     [Space, SerializeField] public List<Button> towerButtons;
 
     [Space, SerializeField] public Button restartButton;
+
+    [Space, SerializeField] public Toggle backgroundMusicToggle;
+    [Space, SerializeField] public Toggle backgroundMusicSwitchToggle;
 
     [Header("Object Movement")]
     [Space, SerializeField] private Button nextWaveButton;
@@ -47,8 +51,17 @@ public class UIManager : MonoBehaviour
         if (waveManager == null)
             waveManager = GameObject.Find("WaveManager").GetComponent<WaveManager>();
 
+        if (audioManager == null)
+            audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+
         if (nextWaveButton == null)
             nextWaveButton = GameObject.Find("NextWaveButton").GetComponent<Button>();
+
+        if (backgroundMusicToggle == null)
+            backgroundMusicToggle = GameObject.Find("ToggleMusic").GetComponent<Toggle>();
+
+        if (backgroundMusicSwitchToggle == null)
+            backgroundMusicSwitchToggle = GameObject.Find("ToggleMusicSwitcher").GetComponent<Toggle>();
 
         if (restartButton == null)
         {
@@ -71,14 +84,20 @@ public class UIManager : MonoBehaviour
     {
         UpdateProgressSliders();
         UpdateNewWaveButtonPosition(direction);
+        ToggleUpdate();
 
         if (gameManager.GetGameOver())
         {
             restartButton.gameObject.SetActive(true);
         }
 
-
         //Debug.Log(Mathf.Lerp(1, 0, Time.deltaTime * 100f));
+    }
+
+    private void ToggleUpdate()
+    {
+        audioManager.ToggleBackgroundMusicMuted(!backgroundMusicToggle.isOn);
+        audioManager.ToggleBackgroundMusicSwitch(!backgroundMusicSwitchToggle.isOn);
     }
 
     private void UpdateProgressSliders()
