@@ -42,6 +42,9 @@ public class AudioManager : MonoBehaviour
             }
             i++;
         }
+
+        audioSources[0].volume = backgroundMusicVolume;
+        audioSources[0].Play();
     }
 
     // Update is called once per frame
@@ -50,7 +53,7 @@ public class AudioManager : MonoBehaviour
         if (waveManager.GetWaveCount() != waveCount)
         {
             waveCount = waveManager.GetWaveCount();
-            UpdateBackgroundMusic(waveCount);
+            //UpdateBackgroundMusic(waveCount);
         }
     }
 
