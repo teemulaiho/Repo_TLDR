@@ -27,6 +27,7 @@ public class Turret : MonoBehaviour
     [SerializeField] private float attackSpeedMultiplier = 1f;
 
     private float attackCountdown;
+    private float distanceToEnemy;
 
     public bool placeable;
     
@@ -69,7 +70,7 @@ public class Turret : MonoBehaviour
 
     private void TurretRotation()
     {
-        Vector3 dir = target.position - transform.position;
+        Vector3 dir = (target.position + target.forward * 1.5f) - transform.position;
         Quaternion lookRotation = Quaternion.LookRotation(dir);
         Vector3 rotation = Quaternion.Lerp(transform.rotation, lookRotation, rotationSpeed * Time.deltaTime).eulerAngles;
         transform.rotation = Quaternion.Euler(0f, rotation.y, 0f);
@@ -77,10 +78,16 @@ public class Turret : MonoBehaviour
 
     private bool AmILookingAtEnemy()
     {
-        Vector3 dir = (target.transform.position - transform.position).normalized;
+        Vector3 dir = ((target.transform.position) - transform.position).normalized;
         float dot = Vector3.Dot(dir, transform.forward);
 
-        if (dot > 0.9)
+        Debug.Log(dot + " " + distanceToEnemy);
+
+        if (dot > 0.9975 && distanceToEnemy >= 17)
+            return true;
+        else if (dot > 0.96 && distanceToEnemy <= 17 && distanceToEnemy >= 8)
+            return true;
+        else if (dot > 0.90 && distanceToEnemy < 8)
             return true;
         else
             return false;
@@ -104,7 +111,7 @@ public class Turret : MonoBehaviour
 
         foreach (GameObject enemy in enemies)
         {
-            float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
+            distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
             
             if (distanceToEnemy < shortestDistance)
             {

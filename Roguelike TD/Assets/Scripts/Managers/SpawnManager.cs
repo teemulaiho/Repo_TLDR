@@ -113,12 +113,7 @@ public class SpawnManager : MonoBehaviour
         {
             Collider[] hitColliders = Physics.OverlapSphere(s.transform.position, 25f, layersToAvoid, QueryTriggerInteraction.Collide);
 
-            foreach (Collider collider in hitColliders)
-            {
-                Debug.Log(collider.isTrigger);
-            }
-
-            if (hitColliders.Length <= 1)
+            if (hitColliders.Length <= 0)
             {
                 break;
             }

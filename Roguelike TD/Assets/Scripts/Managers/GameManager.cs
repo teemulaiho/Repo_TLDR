@@ -39,8 +39,7 @@ public class GameManager : MonoBehaviour
     public void InitializeNewWave()
     {
         int spawnerCount = GetSpawnerCount();
-        //spawnManager.SpawnSpawner(spawnerCount);
-        spawnManager.SpawnSpawner(7);
+        spawnManager.SpawnSpawner(spawnerCount);
     }
 
     public void StartNextWave()

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3867347047077457866}
   - component: {fileID: 3867347047077457867}
+  - component: {fileID: 1972310889633901366}
   m_Layer: 11
   m_Name: Spawner
   m_TagString: Untagged
@@ -51,6 +52,19 @@ MonoBehaviour:
   spriteTransform: {fileID: 3867347047374974483}
   spawnerResource: 0
   active: 0
+--- !u!114 &1972310889633901366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3867347047077457869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa17599b7d04cdb47a5966376903efdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arrowGO: {fileID: 7162478845693578323, guid: d28de3b2e99447046adfeeb0528a2744, type: 3}
 --- !u!1 &3867347047374974482
 GameObject:
   m_ObjectHideFlags: 0
