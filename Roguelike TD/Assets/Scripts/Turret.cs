@@ -89,12 +89,12 @@ public class Turret : MonoBehaviour
 
         Debug.Log(dot + " " + distanceToEnemy);
 
-        if (dot > 0.9975 && distanceToEnemy >= 17)
-            return true;
-        else if (dot > 0.945 && distanceToEnemy <= 17 && distanceToEnemy >= 10)
-            return true;
-        else if (dot > 0.85 && distanceToEnemy < 10)
-            return true;
+        if (distanceToEnemy < 10)
+            return dot > 0.7;
+        else if (distanceToEnemy < 17)
+            return dot > 0.90;
+        else if (distanceToEnemy > range)
+            return dot > 0.99;
         else
             return false;
     }
