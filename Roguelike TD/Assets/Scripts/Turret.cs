@@ -81,13 +81,11 @@ public class Turret : MonoBehaviour
         Vector3 dir = ((target.transform.position) - transform.position).normalized;
         float dot = Vector3.Dot(dir, transform.forward);
 
-        Debug.Log(dot + " " + distanceToEnemy);
-
         if (dot > 0.9975 && distanceToEnemy >= 17)
             return true;
         else if (dot > 0.96 && distanceToEnemy <= 17 && distanceToEnemy >= 8)
             return true;
-        else if (dot > 0.90 && distanceToEnemy < 8)
+        else if (dot > 0.88 && distanceToEnemy < 8)
             return true;
         else
             return false;
