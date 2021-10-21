@@ -41,7 +41,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -5949473741078025308, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
       propertyPath: rotationSpeed
-      value: 6
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: -5949473741078025308, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
       propertyPath: turretDescription

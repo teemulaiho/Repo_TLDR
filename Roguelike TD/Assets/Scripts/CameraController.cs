@@ -59,8 +59,6 @@ public class CameraController : MonoBehaviour
                 if (!turretSelection.holdingObject && !waveManager.WaveIncomingCheck())
                 {
                     turretSelection.GrabTurret();
-                    if (turretSelection.grabbedGO != null)
-                        turretSelection.GetGrabbedGO().GetComponent<Turret>().RangeIndicator(true);
                 }
             }
         }
@@ -73,8 +71,6 @@ public class CameraController : MonoBehaviour
             if (holdingObject && dragStartPosition == dragCurrentPosition && !waveManager.WaveIncomingCheck())
             {
                 turretSelection.DropTurret();
-                if (turretSelection.grabbedGO != null)
-                    turretSelection.GetGrabbedGO().GetComponent<Turret>().RangeIndicator(false);
             }
         }
     }

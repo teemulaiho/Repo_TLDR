@@ -95,15 +95,15 @@ public class GameManager : MonoBehaviour
         {
             return 1;
         }
-        else if (curWave <= 4)
+        else if (curWave <= 6)
         {
             return 2;
         }
-        else if (curWave <= 7)
+        else if (curWave <= 9)
         {
             return 3;
         } 
-        else if (curWave <= 10)
+        else if (curWave <= 12)
         {
             return 4;
         }

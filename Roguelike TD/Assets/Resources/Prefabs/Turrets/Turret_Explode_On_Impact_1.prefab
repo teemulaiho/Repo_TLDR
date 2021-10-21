@@ -46,10 +46,26 @@ PrefabInstance:
       value: Shoots a bullet that explodes on impact dealing damage to enemies within
         the area.
       objectReference: {fileID: 0}
+    - target: {fileID: 1991385580906976658, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 15.960555
+      objectReference: {fileID: 0}
+    - target: {fileID: 1991385580906976658, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 15.960555
+      objectReference: {fileID: 0}
+    - target: {fileID: 1991385580906976658, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 15.960555
+      objectReference: {fileID: 0}
     - target: {fileID: 3233324927651172853, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: b9e94a478dffb804390f965307630a97, type: 2}
+    - target: {fileID: 4048789866381980533, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4706578592989389332, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
       propertyPath: m_Name
       value: Turret_Explode_On_Impact_1
@@ -57,18 +73,6 @@ PrefabInstance:
     - target: {fileID: 8831438693530330636, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
       propertyPath: m_RootOrder
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8831438693530330636, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2.924262
-      objectReference: {fileID: 0}
-    - target: {fileID: 8831438693530330636, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2.924262
-      objectReference: {fileID: 0}
-    - target: {fileID: 8831438693530330636, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2.924262
       objectReference: {fileID: 0}
     - target: {fileID: 8831438693530330636, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
       propertyPath: m_LocalPosition.x

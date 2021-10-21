@@ -40,15 +40,6 @@ public class TurretSelection : MonoBehaviour
 
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        //if (Input.GetMouseButtonDown(0) && !holdingObject)  // Grab turtle
-        //{
-        //    GrabTurret();
-        //}
-        //else if (Input.GetMouseButtonDown(0) && holdingObject)  // Drop turtle if already grabbed
-        //{
-        //    DropTurret();
-        //}
-
         if (holdingObject)  // Turtle follow mouse pos
         {
             if (Physics.Raycast(ray, out hitInfo, float.PositiveInfinity, groundLayerMask))
@@ -63,6 +54,7 @@ public class TurretSelection : MonoBehaviour
         if (Physics.Raycast(ray, out hitInfo, float.PositiveInfinity, turretLayerMask))
         {
             grabbedGO = hitInfo.transform.parent.gameObject;
+            grabbedGO.GetComponent<Turret>().RangeIndicator(true);
 
             holdingObject = true;
         }
@@ -80,6 +72,8 @@ public class TurretSelection : MonoBehaviour
         if (Physics.Raycast(ray, out hitInfo, float.PositiveInfinity, groundLayerMask))
         {
             grabbedGO.transform.position = hitInfo.point;
+
+            grabbedGO.GetComponent<Turret>().RangeIndicator(false);
 
             ParticleSystem smoke = Instantiate(placementSmokePrefab);
             smoke.transform.position += hitInfo.point;
