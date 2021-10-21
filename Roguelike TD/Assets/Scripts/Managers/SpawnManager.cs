@@ -46,6 +46,10 @@ public class SpawnManager : MonoBehaviour
 
     private Vector3 GetSpawnerArc(int spawnerCount, int i)
     {
+        // If base has been destroyed, go to origin of map.
+        if (baseTransform == null)
+            return Vector3.zero;
+
         float yDirection = baseTransform.transform.eulerAngles.y;
         yDirection = SetSpawnPosition(yDirection, spawnerCount, i);
 

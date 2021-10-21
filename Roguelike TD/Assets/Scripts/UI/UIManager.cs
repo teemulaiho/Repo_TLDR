@@ -7,6 +7,7 @@ using TMPro;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] WaveManager waveManager;
+    [SerializeField] GameManager gameManager;
 
     [SerializeField] private PickTurretParent pickTurretParent;
 
@@ -18,6 +19,8 @@ public class UIManager : MonoBehaviour
 
     [Space, SerializeField] public List<Slider> progressSliders;
     [Space, SerializeField] public List<Button> towerButtons;
+
+    [Space, SerializeField] public Button restartButton;
 
     [Header("Object Movement")]
     [Space, SerializeField] private Button nextWaveButton;
@@ -38,11 +41,25 @@ public class UIManager : MonoBehaviour
         if (waveCounter == null)
             waveCounter = GameObject.Find("WaveCounterText").GetComponent<TMP_Text>();
 
+        if (gameManager == null)
+            gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
         if (waveManager == null)
             waveManager = GameObject.Find("WaveManager").GetComponent<WaveManager>();
 
         if (nextWaveButton == null)
             nextWaveButton = GameObject.Find("NextWaveButton").GetComponent<Button>();
+
+        if (restartButton == null)
+        {
+            restartButton = GameObject.Find("Restart Button").GetComponent<Button>();
+
+            if (restartButton)
+            {
+                restartButton.gameObject.SetActive(false);
+                restartButton.onClick.AddListener(gameManager.RestartGame);
+            }
+        }
 
         foreach (Slider s in progressSliders)
         {
@@ -54,6 +71,11 @@ public class UIManager : MonoBehaviour
     {
         UpdateProgressSliders();
         UpdateNewWaveButtonPosition(direction);
+
+        if (gameManager.GetGameOver())
+        {
+            restartButton.gameObject.SetActive(true);
+        }
 
 
         //Debug.Log(Mathf.Lerp(1, 0, Time.deltaTime * 100f));
@@ -105,22 +127,26 @@ public class UIManager : MonoBehaviour
 
             nextWaveButton.transform.position = newPos;
 
-            if (newPos.x == Screen.width + (dir * nextWaveButton.GetComponent<RectTransform>().rect.width))
-                moveNextWaveButton = false;
-
             Image mr = nextWaveButton.GetComponent<Image>();
 
-            float alpha = 0f;
+            float alpha = 1f;
             float lerpSpeed = 10f;
 
             if (dir == 0)
                 alpha = 1f;
-            else if (dir < 0)
-                alpha = Mathf.Lerp(0, 1, Time.deltaTime * lerpSpeed);
-            else if (dir > 0)
+            else if (dir < 0) // Moving outside of screen.
                 alpha = Mathf.Lerp(1, 0, Time.deltaTime * lerpSpeed);
+            else if (dir > 0) // Moving back to screen.
+                alpha = Mathf.Lerp(0, 1, Time.deltaTime * lerpSpeed);
+  
+            if (newPos.x == Screen.width + (dir * nextWaveButton.GetComponent<RectTransform>().rect.width))
+            {
+                moveNextWaveButton = false;
+            }
 
             mr.color = new Color(mr.color.r, mr.color.g, mr.color.b, alpha);
+
+
         }
     }
 
@@ -215,11 +241,25 @@ public class UIManager : MonoBehaviour
     public void ActivateNextWaveButton(int dir)
     {
         if (dir < 0)
+        {
             nextWaveButton.interactable = true;
+            EnableTurretButtons(true);
+        }
         else
+        {
             nextWaveButton.interactable = false;
+            EnableTurretButtons(false);
+        }
 
         direction = dir;
         moveNextWaveButton = true;
+    }
+
+    private void EnableTurretButtons(bool isActive)
+    {
+        foreach (Button b in towerButtons)
+        {
+            b.gameObject.SetActive(isActive);
+        }
     }
 }

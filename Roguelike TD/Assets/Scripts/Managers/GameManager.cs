@@ -1,8 +1,10 @@
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private Health baseHealth;
     [SerializeField] private WaveManager waveMngr;
     [SerializeField] private NavMeshManager navMeshMngr;
     [SerializeField] private UIManager uiManager;
@@ -13,8 +15,14 @@ public class GameManager : MonoBehaviour
 
     private float timeScale = 1f;
 
+    bool gameOver = false;
+
+    public bool GetGameOver() { return gameOver; }
+
     private void Awake()
     {
+        if (!baseHealth)
+            baseHealth = GameObject.Find("Base").GetComponent<Health>(); 
         waveMngr = FindObjectOfType<WaveManager>();
         navMeshMngr = FindObjectOfType<NavMeshManager>();
         uiManager = FindObjectOfType<UIManager>();
@@ -23,12 +31,18 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        gameOver = false;
         WaveIsOver();
     }
 
     private void Update()
     {
         Time.timeScale = timeScale;
+
+        if (baseHealth.GetCurrentHealth() <= 0)
+        {
+            gameOver = true;
+        }
     }
 
     public void SetTimeScale(float newTimeScale)
@@ -97,5 +111,10 @@ public class GameManager : MonoBehaviour
         {
             return 5;
         }
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(0);
     }
 }
