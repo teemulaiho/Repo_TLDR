@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
     {
         uiManager.ActivateNextWaveButton(1);
         navMeshMngr.UpdateNavMeshSurface();
-        waveMngr.StartNextWave(20f);
+        waveMngr.StartNextWave(5f);
 
         spawnManager.ActivateSpawners();
 

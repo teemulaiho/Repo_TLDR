@@ -81,13 +81,11 @@ public class Turret : MonoBehaviour
         Vector3 dir = ((target.transform.position) - transform.position).normalized;
         float dot = Vector3.Dot(dir, transform.forward);
 
-        Debug.Log(dot + " " + distanceToEnemy);
-
         if (dot > 0.9975 && distanceToEnemy >= 17)
             return true;
         else if (dot > 0.96 && distanceToEnemy <= 17 && distanceToEnemy >= 8)
             return true;
-        else if (dot > 0.90 && distanceToEnemy < 8)
+        else if (dot > 0.88 && distanceToEnemy < 8)
             return true;
         else
             return false;
@@ -157,25 +155,5 @@ public class Turret : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, range);
-    }
-
-    private void OnCollisionStay(Collision other)
-    {
-        Debug.Log("1");
-        if (other.gameObject.layer == 11)
-        {
-            Debug.Log("In Obstacle");
-            placeable = false;
-        }
-    }
-
-    private void OnCollisionExit(Collision other)
-    {
-        Debug.Log("2");
-        if (other.gameObject.layer == 11)
-        {
-            Debug.Log("Exit Obstacle");
-            placeable = true;
-        }
     }
 }

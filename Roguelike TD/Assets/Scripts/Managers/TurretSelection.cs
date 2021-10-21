@@ -13,8 +13,10 @@ public class TurretSelection : MonoBehaviour
     Ray ray;
     RaycastHit hitInfo;
 
-    private bool holdingObject;
+    public bool holdingObject;
     private GameObject grabbedGO;
+
+    public GameObject GetGrabbedGO() { return grabbedGO; }
 
     private void Awake()
     {
@@ -38,14 +40,14 @@ public class TurretSelection : MonoBehaviour
 
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Input.GetMouseButtonDown(0) && !holdingObject)  // Grab turtle
-        {
-            GrabTurret();
-        }
-        else if (Input.GetMouseButtonDown(0) && holdingObject)  // Drop turtle if already grabbed
-        {
-            DropTurret();
-        }
+        //if (Input.GetMouseButtonDown(0) && !holdingObject)  // Grab turtle
+        //{
+        //    GrabTurret();
+        //}
+        //else if (Input.GetMouseButtonDown(0) && holdingObject)  // Drop turtle if already grabbed
+        //{
+        //    DropTurret();
+        //}
 
         if (holdingObject)  // Turtle follow mouse pos
         {
@@ -56,7 +58,7 @@ public class TurretSelection : MonoBehaviour
         }
     }
 
-    private void GrabTurret()
+    public void GrabTurret()
     {
         if (Physics.Raycast(ray, out hitInfo, float.PositiveInfinity, turretLayerMask))
         {
