@@ -14,7 +14,7 @@ public class TurretSelection : MonoBehaviour
     RaycastHit hitInfo;
 
     public bool holdingObject;
-    private GameObject grabbedGO;
+    public GameObject grabbedGO;
 
     public GameObject GetGrabbedGO() { return grabbedGO; }
 

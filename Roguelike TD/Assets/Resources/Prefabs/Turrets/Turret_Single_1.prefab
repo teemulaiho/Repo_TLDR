@@ -51,6 +51,18 @@ PrefabInstance:
       propertyPath: turretDescription
       value: Shoot a single bullet straight towards the target.
       objectReference: {fileID: 0}
+    - target: {fileID: 1991385580906976658, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 10.798892
+      objectReference: {fileID: 0}
+    - target: {fileID: 1991385580906976658, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 10.798892
+      objectReference: {fileID: 0}
+    - target: {fileID: 1991385580906976658, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 10.798892
+      objectReference: {fileID: 0}
     - target: {fileID: 4706578592989389332, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
       propertyPath: m_Name
       value: Turret_Single_1

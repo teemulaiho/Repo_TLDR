@@ -32,6 +32,7 @@ public class Turret : MonoBehaviour
     public bool placeable;
     
     private Transform target;
+    [SerializeField] private GameObject indicator;
 
     public event Action<Transform> ShootNow;
 
@@ -58,6 +59,11 @@ public class Turret : MonoBehaviour
         AmILookingAtEnemy();
     }
 
+    public void RangeIndicator(bool state)
+    {
+        indicator.SetActive(state);
+    }
+
     private void AttackCountdown()
     {
         if (attackCountdown <= 0f && AmILookingAtEnemy())
@@ -81,11 +87,13 @@ public class Turret : MonoBehaviour
         Vector3 dir = ((target.transform.position) - transform.position).normalized;
         float dot = Vector3.Dot(dir, transform.forward);
 
+        Debug.Log(dot + " " + distanceToEnemy);
+
         if (dot > 0.9975 && distanceToEnemy >= 17)
             return true;
-        else if (dot > 0.96 && distanceToEnemy <= 17 && distanceToEnemy >= 8)
+        else if (dot > 0.945 && distanceToEnemy <= 17 && distanceToEnemy >= 10)
             return true;
-        else if (dot > 0.88 && distanceToEnemy < 8)
+        else if (dot > 0.85 && distanceToEnemy < 10)
             return true;
         else
             return false;
