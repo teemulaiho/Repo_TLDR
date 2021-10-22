@@ -44,7 +44,9 @@ public class TurretSelection : MonoBehaviour
         {
             if (Physics.Raycast(ray, out hitInfo, float.PositiveInfinity, groundLayerMask))
             {
-                grabbedGO.transform.position = hitInfo.point;
+                //grabbedGO.transform.position = hitInfo.point;
+                Vector3 hitPointOffset = new Vector3(hitInfo.point.x, 0.5f, hitInfo.point.z);
+                grabbedGO.transform.position = hitPointOffset;
             }            
         }
     }
