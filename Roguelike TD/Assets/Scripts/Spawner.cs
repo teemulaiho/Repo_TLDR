@@ -14,6 +14,9 @@ public class Spawner : MonoBehaviour
     private bool inCombat = true;
     [Space, SerializeField] private bool active = true;
 
+    private SpawnManager spawnManager;
+    public bool willBeActivated = false;
+
     private Vector3 range;
 
     public void SetSpawnerResource(int value)
@@ -26,10 +29,29 @@ public class Spawner : MonoBehaviour
         active = state;
     }
 
+    public void WillBeActivatedAtRoundStart(bool state)
+    {
+        if (state)
+        {
+            willBeActivated = true;
+            spawnManager.AddSpawnerToList(this);
+
+            // Change color?
+        }
+        else
+        {
+            willBeActivated = false;
+            spawnManager.RemoveSpawnerFromList(this);
+
+            // Change back to default color
+        }
+    }
+
     private void Awake()
     {
         enemyParent = GameObject.Find("ENEMYPARENT").transform;
         waveManager = FindObjectOfType<WaveManager>();
+        spawnManager = FindObjectOfType<SpawnManager>();
         enemyPrefabList = new List<GameObject>();
 
         enemyPrefabList.Add(Resources.Load<GameObject>("Prefabs/Enemies/SmallEnemy"));

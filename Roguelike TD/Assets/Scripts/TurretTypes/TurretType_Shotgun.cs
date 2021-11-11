@@ -79,7 +79,7 @@ public class TurretType_Shotgun : MonoBehaviour
         if (bullet != null)
         {
             bullet.SetTargetPos(arcPos);
-            bullet.SetBulletValues(turretScript.GetBulletSpeed(), turretScript.GetBulletDamage());
+            bullet.SetBulletValues(transform, turretScript.GetBulletSpeed(), turretScript.GetBulletDamage(), turretScript.GetBulletMaxTravel());
         }
     }
 }

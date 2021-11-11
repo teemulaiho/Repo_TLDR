@@ -3436,6 +3436,7 @@ MonoBehaviour:
   placementSmokePrefab: {fileID: 0}
   placementSound: {fileID: 0}
   holdingObject: 0
+  grabbedGO: {fileID: 0}
 --- !u!4 &820476757
 Transform:
   m_ObjectHideFlags: 0

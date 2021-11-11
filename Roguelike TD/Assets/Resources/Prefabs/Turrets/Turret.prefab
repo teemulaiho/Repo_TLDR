@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2700729387211273639}
   m_Layer: 7
   m_Name: ShootPos
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 388286695741619379}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.631, z: 2.47}
+  m_LocalPosition: {x: 0, y: 1.62, z: 1.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8831438693530330636}
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 8503613690551998559}
   m_Layer: 7
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -55,7 +55,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1267747916304044390}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.02, z: 0}
+  m_LocalPosition: {x: 0, y: 2.97, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8831438693530330636}
@@ -71,8 +71,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1.95
-  m_Height: 3.81
+  m_Radius: 0.91
+  m_Height: 3.33
   m_Direction: 1
   m_Center: {x: 0, y: -1, z: 0}
 --- !u!1 &4048789866381980533
@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 3009935232382178291}
   m_Layer: 7
   m_Name: RangeIndicationSrite
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -101,7 +101,7 @@ Transform:
   m_GameObject: {fileID: 4048789866381980533}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0.01, z: 0}
-  m_LocalScale: {x: 5.4603896, y: 5.4603896, z: 5.4603896}
+  m_LocalScale: {x: 3.9943075, y: 3.9943075, z: 3.9943075}
   m_Children: []
   m_Father: {fileID: 8831438693530330636}
   m_RootOrder: 3
@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: -5949473741078025308}
   m_Layer: 7
   m_Name: Turret
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -207,10 +207,10 @@ MonoBehaviour:
   turretName: name here
   turretDescription: description here
   attackSpeed: 1
-  range: 10
+  range: 7.5
   rotationSpeed: 10
   bulletDamage: 1
-  bulletSpeed: 25
+  bulletSpeed: 35
   buffList: 
   attackSpeedMultiplier: 1
   placeable: 0
@@ -227,12 +227,24 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2426583394309217183, guid: 76f86bcad6843d54bb91c799abaf58db, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426583394309217183, guid: 76f86bcad6843d54bb91c799abaf58db, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426583394309217183, guid: 76f86bcad6843d54bb91c799abaf58db, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426583394309217183, guid: 76f86bcad6843d54bb91c799abaf58db, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2426583394309217183, guid: 76f86bcad6843d54bb91c799abaf58db, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.6
+      value: 0.73
       objectReference: {fileID: 0}
     - target: {fileID: 2426583394309217183, guid: 76f86bcad6843d54bb91c799abaf58db, type: 3}
       propertyPath: m_LocalPosition.z
@@ -269,6 +281,10 @@ PrefabInstance:
     - target: {fileID: 3091479324798861605, guid: 76f86bcad6843d54bb91c799abaf58db, type: 3}
       propertyPath: m_Name
       value: Turtle_Model
+      objectReference: {fileID: 0}
+    - target: {fileID: 3091479324798861605, guid: 76f86bcad6843d54bb91c799abaf58db, type: 3}
+      propertyPath: m_TagString
+      value: Tower
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 76f86bcad6843d54bb91c799abaf58db, type: 3}

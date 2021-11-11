@@ -26,6 +26,16 @@ public class SpawnManager : MonoBehaviour
             waveManager = GameObject.Find("WaveManager").GetComponent<WaveManager>();
     }
 
+    public void AddSpawnerToList(Spawner spawner)
+    {
+        spawnerList.Add(spawner);
+    }
+
+    public void RemoveSpawnerFromList(Spawner spawner)
+    {
+        spawnerList.Remove(spawner);
+    }
+
     private float SetSpawnPosition(float yDirection, int spawnerCount, int i)
     {
         float spawnerSpacing = Random.Range(0f, 360f) + 64f;

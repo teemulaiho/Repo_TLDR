@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 1917661331763139517, guid: bc6b59283934e0f48a7cd320dad0e302, type: 3}
   bulletAmount: 5
-  bulletSpacing: 8
-  radius: 7
+  bulletSpacing: 6
+  radius: 3
 --- !u!1001 &865007972806358680
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25,7 +25,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -5949473741078025308, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
       propertyPath: range
-      value: 10
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: -5949473741078025308, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
       propertyPath: turretName
@@ -40,17 +40,33 @@ PrefabInstance:
       value: 70
       objectReference: {fileID: 0}
     - target: {fileID: -5949473741078025308, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
-      propertyPath: rotationSpeed
-      value: 8
+      propertyPath: bulletMaxTravel
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: -5949473741078025308, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
       propertyPath: turretDescription
       value: Shoots 5 bullets in an arch.
       objectReference: {fileID: 0}
+    - target: {fileID: 1991385580906976658, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.6995926
+      objectReference: {fileID: 0}
+    - target: {fileID: 1991385580906976658, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.6995926
+      objectReference: {fileID: 0}
+    - target: {fileID: 1991385580906976658, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.6995926
+      objectReference: {fileID: 0}
     - target: {fileID: 3233324927651172853, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 166be215decd05c468c8b4f1df915c1f, type: 2}
+    - target: {fileID: 4048789866381980533, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4706578592989389332, guid: d920100df44fe0046a009e0aaa2a12ce, type: 3}
       propertyPath: m_Name
       value: Turret_Shotgun_1

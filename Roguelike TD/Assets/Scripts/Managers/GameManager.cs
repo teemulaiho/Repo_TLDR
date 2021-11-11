@@ -64,10 +64,10 @@ public class GameManager : MonoBehaviour
 
         spawnManager.ActivateSpawners();
 
-        foreach (Spawner spawner in spawners)
-        {
-            spawner.SetActiveBool(true);
-        }
+        //foreach (Spawner spawner in spawners)
+        //{
+        //    spawner.SetActiveBool(true);
+        //}
     }
 
     public void WaveIsOver()
@@ -75,12 +75,9 @@ public class GameManager : MonoBehaviour
         uiManager.ActivateTurretButtons(turretPool[0].GetComponent<Turret>(), 
                                         turretPool[1].GetComponent<Turret>(), 
                                         turretPool[2].GetComponent<Turret>());
-
-        if (waveMngr.GetWaveCount() > 0)
-            uiManager.ActivateNextWaveButton(-1);
         
-        spawnManager.ClearSpawners();
-        InitializeNewWave();
+        //spawnManager.ClearSpawners();
+        //InitializeNewWave();
     }
 
     public int GetSpawnerCount()

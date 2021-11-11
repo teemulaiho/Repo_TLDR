@@ -33,11 +33,6 @@ public class WaveManager : MonoBehaviour
     {
         waveTimer = waveLength;
         waveIncoming = true;
-
-        waveCount++;
-
-        uiManager.UpdateWaveCounterText();
-        //spawnManager.ActivateSpawners();
     }
 
     private void Update()
@@ -47,7 +42,6 @@ public class WaveManager : MonoBehaviour
             if (waveTimer > 0)
             {
                 waveTimer -= Time.deltaTime;
-                //uiManager.DisplayTime(waveTimer);
             }
             else
             {

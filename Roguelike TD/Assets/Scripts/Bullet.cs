@@ -5,7 +5,9 @@ public class Bullet : MonoBehaviour
 {
     private float speed = 70f;
     private float damage = 1f;
+    private float maxTravel = 10f;
 
+    private Transform towerTransform;
     private Vector3 vTarget;
     private Vector3 movementDirection;
 
@@ -19,10 +21,12 @@ public class Bullet : MonoBehaviour
         movementDirection = vTarget - transform.position;
     }
 
-    public void SetBulletValues(float bulletSpeed, float bulletDamage)
+    public void SetBulletValues(Transform myTowerTransform,float bulletSpeed, float bulletDamage, float bulletMaxTravel)
     {
+        towerTransform = myTowerTransform;
         speed = bulletSpeed;
         damage = bulletDamage;
+        maxTravel = bulletMaxTravel;
     }
 
     void Update()
@@ -45,8 +49,9 @@ public class Bullet : MonoBehaviour
 
         transform.Translate(movementDirection.normalized * distanceThisFrame, Space.World);
 
-        if (Vector3.Distance(Vector3.zero, transform.position) >= 100f)
+        if (Vector3.Distance(towerTransform.position, transform.position) >= maxTravel)
         {
+            Debug.Log("Destroyed");
             Destroy(gameObject);
         }
     }

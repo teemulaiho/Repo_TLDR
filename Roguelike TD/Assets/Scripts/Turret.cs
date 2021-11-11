@@ -21,6 +21,7 @@ public class Turret : MonoBehaviour
     [Header("Bullet Stats")]
     [SerializeField] private float bulletDamage = 1f;
     [SerializeField] private float bulletSpeed = 5f;
+    [SerializeField] private float bulletMaxTravel = 10f;
 
     [Header("Buffs")]
     [SerializeField] private List<Buff> buffList;
@@ -32,6 +33,7 @@ public class Turret : MonoBehaviour
     public bool placeable;
     
     private Transform target;
+    private Transform prevTarget;
     [SerializeField] private GameObject indicator;
 
     public event Action<Transform> ShootNow;
@@ -41,6 +43,7 @@ public class Turret : MonoBehaviour
     
     public float GetBulletDamage() { return bulletDamage; }
     public float GetBulletSpeed() { return bulletSpeed; }
+    public float GetBulletMaxTravel() { return bulletMaxTravel; }
 
     private void Start()
     {
@@ -56,7 +59,7 @@ public class Turret : MonoBehaviour
 
         AttackCountdown();
         TurretRotation();
-        AmILookingAtEnemy();
+        //AmILookingAtEnemy();
     }
 
     public void RangeIndicator(bool state)
@@ -76,7 +79,7 @@ public class Turret : MonoBehaviour
 
     private void TurretRotation()
     {
-        Vector3 dir = (target.position + target.forward * 1.5f) - transform.position;
+        Vector3 dir = (target.position + target.forward * 0.5f) - transform.position;
         Quaternion lookRotation = Quaternion.LookRotation(dir);
         Vector3 rotation = Quaternion.Lerp(transform.rotation, lookRotation, rotationSpeed * Time.deltaTime).eulerAngles;
         transform.rotation = Quaternion.Euler(0f, rotation.y, 0f);
@@ -87,16 +90,33 @@ public class Turret : MonoBehaviour
         Vector3 dir = ((target.transform.position) - transform.position).normalized;
         float dot = Vector3.Dot(dir, transform.forward);
 
-        Debug.Log(dot + " " + distanceToEnemy);
-
-        if (distanceToEnemy < 10)
+        /*if (distanceToEnemy < 4)
             return dot > 0.7;
-        else if (distanceToEnemy < 17)
+        else if (distanceToEnemy < 7)
             return dot > 0.90;
         else if (distanceToEnemy > range)
             return dot > 0.99;
         else
+            return false;*/
+        
+        if (prevTarget != target)
+        {
+            if (dot > 0.995)
+            {
+                prevTarget = target;
+                return true;
+            }   
+            else
+                return false;
+        }
+        else if (dot > 0.96)
+        {
+            return true; 
+        }
+        else
             return false;
+
+        
     }
 
     private void Shoot()
