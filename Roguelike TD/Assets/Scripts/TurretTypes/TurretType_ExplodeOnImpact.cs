@@ -41,7 +41,7 @@ public class TurretType_ExplodeOnImpact : MonoBehaviour
         if (bullet != null)
         {
             bullet.SetTargetPos(target.position);
-            bullet.SetBulletValues(turretScript.GetBulletSpeed(), turretScript.GetBulletDamage());
+            bullet.SetBulletValues(transform, turretScript.GetBulletSpeed(), turretScript.GetBulletDamage(), turretScript.GetBulletMaxTravel());
         }
     }
 }

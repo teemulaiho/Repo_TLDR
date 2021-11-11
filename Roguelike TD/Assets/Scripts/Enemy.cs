@@ -31,6 +31,8 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] private float enemyDamage;
 
+    private Transform baseTransform;
+
     private void Awake()
     {
         waveManager = FindObjectOfType<WaveManager>();
@@ -45,7 +47,8 @@ public class Enemy : MonoBehaviour
     {
         debuffList = new List<Debuff>();
 
-        enemyAgent.SetDestination(new Vector3(0, 0, 0));
+        baseTransform = FindObjectOfType<Base>().transform;
+        enemyAgent.SetDestination(baseTransform.position);
         enemyAgent.speed = enemyAgentSpeed;
 
         originalColor = GetComponentInChildren<MeshRenderer>().material.color;

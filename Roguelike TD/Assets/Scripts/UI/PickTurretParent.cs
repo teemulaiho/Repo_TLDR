@@ -21,7 +21,7 @@ public class PickTurretParent : MonoBehaviour
     private Turret secondTurret;
     private Turret thirdTurret;
 
-    private void Start()
+    private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
 

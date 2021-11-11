@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class TurretSelection : MonoBehaviour
@@ -6,6 +7,7 @@ public class TurretSelection : MonoBehaviour
 
     [SerializeField] private LayerMask groundLayerMask = new LayerMask();
     [SerializeField] private LayerMask turretLayerMask = new LayerMask();
+    [SerializeField] private LayerMask spawnerLayerMask = new LayerMask();
 
     [SerializeField] private ParticleSystem placementSmokePrefab;
     [SerializeField] private AudioSource placementSound;
@@ -49,6 +51,30 @@ public class TurretSelection : MonoBehaviour
                 grabbedGO.transform.position = hitPointOffset;
             }            
         }
+
+        if (!holdingObject && Input.GetMouseButtonDown(0))
+        {
+            if (Physics.Raycast(ray, out hitInfo, float.PositiveInfinity, spawnerLayerMask))
+            {
+                Debug.Log("Spawner Activated");
+                ActivateSpawner(hitInfo);
+            }
+        }
+    }
+
+    private void ActivateSpawner(RaycastHit spawnerInfo)
+    {
+        var spawner = spawnerInfo.transform.parent.GetComponent<Spawner>();
+
+        if (spawner.willBeActivated)
+        {
+            spawner.WillBeActivatedAtRoundStart(false);
+        }
+        else
+        {
+            spawner.WillBeActivatedAtRoundStart(true);
+        }
+            
     }
 
     public void GrabTurret()
@@ -56,7 +82,7 @@ public class TurretSelection : MonoBehaviour
         if (Physics.Raycast(ray, out hitInfo, float.PositiveInfinity, turretLayerMask))
         {
             grabbedGO = hitInfo.transform.parent.gameObject;
-            grabbedGO.GetComponent<Turret>().RangeIndicator(true);
+            if (hitInfo.transform.CompareTag("Tower")) grabbedGO.GetComponent<Turret>().RangeIndicator(true);
 
             holdingObject = true;
         }
@@ -75,11 +101,18 @@ public class TurretSelection : MonoBehaviour
         {
             grabbedGO.transform.position = hitInfo.point;
 
-            grabbedGO.GetComponent<Turret>().RangeIndicator(false);
+            if (grabbedGO.GetComponent<Turret>() != null)
+            {
+                grabbedGO.GetComponent<Turret>().RangeIndicator(false);
+            }
 
             ParticleSystem smoke = Instantiate(placementSmokePrefab);
             smoke.transform.position += hitInfo.point;
             smoke.Play();
+            if (grabbedGO.GetComponent<Turret>() == null)
+            {
+                smoke.transform.localScale = new Vector3(2, 2, 2);
+            }
 
             if (placementSound.isPlaying)
                 placementSound.Stop();
