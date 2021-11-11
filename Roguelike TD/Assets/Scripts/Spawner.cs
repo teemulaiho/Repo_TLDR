@@ -9,6 +9,8 @@ public class Spawner : MonoBehaviour
     [SerializeField] private List<GameObject> enemyPrefabList;
     [SerializeField] private Transform spriteTransform;
 
+    [SerializeField] private MeshRenderer meshRenderer;
+
     [Space, SerializeField] private int spawnerResource = 0;
 
     private bool inCombat = true;
@@ -35,8 +37,9 @@ public class Spawner : MonoBehaviour
         {
             willBeActivated = true;
             spawnManager.AddSpawnerToList(this);
-
+            
             // Change color?
+            meshRenderer.material.color = Color.blue;
         }
         else
         {
@@ -44,6 +47,8 @@ public class Spawner : MonoBehaviour
             spawnManager.RemoveSpawnerFromList(this);
 
             // Change back to default color
+            float r = 120f / 255f;
+            meshRenderer.material.color = new Color(r, 0, 0);
         }
     }
 
@@ -53,6 +58,7 @@ public class Spawner : MonoBehaviour
         waveManager = FindObjectOfType<WaveManager>();
         spawnManager = FindObjectOfType<SpawnManager>();
         enemyPrefabList = new List<GameObject>();
+        meshRenderer = GetComponentInChildren<MeshRenderer>();
 
         enemyPrefabList.Add(Resources.Load<GameObject>("Prefabs/Enemies/SmallEnemy"));
         enemyPrefabList.Add(Resources.Load<GameObject>("Prefabs/Enemies/MediumEnemy"));
