@@ -17,8 +17,8 @@ TagManager:
   - UI
   - Ground
   - Selectable
-  - 
-  - 
+  - LayerMask
+  - SeeThrough
   - 
   - 
   - 
