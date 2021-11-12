@@ -352,3 +352,4 @@ Received Import Request.
 Start importing Assets/Materials/Foliage/Foliage1URP.mat using Guid(a5adc0c49f1605d4db5c7d85595283a4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ba3a6eaffb98ec7ec431a3d7d43d3491') in 0.189819 seconds
   Import took 0.213042 seconds .
 
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
